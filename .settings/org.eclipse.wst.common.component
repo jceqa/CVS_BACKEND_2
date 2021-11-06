@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
             
     
-    <wb-module deploy-name="CVS_BACKEND_2">
+    <wb-module deploy-name="cvs2">
                 
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
                 
@@ -15,7 +15,7 @@
                         
         
         <property name="java-output-path" value="/CVS_BACKEND_2/target/classes"/>
-        <property name="context-root" value="CVS_BACKEND_2"/>
+        <property name="context-root" value="cvs2"/>
                     
     
     </wb-module>

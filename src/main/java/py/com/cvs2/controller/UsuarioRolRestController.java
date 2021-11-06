@@ -20,7 +20,7 @@ public class UsuarioRolRestController {
 	@Path("/{id}")
 	public Response getUsuarioRolById(@PathParam("id") Integer id) {
 		UsuarioRolDao urDAO = new UsuarioRolDao();
-		UsuarioRol ur = urDAO.getById(id);
+		UsuarioRol ur = urDAO.findById(id);
 
 		return Response.ok(ur, MediaType.APPLICATION_JSON).build();
 	}
