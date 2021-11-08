@@ -14,19 +14,21 @@ public class GenericDao<T> {
 
 	private Class<T> type;
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public GenericDao() {
 		Type t = getClass().getGenericSuperclass();
 		ParameterizedType pt = (ParameterizedType) t;
 		type = (Class) pt.getActualTypeArguments()[0];
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<T> list() {
 		List<T> tL;
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
 		EntityManager em = emf.createEntityManager();
 
-		String tableName = type.toString().substring(type.toString().lastIndexOf(".") +1 );
+		String tableName = type.toString().substring(type.toString().lastIndexOf(".") + 1);
 
 		Query q = em.createQuery("SELECT t FROM " + tableName + " t ORDER BY t.id");
 

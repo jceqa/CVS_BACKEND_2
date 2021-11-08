@@ -1,4 +1,4 @@
-package py.com.cvs2.controller;
+package py.com.cvs2.rest;
 
 import java.util.List;
 
@@ -11,19 +11,19 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import py.com.cvs2.model.Permiso;
-import py.com.cvs2.dao.PermisoDao;
+import py.com.cvs2.controller.PermisoController;
 
 @Path("/permiso")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class PermisoRestController {
+public class PermisoRest {
 
 	@GET
 	@Path("rol/{idRol}")
-	public Response getByRol(@PathParam("idRol") Integer idRol) {
+	public Response listByRol(@PathParam("idRol") Integer idRol) {
 
-		PermisoDao permisoDAO = new PermisoDao();
-		List<Permiso> permisos = permisoDAO.findById(idRol);
+		PermisoController pc = new PermisoController();
+		List<Permiso> permisos = pc.listByRol(idRol);
 
 		return Response.ok(permisos).build();
 	}

@@ -1,4 +1,4 @@
-package py.com.cvs2.controller;
+package py.com.cvs2.rest;
 
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -11,18 +11,19 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import py.com.cvs2.dao.MarcaDao;
+
+import py.com.cvs2.controller.MarcaController;
 import py.com.cvs2.model.Marca;
 
 @Path("/marca")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class MarcaRestController {
+public class MarcaRest {
 
 	@GET
-	public Response getMarcas() {
-		MarcaDao marcaDAO = new MarcaDao();
-		List<Marca> marcas = marcaDAO.list();
+	public Response listMarcas() {
+		MarcaController mc = new MarcaController();
+		List<Marca> marcas = mc.listMarcas();
 
 		return Response.ok(marcas, MediaType.APPLICATION_JSON).build();
 	}
@@ -30,24 +31,24 @@ public class MarcaRestController {
 	@GET
 	@Path("/{id}")
 	public Response getMarcaById(@PathParam("id") Integer id) {
-		MarcaDao marcaDAO = new MarcaDao();
-		Marca marca = marcaDAO.findById(id);
+		MarcaController mc = new MarcaController();
+		Marca marca = mc.getMarcaById(id);
 
 		return Response.ok(marca, MediaType.APPLICATION_JSON).build();
 	}
 
 	@POST
-	public Response setMarca(Marca marca) {
-		MarcaDao marcaDao = new MarcaDao();
-		marca = marcaDao.save(marca);
+	public Response saveMarca(Marca marca) {
+		MarcaController mc = new MarcaController();
+		marca = mc.saveMarca(marca);
 
 		return Response.ok(marca, MediaType.APPLICATION_JSON).build();
 	}
 
 	@PUT
 	public Response updateMarca(Marca marca) {
-		MarcaDao marcaDao = new MarcaDao();
-		marca = marcaDao.update(marca);
+		MarcaController mc = new MarcaController();
+		marca = mc.updateMarca(marca);
 
 		return Response.ok(marca, MediaType.APPLICATION_JSON).build();
 	}
@@ -55,9 +56,9 @@ public class MarcaRestController {
 	@DELETE
 	@Path("/{id}")
 	public Response deleteMarca(@PathParam("id") Integer id) {
-		MarcaDao marcaDao = new MarcaDao();
+		MarcaController mc = new MarcaController();
 
-		marcaDao.delete(id);
+		mc.deleteMarca(id);
 
 		return Response.ok().build();
 	}

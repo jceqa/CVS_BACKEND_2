@@ -1,4 +1,4 @@
-package py.com.cvs2.controller;
+package py.com.cvs2.rest;
 
 import java.util.List;
 
@@ -13,18 +13,19 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import py.com.cvs2.controller.EquipoController;
 import py.com.cvs2.dao.EquipoDao;
 import py.com.cvs2.model.Equipo;
 
 @Path("/equipo")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class EquipoRestController {
+public class EquipoRest {
 
 	@GET
-	public Response getEquipos() {
-		EquipoDao equipoDao = new EquipoDao();
-		List<Equipo> equipos = equipoDao.list();
+	public Response listEquipos() {
+		EquipoController ec = new EquipoController();
+		List<Equipo> equipos = ec.listEquipos();
 
 		return Response.ok(equipos, MediaType.APPLICATION_JSON).build();
 	}
@@ -32,24 +33,24 @@ public class EquipoRestController {
 	@GET
 	@Path("/{id}")
 	public Response getEquipoById(@PathParam("id") Integer id) {
-		EquipoDao equipoDao = new EquipoDao();
-		Equipo equipo = equipoDao.findById(id);
+		EquipoController ec = new EquipoController();
+		Equipo equipo = ec.getEquipoById(id);
 
 		return Response.ok(equipo, MediaType.APPLICATION_JSON).build();
 	}
 
 	@POST
-	public Response setEquipo(Equipo equipo) {
-		EquipoDao equipoDao = new EquipoDao();
-		equipo = equipoDao.save(equipo);
+	public Response saveEquipo(Equipo equipo) {
+		EquipoController ec = new EquipoController();
+		equipo = ec.saveEquipo(equipo);
 
 		return Response.ok(equipo, MediaType.APPLICATION_JSON).build();
 	}
 
 	@PUT
 	public Response updateEquipo(Equipo equipo) {
-		EquipoDao equipoDao = new EquipoDao();
-		equipo = equipoDao.update(equipo);
+		EquipoController ec = new EquipoController();
+		equipo = ec.updateEquipo(equipo);
 
 		return Response.ok(equipo, MediaType.APPLICATION_JSON).build();
 	}
@@ -57,9 +58,8 @@ public class EquipoRestController {
 	@DELETE
 	@Path("/{id}")
 	public Response deleteEquipo(@PathParam("id") Integer id) {
-		EquipoDao equipoDao = new EquipoDao();
-
-		equipoDao.delete(id);
+		EquipoController ec = new EquipoController();
+		ec.deleteEquipo(id);
 
 		return Response.ok().build();
 	}

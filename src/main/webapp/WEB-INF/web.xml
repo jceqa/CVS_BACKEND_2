@@ -11,12 +11,12 @@
 	<context-param>
 		<param-name>resteasy.resources</param-name>
 		<param-value>
-			py.com.cvs2.controller.HelloWorldRest,
-			py.com.cvs2.controller.MarcaRestController,
-			py.com.cvs2.controller.UsuarioRestController,
-			py.com.cvs2.controller.UsuarioRolRestController,
-			py.com.cvs2.controller.PermisoRestController,
-			py.com.cvs2.controller.EquipoRestController
+			py.com.cvs2.rest.HelloWorldRest,
+			py.com.cvs2.rest.MarcaRest,
+			py.com.cvs2.rest.UsuarioRest,
+			py.com.cvs2.rest.UsuarioRolRest,
+			py.com.cvs2.rest.PermisoRest,
+			py.com.cvs2.rest.EquipoRest
 		</param-value>
 	</context-param>
 

@@ -1,8 +1,8 @@
-package py.com.cvs2.controller;
+package py.com.cvs2.rest;
 
-import java.lang.reflect.ParameterizedType;
+/*import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.List;
+import java.util.List;*/
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -15,22 +15,22 @@ import javax.ws.rs.core.Response;
 
 import py.com.cvs2.dao.GenericDao;
 
-public class GenericRestController<T, K extends GenericDao<T>> {
+public class GenericRest<T, K extends GenericDao<T>> {
 
-	private Class<T> type;
-
-	public GenericRestController() {
-		Type t = getClass().getGenericSuperclass();
-		ParameterizedType pt = (ParameterizedType) t;
-		type = (Class) pt.getActualTypeArguments()[0];
-	}
+	/*
+	 * private Class<T> type;
+	 * 
+	 * public GenericRest() { Type t = getClass().getGenericSuperclass();
+	 * ParameterizedType pt = (ParameterizedType) t; type = (Class)
+	 * pt.getActualTypeArguments()[0]; }
+	 */
 
 	@GET
 	public Response getAll() {
-		//K k = new K();
-		//List<T> tL = k.list();
+		// K k = new K();
+		// List<T> tL = k.list();
 
-		return Response.ok(/*tL*/ MediaType.APPLICATION_JSON).build();
+		return Response.ok(/* tL */ MediaType.APPLICATION_JSON).build();
 	}
 
 	@GET

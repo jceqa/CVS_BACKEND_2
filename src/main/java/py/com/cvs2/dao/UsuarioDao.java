@@ -3,18 +3,17 @@ package py.com.cvs2.dao;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
-import java.util.HashMap;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import py.com.cvs2.model.Marca;
+import py.com.cvs2.dto.TokenDto;
 import py.com.cvs2.model.Usuario;
 
 public class UsuarioDao {
 
-	public HashMap validarAcceso(Usuario usuario) {
+	public TokenDto validarAcceso(Usuario usuario) {
 		boolean ok = false;
 		String token = "";
 
@@ -30,16 +29,15 @@ public class UsuarioDao {
 		System.out.println(u.toString());
 
 		try {
-			ok = true;
 			token = JWT.create().withIssuer(u.getId().toString()).sign(Algorithm.HMAC256("sat"));
 			ok = true;
 		} catch (JWTCreationException | IllegalArgumentException ex) {
 			System.out.println(ex.getMessage());
 		}
 
-		HashMap datos = new HashMap();
-		datos.put("ok", ok);
-		datos.put("token", token);
+		TokenDto datos = new TokenDto();
+		datos.setOk(ok);
+		datos.setToken(token);
 		return datos;
 	}
 

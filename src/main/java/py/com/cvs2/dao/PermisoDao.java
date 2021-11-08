@@ -11,6 +11,7 @@ import py.com.cvs2.model.Permiso;
 
 public class PermisoDao {
 
+	@SuppressWarnings("unchecked")
 	public List<Permiso> findById(Integer idRol) {
 
 		List<Permiso> permisos;
@@ -18,11 +19,8 @@ public class PermisoDao {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
 		EntityManager em = emf.createEntityManager();
 
-		Query q = em.createQuery("SELECT p FROM Permiso p " + 
-				"WHERE p.rol.id=:idRol "
-				+ " ORDER BY p.formulario.sistema.id, "
-				+ " p.formulario.subMenu.id, "
-				+ " p.formulario.id");
+		Query q = em.createQuery("SELECT p FROM Permiso p " + "WHERE p.rol.id=:idRol "
+				+ " ORDER BY p.formulario.sistema.id, " + " p.formulario.subMenu.id, " + " p.formulario.id");
 
 		q.setParameter("idRol", idRol);
 
