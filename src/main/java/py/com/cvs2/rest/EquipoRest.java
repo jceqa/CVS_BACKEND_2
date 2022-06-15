@@ -14,7 +14,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import py.com.cvs2.controller.EquipoController;
-import py.com.cvs2.dao.EquipoDao;
 import py.com.cvs2.model.Equipo;
 
 @Path("/equipo")
