@@ -17,14 +17,15 @@
 			py.com.cvs2.rest.UsuarioRolRest,
 			py.com.cvs2.rest.PermisoRest,
 			py.com.cvs2.rest.EquipoRest,
-                        py.com.cvs2.rest.CiudadRest,
-                        py.com.cvs2.rest.ImpuestoRest,
-                        py.com.cvs2.rest.TipoArticuloRest,
-                        py.com.cvs2.rest.CargoRest,
-                        py.com.cvs2.rest.EstadoRest,
-                        py.com.cvs2.rest.EntidadEmisoraRest,
-                        py.com.cvs2.rest.CondicionPagoRest,
-                        py.com.cvs2.rest.TipoTarjetaRest,
+			py.com.cvs2.rest.CiudadRest,
+			py.com.cvs2.rest.ImpuestoRest,
+			py.com.cvs2.rest.TipoArticuloRest,
+			py.com.cvs2.rest.CargoRest,
+			py.com.cvs2.rest.EstadoRest,
+			py.com.cvs2.rest.EntidadEmisoraRest,
+			py.com.cvs2.rest.CondicionPagoRest,
+			py.com.cvs2.rest.TipoTarjetaRest,
+			py.com.cvs2.rest.ArticuloRest
 		</param-value>
 	</context-param>
 
