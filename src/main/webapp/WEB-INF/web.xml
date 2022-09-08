@@ -25,7 +25,8 @@
 			py.com.cvs2.rest.EntidadEmisoraRest,
 			py.com.cvs2.rest.CondicionPagoRest,
 			py.com.cvs2.rest.TipoTarjetaRest,
-			py.com.cvs2.rest.ArticuloRest
+			py.com.cvs2.rest.ArticuloRest,
+			py.com.cvs2.rest.PersonaRest
 		</param-value>
 	</context-param>
 
