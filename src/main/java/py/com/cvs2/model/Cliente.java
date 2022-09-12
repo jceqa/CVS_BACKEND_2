@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table
-public class Persona implements Serializable {
+public class Cliente implements Serializable {
 
     private static final long serialVersionUID = -6533574310851771145L;
 
@@ -14,14 +14,14 @@ public class Persona implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "documento")
+    private String documento;
+
+    @Column(name = "ruc")
+    private String ruc;
+
     @Column(name = "nombre")
     private String nombre;
-
-    @Column(name = "apellido")
-    private String apellido;
-
-    @Column(name = "ci")
-    private String ci;
 
     @Column(name = "telefono")
     private String telefono;
@@ -29,20 +29,24 @@ public class Persona implements Serializable {
     @Column(name = "direccion")
     private String direccion;
 
+    @Column(name = "correo")
+    private String correo;
+
     @ManyToOne
     @JoinColumn(name = "id_ciudad")
     private Ciudad ciudad;
 
-    public Persona() {
+    public Cliente() {
     }
 
-    public Persona(int id, String nombre, String apellido, String ci, String telefono, String direccion, Ciudad ciudad) {
+    public Cliente(int id, String documento, String ruc, String nombre, String telefono, String direccion, String correo, Ciudad ciudad) {
         this.id = id;
+        this.documento= documento;
+        this.ruc = ruc;
         this.nombre = nombre;
-        this.apellido = apellido;
-        this.ci = ci;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.correo = correo;
         this.ciudad = ciudad;
     }
 
@@ -54,28 +58,28 @@ public class Persona implements Serializable {
         this.id = id;
     }
 
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public String getRuc() {
+        return ruc;
+    }
+
+    public void setRuc(String ruc) {
+        this.ruc = ruc;
+    }
+
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getApeliido() {
-        return apellido;
-    }
-
-    public void setApeliido(String apeliido) {
-        this.apellido = apeliido;
-    }
-
-    public String getCi() {
-        return ci;
-    }
-
-    public void setCi(String ci) {
-        this.ci = ci;
     }
 
     public String getTelefono() {
@@ -94,6 +98,14 @@ public class Persona implements Serializable {
         this.direccion = direccion;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
     public Ciudad getCiudad() {
         return ciudad;
     }
@@ -104,13 +116,14 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "Persona{" +
+        return "Cliente{" +
                 "id=" + id +
+                ", documento='" + documento + '\'' +
+                ", ruc='" + ruc + '\'' +
                 ", nombre='" + nombre + '\'' +
-                ", apeliido='" + apellido + '\'' +
-                ", ci='" + ci + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", direccion='" + direccion + '\'' +
+                ", correo='" + correo + '\'' +
                 ", ciudad=" + ciudad +
                 '}';
     }
