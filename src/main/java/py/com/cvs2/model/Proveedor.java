@@ -17,8 +17,8 @@ public class Proveedor implements Serializable{
     @Column(name = "ruc")
     private String ruc;
 
-    @Column(name = "razon")
-    private String razon;
+    @Column(name = "razon_social")
+    private String razonSocial;
 
     @Column(name = "direccion")
     private String direccion;
@@ -36,15 +36,14 @@ public class Proveedor implements Serializable{
     public Proveedor() {
     }
 
-    public Proveedor(int id, String ruc, String razon, String direccion, String correo, String telefono, Ciudad ciudad) {
+    public Proveedor(int id, String ruc, String razonSocial, String direccion, String correo, String telefono, Ciudad ciudad) {
         this.id = id;
         this.ruc = ruc;
-        this.razon = razon;
+        this.razonSocial = razonSocial;
         this.direccion = direccion;
         this.correo = correo;
         this.telefono = telefono;
         this.ciudad = ciudad;
-
     }
     public int getId() {
         return id;
@@ -62,12 +61,12 @@ public class Proveedor implements Serializable{
         this.ruc = ruc;
     }
 
-    public String getRazon() {
-        return razon;
+    public String getRazonSocial() {
+        return razonSocial;
     }
 
-    public void setRazon(String razon) {
-        this.razon = razon;
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
     }
 
     public String getDireccion() {
@@ -94,15 +93,22 @@ public class Proveedor implements Serializable{
         this.ciudad = ciudad;
     }
 
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
     @Override
     public String toString() {
         return "Articulo{" +
                 "id=" + id +
-                ", razon='" + razon + '\'' +
+                ", razon_social='" + razonSocial + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", correo='" + correo + '\'' +
                 ", ciudad=" + ciudad +
                 '}';
     }
-
 }
