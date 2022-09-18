@@ -46,7 +46,7 @@ public class CiudadRest {
 	}
 
 	@POST
-	public Response saveCiudad(Ciudad ciudad) {
+	public Response saveCiudad(Ciudad ciudad) throws Exception {
 		CiudadController cc = new CiudadController();
 		ciudad = cc.saveCiudad(ciudad);
 

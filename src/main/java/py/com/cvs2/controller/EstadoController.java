@@ -22,7 +22,7 @@ public class EstadoController {
 		return estadoDAO.findById(id);
 	}
 
-	public Estado saveEstado(Estado estado) {
+	public Estado saveEstado(Estado estado) throws Exception {
 		EstadoDao estadoDao = new EstadoDao();
 		return estadoDao.save(estado);
 	}

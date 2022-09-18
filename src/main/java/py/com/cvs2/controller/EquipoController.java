@@ -17,7 +17,7 @@ public class EquipoController {
 		return equipoDao.findById(id);
 	}
 
-	public Equipo saveEquipo(Equipo equipo) {
+	public Equipo saveEquipo(Equipo equipo) throws Exception {
 		EquipoDao equipoDao = new EquipoDao();
 		return equipoDao.save(equipo);
 	}

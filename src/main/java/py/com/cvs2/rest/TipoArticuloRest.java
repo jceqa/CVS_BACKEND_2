@@ -42,7 +42,7 @@ public class TipoArticuloRest {
 	}
 
 	@POST
-	public Response saveTipoArticulo(TipoArticulo tipoarticulo) {
+	public Response saveTipoArticulo(TipoArticulo tipoarticulo) throws Exception {
 		TipoArticuloController tac = new TipoArticuloController();
 		tipoarticulo = tac.saveTipoArticulo(tipoarticulo);
 

@@ -32,7 +32,7 @@ public class SucursalRest {
     }
 
     @POST
-    public Response saveSucursal(Sucursal sucursal) {
+    public Response saveSucursal(Sucursal sucursal) throws Exception {
         SucursalController sc = new SucursalController();
         sucursal = sc.saveSucursal(sucursal);
 

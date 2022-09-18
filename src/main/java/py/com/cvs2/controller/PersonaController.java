@@ -17,7 +17,7 @@ public class PersonaController {
         return personaDAO.findById(id);
     }
 
-    public Persona savePersona(Persona persona) {
+    public Persona savePersona(Persona persona) throws Exception {
         PersonaDao personaDao = new PersonaDao();
         return personaDao.save(persona);
     }

@@ -46,7 +46,7 @@ public class ImpuestoRest {
 	}
 
 	@POST
-	public Response saveImpuesto(Impuesto impuesto) {
+	public Response saveImpuesto(Impuesto impuesto) throws Exception {
 		ImpuestoController ic = new ImpuestoController();
 		impuesto = ic.saveImpuesto(impuesto);
 

@@ -18,7 +18,7 @@ public class ProveedorController {
         return proveedorDAO.findById(id);
     }
 
-    public Proveedor saveProveedor(Proveedor proveedor) {
+    public Proveedor saveProveedor(Proveedor proveedor) throws Exception {
         ProveedorDao proveedorDao = new ProveedorDao();
         return proveedorDao.save(proveedor);
     }

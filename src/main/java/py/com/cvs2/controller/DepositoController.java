@@ -18,7 +18,7 @@ public class DepositoController {
         return depositoDAO.findById(id);
     }
 
-    public Deposito saveDeposito(Deposito deposito) {
+    public Deposito saveDeposito(Deposito deposito) throws Exception {
         DepositoDao depositoDao = new DepositoDao();
         return depositoDao.save(deposito);
     }

@@ -31,7 +31,7 @@ public class PersonaRest {
     }
 
     @POST
-    public Response savePersona(Persona persona) {
+    public Response savePersona(Persona persona) throws Exception {
         PersonaController pc = new PersonaController();
         persona = pc.savePersona(persona);
 

@@ -39,7 +39,7 @@ public class EquipoRest {
 	}
 
 	@POST
-	public Response saveEquipo(Equipo equipo) {
+	public Response saveEquipo(Equipo equipo) throws Exception {
 		EquipoController ec = new EquipoController();
 		equipo = ec.saveEquipo(equipo);
 

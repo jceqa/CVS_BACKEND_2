@@ -42,7 +42,7 @@ public class TipoTarjetaRest {
 	}
 
 	@POST
-	public Response saveTipoTarjeta(TipoTarjeta tipotarjeta) {
+	public Response saveTipoTarjeta(TipoTarjeta tipotarjeta) throws Exception {
 		TipoTarjetaController tc = new TipoTarjetaController();
 		tipotarjeta = tc.saveTipoTarjeta(tipotarjeta);
 

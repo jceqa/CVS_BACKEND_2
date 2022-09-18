@@ -31,7 +31,7 @@ public class ArticuloRest {
     }
 
     @POST
-    public Response saveArticulo(Articulo articulo) {
+    public Response saveArticulo(Articulo articulo) throws Exception {
         ArticuloController ac = new ArticuloController();
         articulo = ac.saveArticulo(articulo);
 

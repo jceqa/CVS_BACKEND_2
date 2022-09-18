@@ -1,14 +1,13 @@
 package py.com.cvs2.dao;
 
+import org.postgresql.util.PSQLException;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 
 public class GenericDao<T> {
 
@@ -48,16 +47,29 @@ public class GenericDao<T> {
 		return t;
 	}
 
-	public T save(T t) {
+	public T save(T t) throws Exception {
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
-		EntityManager em = emf.createEntityManager();
+		try{
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
+			EntityManager em = emf.createEntityManager();
 
-		EntityTransaction et = em.getTransaction();
-		et.begin();
-		em.persist(t);
+			EntityTransaction et = em.getTransaction();
+			et.begin();
+			em.persist(t);
 
-		et.commit();
+			et.commit();
+		} catch(RollbackException e){
+			//System.out.println("Cause: " + e.getCause());
+			System.out.println("Message: " +e.getMessage() + " fin message");
+
+			if(e.getMessage().contains("Ya existe la llave")){
+				if(e.getMessage().contains("descripcion")){
+					throw new Exception("La descripción ya existe.");
+				}
+			}
+			// System.out.println("Localized Message: " + e.getLocalizedMessage());
+			throw new Exception("Error al insertar.");
+		}
 		return t;
 
 	}

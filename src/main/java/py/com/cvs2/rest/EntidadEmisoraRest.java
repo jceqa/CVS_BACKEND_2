@@ -43,7 +43,7 @@ public class EntidadEmisoraRest {
 	}
 
 	@POST
-	public Response saveEntidadEmisora(EntidadEmisora entidademisora) {
+	public Response saveEntidadEmisora(EntidadEmisora entidademisora) throws Exception {
 		EntidadEmisoraController ec = new EntidadEmisoraController();
 		entidademisora = ec.saveEntidadEmisora(entidademisora);
 

@@ -25,7 +25,7 @@ public class ImpuestoController {
 		return impuestoDAO.findById(id);
 	}
 
-	public Impuesto saveImpuesto(Impuesto impuesto) {
+	public Impuesto saveImpuesto(Impuesto impuesto) throws Exception {
 		ImpuestoDao impuestoDao = new ImpuestoDao();
 		return impuestoDao.save(impuesto);
 	}

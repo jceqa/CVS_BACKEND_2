@@ -43,7 +43,7 @@ public class GenericRest<T, K extends GenericDao<T>> {
 	}
 
 	@POST
-	public Response set(T t) {
+	public Response set(T t) throws Exception {
 		GenericDao<T> dao = new GenericDao<T>();
 		t = dao.save(t);
 

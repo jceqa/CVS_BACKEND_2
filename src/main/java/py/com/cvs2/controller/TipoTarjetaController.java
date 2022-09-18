@@ -22,7 +22,7 @@ public class TipoTarjetaController {
 		return tipotarjetaDAO.findById(id);
 	}
 
-	public TipoTarjeta saveTipoTarjeta(TipoTarjeta tipotarjeta) {
+	public TipoTarjeta saveTipoTarjeta(TipoTarjeta tipotarjeta) throws Exception {
 		TipoTarjetaDao tipotarjetaDao = new TipoTarjetaDao();
 		return tipotarjetaDao.save(tipotarjeta);
 	}

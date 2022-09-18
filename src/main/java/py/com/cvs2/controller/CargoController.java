@@ -22,7 +22,7 @@ public class CargoController {
 		return cargoDAO.findById(id);
 	}
 
-	public Cargo saveCargo(Cargo cargo) {
+	public Cargo saveCargo(Cargo cargo) throws Exception {
 		CargoDao cargoDao = new CargoDao();
 		return cargoDao.save(cargo);
 	}

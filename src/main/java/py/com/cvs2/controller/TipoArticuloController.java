@@ -25,7 +25,7 @@ public class TipoArticuloController {
 		return tipoarticuloDAO.findById(id);
 	}
 
-	public TipoArticulo saveTipoArticulo(TipoArticulo tipoarticulo) {
+	public TipoArticulo saveTipoArticulo(TipoArticulo tipoarticulo) throws Exception {
 		TipoArticuloDao tipoarticuloDao = new TipoArticuloDao();
 		return tipoarticuloDao.save(tipoarticulo);
 	}

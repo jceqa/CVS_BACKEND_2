@@ -18,7 +18,7 @@ public class SucursalController {
         return sucursalDAO.findById(id);
     }
 
-    public Sucursal saveSucursal(Sucursal sucursal) {
+    public Sucursal saveSucursal(Sucursal sucursal) throws Exception {
         SucursalDao sucursalDao = new SucursalDao();
         return sucursalDao.save(sucursal);
     }

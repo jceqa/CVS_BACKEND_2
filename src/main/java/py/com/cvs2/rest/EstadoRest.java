@@ -44,7 +44,7 @@ public class EstadoRest {
 	}
 
 	@POST
-	public Response saveEstado(Estado estado) {
+	public Response saveEstado(Estado estado) throws Exception {
 		EstadoController ec = new EstadoController();
 		estado = ec.saveEstado(estado);
 

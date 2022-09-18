@@ -40,8 +40,15 @@ public class MarcaRest {
 	@POST
 	public Response saveMarca(Marca marca) {
 		MarcaController mc = new MarcaController();
-		marca = mc.saveMarca(marca);
+		try {
+			marca = mc.saveMarca(marca);
 
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 		return Response.ok(marca, MediaType.APPLICATION_JSON).build();
 	}
 

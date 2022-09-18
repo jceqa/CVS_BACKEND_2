@@ -17,7 +17,7 @@ public class MarcaController {
 		return marcaDAO.findById(id);
 	}
 
-	public Marca saveMarca(Marca marca) {
+	public Marca saveMarca(Marca marca) throws Exception {
 		MarcaDao marcaDao = new MarcaDao();
 		return marcaDao.save(marca);
 	}

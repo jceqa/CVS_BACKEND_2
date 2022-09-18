@@ -43,7 +43,7 @@ public class CargoRest {
 	}
 
 	@POST
-	public Response saveCargo(Cargo cargo) {
+	public Response saveCargo(Cargo cargo) throws Exception {
 		CargoController cc = new CargoController();
 		cargo = cc.saveCargo(cargo);
 

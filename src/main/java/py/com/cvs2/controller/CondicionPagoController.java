@@ -22,7 +22,7 @@ public class CondicionPagoController {
 		return condicionpagoDAO.findById(id);
 	}
 
-	public CondicionPago saveCondicionPago(CondicionPago condicionpago) {
+	public CondicionPago saveCondicionPago(CondicionPago condicionpago) throws Exception {
 		CondicionPagoDao condicionpagoDao = new CondicionPagoDao();
 		return condicionpagoDao.save(condicionpago);
 	}

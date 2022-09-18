@@ -33,7 +33,7 @@ public class CondicionPagoRest {
     }
 
     @POST
-    public Response saveCondicionPago(CondicionPago condicionPago) {
+    public Response saveCondicionPago(CondicionPago condicionPago) throws Exception {
         CondicionPagoController cpc = new CondicionPagoController();
         condicionPago = cpc.saveCondicionPago(condicionPago);
 

@@ -31,7 +31,7 @@ import java.util.List;
         }
 
         @POST
-        public Response saveProveedor(Proveedor proveedor) {
+        public Response saveProveedor(Proveedor proveedor) throws Exception {
             ProveedorController pc = new ProveedorController();
             proveedor = pc.saveProveedor(proveedor);
 

@@ -17,7 +17,7 @@ public class ClienteController {
         return clienteDAO.findById(id);
     }
 
-    public Cliente saveCliente(Cliente cliente) {
+    public Cliente saveCliente(Cliente cliente) throws Exception {
         ClienteDao clienteDao = new ClienteDao();
         return clienteDao.save(cliente);
     }

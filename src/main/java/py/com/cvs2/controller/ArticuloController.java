@@ -17,7 +17,7 @@ public class ArticuloController {
         return articuloDAO.findById(id);
     }
 
-    public Articulo saveArticulo(Articulo articulo) {
+    public Articulo saveArticulo(Articulo articulo) throws Exception {
         ArticuloDao articuloDao = new ArticuloDao();
         return articuloDao.save(articulo);
     }

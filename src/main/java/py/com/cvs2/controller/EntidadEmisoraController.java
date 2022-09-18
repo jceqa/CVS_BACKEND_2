@@ -22,7 +22,7 @@ public class EntidadEmisoraController {
 		return entidademisoraDAO.findById(id);
 	}
 
-	public EntidadEmisora saveEntidadEmisora(EntidadEmisora entidademisora) {
+	public EntidadEmisora saveEntidadEmisora(EntidadEmisora entidademisora) throws Exception {
 		EntidadEmisoraDao entidademisoraDao = new EntidadEmisoraDao();
 		return entidademisoraDao.save(entidademisora);
 	}

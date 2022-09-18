@@ -32,7 +32,7 @@ public class DepositoRest {
     }
 
     @POST
-    public Response saveDeposito(Deposito deposito) {
+    public Response saveDeposito(Deposito deposito) throws Exception {
         DepositoController dc = new DepositoController();
         deposito = dc.saveDeposito(deposito);
 

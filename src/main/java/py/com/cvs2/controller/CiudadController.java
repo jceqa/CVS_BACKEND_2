@@ -25,7 +25,7 @@ public class CiudadController {
 		return ciudadDAO.findById(id);
 	}
 
-	public Ciudad saveCiudad(Ciudad ciudad) {
+	public Ciudad saveCiudad(Ciudad ciudad) throws Exception {
 		CiudadDao ciudadDao = new CiudadDao();
 		return ciudadDao.save(ciudad);
 	}
