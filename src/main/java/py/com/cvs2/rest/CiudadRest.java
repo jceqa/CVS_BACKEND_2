@@ -46,9 +46,16 @@ public class CiudadRest {
 	}
 
 	@POST
-	public Response saveCiudad(Ciudad ciudad) throws Exception {
+	public Response saveCiudad(Ciudad ciudad) {
 		CiudadController cc = new CiudadController();
-		ciudad = cc.saveCiudad(ciudad);
+		try{
+			ciudad = cc.saveCiudad(ciudad);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok(ciudad, MediaType.APPLICATION_JSON).build();
 	}
@@ -56,7 +63,14 @@ public class CiudadRest {
 	@PUT
 	public Response updateMarca(Ciudad ciudad) {
 		CiudadController cc = new CiudadController();
-		ciudad = cc.updateCiudad(ciudad);
+		try{
+			ciudad = cc.updateCiudad(ciudad);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok(ciudad, MediaType.APPLICATION_JSON).build();
 	}
@@ -66,7 +80,14 @@ public class CiudadRest {
 	public Response deleteCiudad(@PathParam("id") Integer id) {
 		CiudadController cc = new CiudadController();
 
-		cc.deleteCiudad(id);
+		try {
+			cc.deleteCiudad(id);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok().build();
 	}

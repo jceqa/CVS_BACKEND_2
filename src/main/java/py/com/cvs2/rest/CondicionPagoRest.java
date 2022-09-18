@@ -33,9 +33,16 @@ public class CondicionPagoRest {
     }
 
     @POST
-    public Response saveCondicionPago(CondicionPago condicionPago) throws Exception {
+    public Response saveCondicionPago(CondicionPago condicionPago) {
         CondicionPagoController cpc = new CondicionPagoController();
-        condicionPago = cpc.saveCondicionPago(condicionPago);
+        try{
+            condicionPago = cpc.saveCondicionPago(condicionPago);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
 
         return Response.ok(condicionPago, MediaType.APPLICATION_JSON).build();
     }
@@ -43,7 +50,14 @@ public class CondicionPagoRest {
     @PUT
     public Response updateCondicionPago(CondicionPago condicionPago) {
         CondicionPagoController cpc = new CondicionPagoController();
-        condicionPago = cpc.updateCondicionPago(condicionPago);
+        try{
+            condicionPago = cpc.updateCondicionPago(condicionPago);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
 
         return Response.ok(condicionPago, MediaType.APPLICATION_JSON).build();
     }

@@ -43,9 +43,16 @@ public class EntidadEmisoraRest {
 	}
 
 	@POST
-	public Response saveEntidadEmisora(EntidadEmisora entidademisora) throws Exception {
+	public Response saveEntidadEmisora(EntidadEmisora entidademisora) {
 		EntidadEmisoraController ec = new EntidadEmisoraController();
-		entidademisora = ec.saveEntidadEmisora(entidademisora);
+		try{
+			entidademisora = ec.saveEntidadEmisora(entidademisora);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok(entidademisora, MediaType.APPLICATION_JSON).build();
 	}
@@ -53,7 +60,14 @@ public class EntidadEmisoraRest {
 	@PUT
 	public Response updateEntidadEmisora(EntidadEmisora entidademisora) {
 		EntidadEmisoraController ec = new EntidadEmisoraController();
-		entidademisora = ec.updateEntidadEmisora(entidademisora);
+		try{
+			entidademisora = ec.updateEntidadEmisora(entidademisora);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok(entidademisora, MediaType.APPLICATION_JSON).build();
 	}
@@ -63,7 +77,14 @@ public class EntidadEmisoraRest {
 	public Response deleteEntidadEmisora(@PathParam("id") Integer id) {
 		EntidadEmisoraController ec = new EntidadEmisoraController();
 
-		ec.deleteEntidadEmisora(id);
+		try {
+			ec.deleteEntidadEmisora(id);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok().build();
 	}

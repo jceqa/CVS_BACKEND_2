@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table
+@Table(name = "proveedor")
 public class Proveedor implements Serializable{
 
     private static final long serialVersionUID = -6533574310851771145L;
@@ -32,6 +32,9 @@ public class Proveedor implements Serializable{
     @ManyToOne
     @JoinColumn(name = "id_ciudad")
     private Ciudad ciudad;
+
+    @Column(name = "estado")
+    String estado;
 
     public Proveedor() {
     }
@@ -99,6 +102,14 @@ public class Proveedor implements Serializable{
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     @Override

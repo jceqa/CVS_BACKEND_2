@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table
+@Table(name = "cliente")
 public class Cliente implements Serializable {
 
     private static final long serialVersionUID = -6533574310851771145L;
@@ -35,6 +35,9 @@ public class Cliente implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_ciudad")
     private Ciudad ciudad;
+
+    @Column(name = "estado")
+    String estado;
 
     public Cliente() {
     }
@@ -112,6 +115,14 @@ public class Cliente implements Serializable {
 
     public void setCiudad(Ciudad ciudad) {
         this.ciudad = ciudad;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     @Override

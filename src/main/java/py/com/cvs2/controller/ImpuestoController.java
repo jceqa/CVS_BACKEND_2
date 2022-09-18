@@ -27,17 +27,21 @@ public class ImpuestoController {
 
 	public Impuesto saveImpuesto(Impuesto impuesto) throws Exception {
 		ImpuestoDao impuestoDao = new ImpuestoDao();
+		impuesto.setEstado("ACTIVO");
 		return impuestoDao.save(impuesto);
 	}
 
-	public Impuesto updateImpuesto(Impuesto impuesto) {
+	public Impuesto updateImpuesto(Impuesto impuesto) throws Exception {
 		ImpuestoDao impuestoDao = new ImpuestoDao();
 		return impuestoDao.update(impuesto);
 	}
 
-	public void deleteImpuesto(Integer id) {
+	public void deleteImpuesto(Integer id) throws Exception {
 		ImpuestoDao impuestoDao = new ImpuestoDao();
-		impuestoDao.delete(id);
+		Impuesto impuesto = impuestoDao.findById(id);
+		impuesto.setEstado("INACTIVO");
+		impuestoDao.update(impuesto);
+		//impuestoDao.delete(id);
 	}
 
 }

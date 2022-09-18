@@ -20,16 +20,21 @@ public class DepositoController {
 
     public Deposito saveDeposito(Deposito deposito) throws Exception {
         DepositoDao depositoDao = new DepositoDao();
+        deposito.setEstado("ACTIVO");
         return depositoDao.save(deposito);
     }
 
-    public Deposito updateDeposito(Deposito deposito) {
+    public Deposito updateDeposito(Deposito deposito) throws Exception {
         DepositoDao depositoDao = new DepositoDao();
         return depositoDao.update(deposito);
     }
 
-    public void deleteDeposito(Integer id) {
+    public void deleteDeposito(Integer id) throws Exception {
         DepositoDao depositoDao = new DepositoDao();
-        depositoDao.delete(id);
+        Deposito deposito = depositoDao.findById(id);
+        deposito.setEstado("INACTIVO");
+        depositoDao.update(deposito);
+
+        //depositoDao.delete(id);
     }
 }

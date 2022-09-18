@@ -19,16 +19,21 @@ public class ClienteController {
 
     public Cliente saveCliente(Cliente cliente) throws Exception {
         ClienteDao clienteDao = new ClienteDao();
+        cliente.setEstado("ACTIVO");
         return clienteDao.save(cliente);
     }
 
-    public Cliente updateCliente(Cliente cliente) {
+    public Cliente updateCliente(Cliente cliente) throws Exception {
         ClienteDao clienteDao = new ClienteDao();
         return clienteDao.update(cliente);
     }
 
-    public void deleteCliente(Integer id) {
+    public void deleteCliente(Integer id) throws Exception {
         ClienteDao clienteDao = new ClienteDao();
-        clienteDao.delete(id);
+        Cliente cliente = clienteDao.findById(id);
+        cliente.setEstado("INACTIVO");
+        clienteDao.update(cliente);
+
+        //clienteDao.delete(id);
     }
 }

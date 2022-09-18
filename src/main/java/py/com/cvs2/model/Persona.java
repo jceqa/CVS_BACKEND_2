@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table
+@Table(name = "persona")
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = -6533574310851771145L;
@@ -33,6 +33,9 @@ public class Persona implements Serializable {
     @JoinColumn(name = "id_ciudad")
     private Ciudad ciudad;
 
+    @Column(name = "estado")
+    String estado;
+
     public Persona() {
     }
 
@@ -60,14 +63,6 @@ public class Persona implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getApeliido() {
-        return apellido;
-    }
-
-    public void setApeliido(String apeliido) {
-        this.apellido = apeliido;
     }
 
     public String getCi() {
@@ -100,6 +95,22 @@ public class Persona implements Serializable {
 
     public void setCiudad(Ciudad ciudad) {
         this.ciudad = ciudad;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     @Override

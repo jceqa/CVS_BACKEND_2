@@ -16,6 +16,9 @@ public class SubMenu {
 	@Column(name = "nombre")
 	private String nombre;
 
+	@Column(name = "estado")
+	String estado;
+
 	public SubMenu() {
 	}
 
@@ -38,6 +41,14 @@ public class SubMenu {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	@Override

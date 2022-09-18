@@ -39,9 +39,16 @@ public class EquipoRest {
 	}
 
 	@POST
-	public Response saveEquipo(Equipo equipo) throws Exception {
+	public Response saveEquipo(Equipo equipo) {
 		EquipoController ec = new EquipoController();
-		equipo = ec.saveEquipo(equipo);
+		try{
+			equipo = ec.saveEquipo(equipo);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok(equipo, MediaType.APPLICATION_JSON).build();
 	}
@@ -49,7 +56,14 @@ public class EquipoRest {
 	@PUT
 	public Response updateEquipo(Equipo equipo) {
 		EquipoController ec = new EquipoController();
-		equipo = ec.updateEquipo(equipo);
+		try{
+			equipo = ec.updateEquipo(equipo);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok(equipo, MediaType.APPLICATION_JSON).build();
 	}
@@ -58,7 +72,15 @@ public class EquipoRest {
 	@Path("/{id}")
 	public Response deleteEquipo(@PathParam("id") Integer id) {
 		EquipoController ec = new EquipoController();
-		ec.deleteEquipo(id);
+
+		try{
+			ec.deleteEquipo(id);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok().build();
 	}

@@ -24,17 +24,21 @@ public class EntidadEmisoraController {
 
 	public EntidadEmisora saveEntidadEmisora(EntidadEmisora entidademisora) throws Exception {
 		EntidadEmisoraDao entidademisoraDao = new EntidadEmisoraDao();
+		entidademisora.setEstado("ACTIVO");
 		return entidademisoraDao.save(entidademisora);
 	}
 
-	public EntidadEmisora updateEntidadEmisora(EntidadEmisora entidademisora) {
+	public EntidadEmisora updateEntidadEmisora(EntidadEmisora entidademisora) throws Exception {
 		EntidadEmisoraDao entidademisoraDao = new EntidadEmisoraDao();
 		return entidademisoraDao.update(entidademisora);
 	}
 
-	public void deleteEntidadEmisora(Integer id) {
+	public void deleteEntidadEmisora(Integer id) throws Exception {
 		EntidadEmisoraDao entidademisoraDao = new EntidadEmisoraDao();
-		entidademisoraDao.delete(id);
+		EntidadEmisora entidadEmisora = entidademisoraDao.findById(id);
+		entidadEmisora.setEstado("INACTIVO");
+		entidademisoraDao.update(entidadEmisora);
+		//entidademisoraDao.delete(id);
 	}
 
 }

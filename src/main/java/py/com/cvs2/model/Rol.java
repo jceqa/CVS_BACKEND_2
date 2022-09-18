@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "rol")
 public class Rol implements Serializable {
 
 	/**
@@ -22,6 +22,9 @@ public class Rol implements Serializable {
 
 	@Column(name = "nombre")
 	private String nombre;
+
+	@Column(name = "estado")
+	String estado;
 
 	public Rol() {
 	}
@@ -45,6 +48,14 @@ public class Rol implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	@Override

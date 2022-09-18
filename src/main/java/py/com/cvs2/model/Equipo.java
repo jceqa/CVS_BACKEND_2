@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "equipo")
 public class Equipo implements Serializable {
 
 	/**
@@ -32,6 +32,9 @@ public class Equipo implements Serializable {
 
 	@Column(name = "modelo")
 	private String modelo;
+
+	@Column(name = "estado")
+	String estado;
 
 	@OneToOne
 	@JoinColumn(name = "id_marca", referencedColumnName = "id")
@@ -86,6 +89,14 @@ public class Equipo implements Serializable {
 
 	public void setMarca(Marca marca) {
 		this.marca = marca;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	@Override

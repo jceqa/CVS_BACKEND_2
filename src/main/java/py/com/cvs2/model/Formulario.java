@@ -8,7 +8,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Table
-@Entity
+@Entity(name = "formulario")
 public class Formulario {
 
 	@Id
@@ -28,6 +28,9 @@ public class Formulario {
 	@OneToOne
 	@JoinColumn(name = "id_sub_menu", referencedColumnName = "id")
 	private SubMenu subMenu;
+
+	@Column(name = "estado")
+	String estado;
 
 	public Formulario() {
 	}
@@ -78,6 +81,14 @@ public class Formulario {
 
 	public void setSubMenu(SubMenu subMenu) {
 		this.subMenu = subMenu;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	@Override

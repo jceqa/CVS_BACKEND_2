@@ -19,17 +19,21 @@ public class MarcaController {
 
 	public Marca saveMarca(Marca marca) throws Exception {
 		MarcaDao marcaDao = new MarcaDao();
+		marca.setEstado("ACTIVO");
 		return marcaDao.save(marca);
 	}
 
-	public Marca updateMarca(Marca marca) {
+	public Marca updateMarca(Marca marca) throws Exception {
 		MarcaDao marcaDao = new MarcaDao();
 		return marcaDao.update(marca);
 	}
 
-	public void deleteMarca(Integer id) {
+	public void deleteMarca(Integer id) throws Exception {
 		MarcaDao marcaDao = new MarcaDao();
-		marcaDao.delete(id);
+		Marca marca = marcaDao.findById(id);
+		marca.setEstado("INACTIVO");
+		marcaDao.update(marca);
+		//marcaDao.delete(id);
 	}
 
 }

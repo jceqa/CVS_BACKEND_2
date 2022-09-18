@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "usuario")
 public class Usuario implements Serializable {
 
 	/**
@@ -27,6 +27,9 @@ public class Usuario implements Serializable {
 
 	@Column(name = "clave")
 	private String clave;
+
+	@Column(name = "estado")
+	String estado;
 
 	public Usuario() {
 	}
@@ -68,6 +71,14 @@ public class Usuario implements Serializable {
 
 	public void setClave(String clave) {
 		this.clave = clave;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	@Override

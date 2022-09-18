@@ -32,9 +32,16 @@ public class SucursalRest {
     }
 
     @POST
-    public Response saveSucursal(Sucursal sucursal) throws Exception {
+    public Response saveSucursal(Sucursal sucursal) {
         SucursalController sc = new SucursalController();
-        sucursal = sc.saveSucursal(sucursal);
+        try{
+            sucursal = sc.saveSucursal(sucursal);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
 
         return Response.ok(sucursal, MediaType.APPLICATION_JSON).build();
     }
@@ -42,7 +49,14 @@ public class SucursalRest {
     @PUT
     public Response updateSucursal(Sucursal sucursal) {
         SucursalController sc = new SucursalController();
-        sucursal = sc.updateSucursal(sucursal);
+        try{
+            sucursal = sc.updateSucursal(sucursal);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
 
         return Response.ok(sucursal, MediaType.APPLICATION_JSON).build();
     }
@@ -52,7 +66,14 @@ public class SucursalRest {
     public Response deleteSucursal(@PathParam("id") Integer id) {
         SucursalController sc = new SucursalController();
 
-        sc.deleteSucursal(id);
+        try {
+            sc.deleteSucursal(id);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
 
         return Response.ok().build();
     }

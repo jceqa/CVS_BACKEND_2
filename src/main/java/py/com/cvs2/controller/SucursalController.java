@@ -20,16 +20,20 @@ public class SucursalController {
 
     public Sucursal saveSucursal(Sucursal sucursal) throws Exception {
         SucursalDao sucursalDao = new SucursalDao();
+        sucursal.setEstado("ACTIVO");
         return sucursalDao.save(sucursal);
     }
 
-    public Sucursal updateSucursal(Sucursal sucursal) {
+    public Sucursal updateSucursal(Sucursal sucursal) throws Exception {
         SucursalDao sucursalDao = new SucursalDao();
         return sucursalDao.update(sucursal);
     }
 
-    public void deleteSucursal(Integer id) {
+    public void deleteSucursal(Integer id) throws Exception {
         SucursalDao sucursalDao = new SucursalDao();
-        sucursalDao.delete(id);
+        Sucursal sucursal = sucursalDao.findById(id);
+        sucursal.setEstado("INACTIVO");
+        sucursalDao.update(sucursal);
+        //sucursalDao.delete(id);
     }
 }

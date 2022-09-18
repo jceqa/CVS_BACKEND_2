@@ -42,9 +42,16 @@ public class TipoTarjetaRest {
 	}
 
 	@POST
-	public Response saveTipoTarjeta(TipoTarjeta tipotarjeta) throws Exception {
+	public Response saveTipoTarjeta(TipoTarjeta tipotarjeta) {
 		TipoTarjetaController tc = new TipoTarjetaController();
-		tipotarjeta = tc.saveTipoTarjeta(tipotarjeta);
+		try {
+			tipotarjeta = tc.saveTipoTarjeta(tipotarjeta);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok(tipotarjeta, MediaType.APPLICATION_JSON).build();
 	}
@@ -52,7 +59,14 @@ public class TipoTarjetaRest {
 	@PUT
 	public Response updateTipoTarjeta(TipoTarjeta tipotarjeta) {
 		TipoTarjetaController tc = new TipoTarjetaController();
-		tipotarjeta = tc.updateTipoTarjeta(tipotarjeta);
+		try {
+			tipotarjeta = tc.updateTipoTarjeta(tipotarjeta);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok(tipotarjeta, MediaType.APPLICATION_JSON).build();
 	}
@@ -62,7 +76,14 @@ public class TipoTarjetaRest {
 	public Response deleteTipoTarjeta(@PathParam("id") Integer id) {
 		TipoTarjetaController tc = new TipoTarjetaController();
 
-		tc.deleteTipoTarjeta(id);
+		try {
+			tc.deleteTipoTarjeta(id);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok().build();
 	}

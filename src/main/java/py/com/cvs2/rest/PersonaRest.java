@@ -31,9 +31,16 @@ public class PersonaRest {
     }
 
     @POST
-    public Response savePersona(Persona persona) throws Exception {
+    public Response savePersona(Persona persona) {
         PersonaController pc = new PersonaController();
-        persona = pc.savePersona(persona);
+        try{
+            persona = pc.savePersona(persona);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
 
         return Response.ok(persona, MediaType.APPLICATION_JSON).build();
     }
@@ -41,7 +48,14 @@ public class PersonaRest {
     @PUT
     public Response updatePersona(Persona persona) {
         PersonaController pc = new PersonaController();
-        persona = pc.updatePersona(persona);
+        try{
+            persona = pc.updatePersona(persona);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
 
         return Response.ok(persona, MediaType.APPLICATION_JSON).build();
     }
@@ -51,7 +65,14 @@ public class PersonaRest {
     public Response deletePersona(@PathParam("id") Integer id) {
         PersonaController pc = new PersonaController();
 
-        pc.deletePersona(id);
+        try {
+            pc.deletePersona(id);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
 
         return Response.ok().build();
     }
