@@ -51,7 +51,7 @@ public class GenericRest<T, K extends GenericDao<T>> {
 	}
 
 	@PUT
-	public Response update(T t) {
+	public Response update(T t) throws Exception {
 		GenericDao<T> dao = new GenericDao<T>();
 		t = dao.update(t);
 

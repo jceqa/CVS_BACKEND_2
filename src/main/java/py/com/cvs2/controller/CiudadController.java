@@ -27,17 +27,22 @@ public class CiudadController {
 
 	public Ciudad saveCiudad(Ciudad ciudad) throws Exception {
 		CiudadDao ciudadDao = new CiudadDao();
+		ciudad.setEstado("ACTIVO");
 		return ciudadDao.save(ciudad);
 	}
 
-	public Ciudad updateCiudad(Ciudad ciudad) {
+	public Ciudad updateCiudad(Ciudad ciudad) throws Exception {
 		CiudadDao ciudadDao = new CiudadDao();
 		return ciudadDao.update(ciudad);
 	}
 
-	public void deleteCiudad(Integer id) {
+	public void deleteCiudad(Integer id) throws Exception {
 		CiudadDao ciudadDao = new CiudadDao();
-		ciudadDao.delete(id);
+		Ciudad ciudad = ciudadDao.findById(id);
+		ciudad.setEstado("INACTIVO");
+		ciudadDao.update(ciudad);
+
+		//ciudadDao.delete(id);
 	}
 
 }

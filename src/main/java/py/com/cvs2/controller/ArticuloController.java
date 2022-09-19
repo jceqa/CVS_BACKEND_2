@@ -19,16 +19,23 @@ public class ArticuloController {
 
     public Articulo saveArticulo(Articulo articulo) throws Exception {
         ArticuloDao articuloDao = new ArticuloDao();
+        articulo.setEstado("ACTIVO");
         return articuloDao.save(articulo);
     }
 
-    public Articulo updateArticulo(Articulo articulo) {
+    public Articulo updateArticulo(Articulo articulo) throws Exception {
         ArticuloDao articuloDao = new ArticuloDao();
         return articuloDao.update(articulo);
     }
 
-    public void deleteArticulo(Integer id) {
+    public void deleteArticulo(Integer id) throws Exception{
         ArticuloDao articuloDao = new ArticuloDao();
-        articuloDao.delete(id);
+
+        Articulo articulo = articuloDao.findById(id);
+        articulo.setEstado("INACTIVO");
+
+        articuloDao.update(articulo);
+
+        //articuloDao.delete(id);
     }
 }

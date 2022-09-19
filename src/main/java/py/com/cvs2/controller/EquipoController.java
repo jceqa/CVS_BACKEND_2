@@ -19,17 +19,21 @@ public class EquipoController {
 
 	public Equipo saveEquipo(Equipo equipo) throws Exception {
 		EquipoDao equipoDao = new EquipoDao();
+		equipo.setEstado("ACTIVO");
 		return equipoDao.save(equipo);
 	}
 
-	public Equipo updateEquipo(Equipo equipo) {
+	public Equipo updateEquipo(Equipo equipo) throws Exception {
 		EquipoDao equipoDao = new EquipoDao();
 		return equipoDao.update(equipo);
 	}
 
-	public void deleteEquipo(Integer id) {
+	public void deleteEquipo(Integer id) throws Exception {
 		EquipoDao equipoDao = new EquipoDao();
-		equipoDao.delete(id);
+		Equipo equipo = equipoDao.findById(id);
+		equipo.setEstado("INACTIVO");
+		equipoDao.update(equipo);
+		//equipoDao.delete(id);
 	}
 
 }

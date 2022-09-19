@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "sistema")
 public class Sistema {
 
 	@Id
@@ -15,6 +15,9 @@ public class Sistema {
 
 	@Column(name = "nombre")
 	private String nombre;
+
+	@Column(name = "estado")
+	String estado;
 
 	public Sistema() {
 	}
@@ -38,6 +41,14 @@ public class Sistema {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	@Override

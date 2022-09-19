@@ -19,16 +19,20 @@ public class PersonaController {
 
     public Persona savePersona(Persona persona) throws Exception {
         PersonaDao personaDao = new PersonaDao();
+        persona.setEstado("ACTIVO");
         return personaDao.save(persona);
     }
 
-    public Persona updatePersona(Persona persona) {
+    public Persona updatePersona(Persona persona) throws Exception {
         PersonaDao personaDao = new PersonaDao();
         return personaDao.update(persona);
     }
 
-    public void deletePersona(Integer id) {
+    public void deletePersona(Integer id) throws Exception {
         PersonaDao personaDao = new PersonaDao();
-        personaDao.delete(id);
+        Persona persona = personaDao.findById(id);
+        persona.setEstado("INACTIVO");
+        personaDao.update(persona);
+        //personaDao.delete(id);
     }
 }

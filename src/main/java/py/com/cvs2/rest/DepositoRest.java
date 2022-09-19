@@ -32,9 +32,16 @@ public class DepositoRest {
     }
 
     @POST
-    public Response saveDeposito(Deposito deposito) throws Exception {
+    public Response saveDeposito(Deposito deposito) {
         DepositoController dc = new DepositoController();
-        deposito = dc.saveDeposito(deposito);
+        try{
+            deposito = dc.saveDeposito(deposito);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
 
         return Response.ok(deposito, MediaType.APPLICATION_JSON).build();
     }
@@ -42,7 +49,14 @@ public class DepositoRest {
     @PUT
     public Response updateDeposito(Deposito deposito) {
         DepositoController dc = new DepositoController();
-        deposito = dc.updateDeposito(deposito);
+        try{
+            deposito = dc.updateDeposito(deposito);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
 
         return Response.ok(deposito, MediaType.APPLICATION_JSON).build();
     }

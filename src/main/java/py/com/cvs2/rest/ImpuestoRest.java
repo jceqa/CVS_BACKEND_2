@@ -46,9 +46,16 @@ public class ImpuestoRest {
 	}
 
 	@POST
-	public Response saveImpuesto(Impuesto impuesto) throws Exception {
+	public Response saveImpuesto(Impuesto impuesto) {
 		ImpuestoController ic = new ImpuestoController();
-		impuesto = ic.saveImpuesto(impuesto);
+		try{
+			impuesto = ic.saveImpuesto(impuesto);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok(impuesto, MediaType.APPLICATION_JSON).build();
 	}
@@ -56,7 +63,14 @@ public class ImpuestoRest {
 	@PUT
 	public Response updateImpuesto(Impuesto impuesto) {
 		ImpuestoController ic = new ImpuestoController();
-		impuesto = ic.updateImpuesto(impuesto);
+		try{
+			impuesto = ic.updateImpuesto(impuesto);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok(impuesto, MediaType.APPLICATION_JSON).build();
 	}
@@ -66,7 +80,14 @@ public class ImpuestoRest {
 	public Response deleteImpuesto(@PathParam("id") Integer id) {
 		ImpuestoController ic = new ImpuestoController();
 
-		ic.deleteImpuesto(id);
+		try{
+			ic.deleteImpuesto(id);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok().build();
 	}

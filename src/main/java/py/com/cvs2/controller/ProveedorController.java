@@ -20,16 +20,21 @@ public class ProveedorController {
 
     public Proveedor saveProveedor(Proveedor proveedor) throws Exception {
         ProveedorDao proveedorDao = new ProveedorDao();
+        proveedor.setEstado("ACTIVO");
         return proveedorDao.save(proveedor);
     }
 
-    public Proveedor updateProveedor(Proveedor proveedor) {
+    public Proveedor updateProveedor(Proveedor proveedor) throws Exception {
         ProveedorDao proveedorDao = new ProveedorDao();
         return proveedorDao.update(proveedor);
     }
 
-    public void deleteProveedor(Integer id) {
+    public void deleteProveedor(Integer id) throws Exception {
         ProveedorDao proveedorDao = new ProveedorDao();
-        proveedorDao.delete(id);
+        Proveedor proveedor = proveedorDao.findById(id);
+        proveedor.setEstado("INACTIVO");
+        proveedorDao.update(proveedor);
+
+        //proveedorDao.delete(id);
     }
 }

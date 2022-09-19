@@ -24,17 +24,21 @@ public class CondicionPagoController {
 
 	public CondicionPago saveCondicionPago(CondicionPago condicionpago) throws Exception {
 		CondicionPagoDao condicionpagoDao = new CondicionPagoDao();
+		condicionpago.setEstado("ACTIVO");
 		return condicionpagoDao.save(condicionpago);
 	}
 
-	public CondicionPago updateCondicionPago(CondicionPago condicionpago) {
+	public CondicionPago updateCondicionPago(CondicionPago condicionpago) throws Exception {
 		CondicionPagoDao condicionpagoDao = new CondicionPagoDao();
 		return condicionpagoDao.update(condicionpago);
 	}
 
-	public void deleteCondicionPago(Integer id) {
+	public void deleteCondicionPago(Integer id) throws Exception {
 		CondicionPagoDao condicionpagoDao = new CondicionPagoDao();
-		condicionpagoDao.delete(id);
+		CondicionPago condicionPago = condicionpagoDao.findById(id);
+		condicionPago.setEstado("INACTIVO");
+		condicionpagoDao.update(condicionPago);
+		//condicionpagoDao.delete(id);
 	}
 
 }

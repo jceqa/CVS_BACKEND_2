@@ -31,9 +31,16 @@ import java.util.List;
         }
 
         @POST
-        public Response saveProveedor(Proveedor proveedor) throws Exception {
+        public Response saveProveedor(Proveedor proveedor) {
             ProveedorController pc = new ProveedorController();
-            proveedor = pc.saveProveedor(proveedor);
+            try{
+                proveedor = pc.saveProveedor(proveedor);
+            } catch (Exception e) {
+                Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+                rb.entity(e.getMessage());
+                //throw new RuntimeException(e);
+                return rb.build();
+            }
 
             return Response.ok(proveedor, MediaType.APPLICATION_JSON).build();
         }
@@ -41,7 +48,14 @@ import java.util.List;
         @PUT
         public Response updateProveedor(Proveedor proveedor) {
             ProveedorController pc = new ProveedorController();
-            proveedor = pc.updateProveedor(proveedor);
+            try{
+                proveedor = pc.updateProveedor(proveedor);
+            } catch (Exception e) {
+                Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+                rb.entity(e.getMessage());
+                //throw new RuntimeException(e);
+                return rb.build();
+            }
 
             return Response.ok(proveedor, MediaType.APPLICATION_JSON).build();
         }
@@ -51,7 +65,14 @@ import java.util.List;
         public Response deleteProveedor(@PathParam("id") Integer id) {
             ProveedorController pc = new ProveedorController();
 
-            pc.deleteProveedor(id);
+            try {
+                pc.deleteProveedor(id);
+            } catch (Exception e) {
+                Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+                rb.entity(e.getMessage());
+                //throw new RuntimeException(e);
+                return rb.build();
+            }
 
             return Response.ok().build();
         }

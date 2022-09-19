@@ -17,7 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name= "impuesto")
 public class Impuesto implements Serializable {
 
 	/**
@@ -32,6 +32,9 @@ public class Impuesto implements Serializable {
 
 	@Column(name = "descripcion")
 	private String descripcion;
+
+	@Column(name = "estado")
+	String estado;
 
 	public Impuesto() {
 	}
@@ -55,6 +58,14 @@ public class Impuesto implements Serializable {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	@Override

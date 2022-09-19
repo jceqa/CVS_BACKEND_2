@@ -30,6 +30,9 @@ public class UsuarioRol implements Serializable{
 	@JoinColumn(name = "id_rol", referencedColumnName = "id")
 	private Rol rol;
 
+	@Column(name = "estado")
+	String estado;
+
 	public UsuarioRol() {
 	}
 
@@ -61,6 +64,14 @@ public class UsuarioRol implements Serializable{
 
 	public void setRol(Rol rol) {
 		this.rol = rol;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	@Override

@@ -25,47 +25,68 @@ import py.com.cvs2.model.Cargo;
 @Consumes(MediaType.APPLICATION_JSON)
 public class CargoRest {
 
-	@GET
-	public Response listCargos() {
-		CargoController cc = new CargoController();
-		List<Cargo> cargos = cc.listCargos();
+    @GET
+    public Response listCargos() {
+        CargoController cc = new CargoController();
+        List<Cargo> cargos = cc.listCargos();
 
-		return Response.ok(cargos, MediaType.APPLICATION_JSON).build();
-	}
+        return Response.ok(cargos, MediaType.APPLICATION_JSON).build();
+    }
 
-	@GET
-	@Path("/{id}")
-	public Response getCargoById(@PathParam("id") Integer id) {
-		CargoController cc = new CargoController();
-		Cargo cargo = cc.getCargoById(id);
+    @GET
+    @Path("/{id}")
+    public Response getCargoById(@PathParam("id") Integer id) {
+        CargoController cc = new CargoController();
+        Cargo cargo = cc.getCargoById(id);
 
-		return Response.ok(cargo, MediaType.APPLICATION_JSON).build();
-	}
+        return Response.ok(cargo, MediaType.APPLICATION_JSON).build();
+    }
 
-	@POST
-	public Response saveCargo(Cargo cargo) throws Exception {
-		CargoController cc = new CargoController();
-		cargo = cc.saveCargo(cargo);
+    @POST
+    public Response saveCargo(Cargo cargo) {
+        CargoController cc = new CargoController();
+        try {
+            cargo = cc.saveCargo(cargo);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
 
-		return Response.ok(cargo, MediaType.APPLICATION_JSON).build();
-	}
+        return Response.ok(cargo, MediaType.APPLICATION_JSON).build();
+    }
 
-	@PUT
-	public Response updateCargo(Cargo cargo) {
-		CargoController cc = new CargoController();
-		cargo = cc.updateCargo(cargo);
+    @PUT
+    public Response updateCargo(Cargo cargo) {
+        CargoController cc = new CargoController();
+        try {
+            cargo = cc.updateCargo(cargo);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
 
-		return Response.ok(cargo, MediaType.APPLICATION_JSON).build();
-	}
+        return Response.ok(cargo, MediaType.APPLICATION_JSON).build();
+    }
 
-	@DELETE
-	@Path("/{id}")
-	public Response deleteCargo(@PathParam("id") Integer id) {
-		CargoController cc = new CargoController();
+    @DELETE
+    @Path("/{id}")
+    public Response deleteCargo(@PathParam("id") Integer id) {
+        CargoController cc = new CargoController();
 
-		cc.deleteCargo(id);
+        try {
+            cc.deleteCargo(id);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
 
-		return Response.ok().build();
-	}
+        return Response.ok().build();
+    }
 
 }

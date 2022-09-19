@@ -24,17 +24,21 @@ public class CargoController {
 
 	public Cargo saveCargo(Cargo cargo) throws Exception {
 		CargoDao cargoDao = new CargoDao();
+		cargo.setEstado("ACTIVO");
 		return cargoDao.save(cargo);
 	}
 
-	public Cargo updateCargo(Cargo cargo) {
+	public Cargo updateCargo(Cargo cargo) throws Exception {
 		CargoDao cargoDao = new CargoDao();
 		return cargoDao.update(cargo);
 	}
 
-	public void deleteCargo(Integer id) {
+	public void deleteCargo(Integer id) throws Exception {
 		CargoDao cargoDao = new CargoDao();
-		cargoDao.delete(id);
+		Cargo cargo = cargoDao.findById(id);
+		cargo.setEstado("INACTIVO");
+		cargoDao.update(cargo);
+		//cargoDao.delete(id);
 	}
 
 }

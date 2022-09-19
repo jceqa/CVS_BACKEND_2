@@ -3,7 +3,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table
+@Table(name = "deposito")
 public class Deposito implements Serializable {
 
     private static final long serialVersionUID = -6533574310851771145L;
@@ -19,6 +19,9 @@ public class Deposito implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_sucursal")
     private Sucursal sucursal;
+
+    @Column(name = "estado")
+    String estado;
 
     public Deposito() {
     }
@@ -51,6 +54,14 @@ public class Deposito implements Serializable {
 
     public void setSucursal(Sucursal sucursal) {
         this.sucursal = sucursal;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     @Override

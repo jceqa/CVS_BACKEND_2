@@ -13,28 +13,32 @@ import py.com.cvs2.model.TipoTarjeta;
 public class TipoTarjetaController {
 
 	public List<TipoTarjeta> listTipoTarjetas() {
-		TipoTarjetaDao tipotarjetaDAO = new TipoTarjetaDao();
-		return tipotarjetaDAO.list();
+		TipoTarjetaDao tipoTarjetaDAO = new TipoTarjetaDao();
+		return tipoTarjetaDAO.list();
 	}
 
 	public TipoTarjeta getTipoTarjetaById(Integer id) {
-		TipoTarjetaDao tipotarjetaDAO = new TipoTarjetaDao();
-		return tipotarjetaDAO.findById(id);
+		TipoTarjetaDao tipoTarjetaDAO = new TipoTarjetaDao();
+		return tipoTarjetaDAO.findById(id);
 	}
 
-	public TipoTarjeta saveTipoTarjeta(TipoTarjeta tipotarjeta) throws Exception {
-		TipoTarjetaDao tipotarjetaDao = new TipoTarjetaDao();
-		return tipotarjetaDao.save(tipotarjeta);
+	public TipoTarjeta saveTipoTarjeta(TipoTarjeta tipoTarjeta) throws Exception {
+		TipoTarjetaDao tipoTarjetaDao = new TipoTarjetaDao();
+		tipoTarjeta.setEstado("ACTIVO");
+		return tipoTarjetaDao.save(tipoTarjeta);
 	}
 
-	public TipoTarjeta updateTipoTarjeta(TipoTarjeta tipotarjeta) {
-		TipoTarjetaDao tipotarjetaDao = new TipoTarjetaDao();
-		return tipotarjetaDao.update(tipotarjeta);
+	public TipoTarjeta updateTipoTarjeta(TipoTarjeta tipoTarjeta) throws Exception {
+		TipoTarjetaDao tipoTarjetaDao = new TipoTarjetaDao();
+		return tipoTarjetaDao.update(tipoTarjeta);
 	}
 
-	public void deleteTipoTarjeta(Integer id) {
-		TipoTarjetaDao tipotarjetaDao = new TipoTarjetaDao();
-		tipotarjetaDao.delete(id);
+	public void deleteTipoTarjeta(Integer id) throws Exception {
+		TipoTarjetaDao tipoTarjetaDao = new TipoTarjetaDao();
+		TipoTarjeta tipoTarjeta = tipoTarjetaDao.findById(id);
+		tipoTarjeta.setEstado("INACTIVO");
+		tipoTarjetaDao.update(tipoTarjeta);
+		//tipoTarjetaDao.delete(id);
 	}
 
 }

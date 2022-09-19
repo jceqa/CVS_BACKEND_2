@@ -24,17 +24,21 @@ public class EstadoController {
 
 	public Estado saveEstado(Estado estado) throws Exception {
 		EstadoDao estadoDao = new EstadoDao();
+		estado.setEstado("ACTIVO");
 		return estadoDao.save(estado);
 	}
 
-	public Estado updateEstado(Estado estado) {
+	public Estado updateEstado(Estado estado) throws Exception {
 		EstadoDao estadoDao = new EstadoDao();
 		return estadoDao.update(estado);
 	}
 
-	public void deleteEstado(Integer id) {
+	public void deleteEstado(Integer id) throws Exception {
 		EstadoDao estadoDao = new EstadoDao();
-		estadoDao.delete(id);
+		Estado estado = estadoDao.findById(id);
+		estado.setEstado("INACTIVO");
+		estadoDao.update(estado);
+		//estadoDao.delete(id);
 	}
 
 }

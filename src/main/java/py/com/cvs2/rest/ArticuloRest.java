@@ -31,9 +31,16 @@ public class ArticuloRest {
     }
 
     @POST
-    public Response saveArticulo(Articulo articulo) throws Exception {
+    public Response saveArticulo(Articulo articulo) {
         ArticuloController ac = new ArticuloController();
-        articulo = ac.saveArticulo(articulo);
+        try {
+            articulo = ac.saveArticulo(articulo);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
 
         return Response.ok(articulo, MediaType.APPLICATION_JSON).build();
     }
@@ -41,7 +48,14 @@ public class ArticuloRest {
     @PUT
     public Response updateArticulo(Articulo articulo) {
         ArticuloController ac = new ArticuloController();
-        articulo = ac.updateArticulo(articulo);
+        try {
+            articulo = ac.updateArticulo(articulo);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
 
         return Response.ok(articulo, MediaType.APPLICATION_JSON).build();
     }
@@ -51,7 +65,15 @@ public class ArticuloRest {
     public Response deleteArticulo(@PathParam("id") Integer id) {
         ArticuloController ac = new ArticuloController();
 
-        ac.deleteArticulo(id);
+        try {
+            ac.deleteArticulo(id);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
+
 
         return Response.ok().build();
     }

@@ -42,9 +42,16 @@ public class TipoArticuloRest {
 	}
 
 	@POST
-	public Response saveTipoArticulo(TipoArticulo tipoarticulo) throws Exception {
+	public Response saveTipoArticulo(TipoArticulo tipoarticulo) {
 		TipoArticuloController tac = new TipoArticuloController();
-		tipoarticulo = tac.saveTipoArticulo(tipoarticulo);
+		try{
+			tipoarticulo = tac.saveTipoArticulo(tipoarticulo);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok(tipoarticulo, MediaType.APPLICATION_JSON).build();
 	}
@@ -52,7 +59,14 @@ public class TipoArticuloRest {
 	@PUT
 	public Response updateTipoArticulo(TipoArticulo tipoarticulo) {
 		TipoArticuloController tac = new TipoArticuloController();
-		tipoarticulo = tac.updateTipoArticulo(tipoarticulo);
+		try{
+			tipoarticulo = tac.updateTipoArticulo(tipoarticulo);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok(tipoarticulo, MediaType.APPLICATION_JSON).build();
 	}
@@ -62,7 +76,14 @@ public class TipoArticuloRest {
 	public Response deleteTipoArticulo(@PathParam("id") Integer id) {
 		TipoArticuloController tac = new TipoArticuloController();
 
-		tac.deleteTipoArticulo(id);
+		try {
+			tac.deleteTipoArticulo(id);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok().build();
 	}

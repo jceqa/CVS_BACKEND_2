@@ -44,9 +44,16 @@ public class EstadoRest {
 	}
 
 	@POST
-	public Response saveEstado(Estado estado) throws Exception {
+	public Response saveEstado(Estado estado) {
 		EstadoController ec = new EstadoController();
-		estado = ec.saveEstado(estado);
+		try{
+			estado = ec.saveEstado(estado);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok(estado, MediaType.APPLICATION_JSON).build();
 	}
@@ -54,7 +61,14 @@ public class EstadoRest {
 	@PUT
 	public Response updateEstado(Estado estado) {
 		EstadoController ec = new EstadoController();
-		estado = ec.updateEstado(estado);
+		try{
+			estado = ec.updateEstado(estado);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok(estado, MediaType.APPLICATION_JSON).build();
 	}
@@ -64,7 +78,14 @@ public class EstadoRest {
 	public Response deleteEstado(@PathParam("id") Integer id) {
 		EstadoController ec = new EstadoController();
 
-		ec.deleteEstado(id);
+		try{
+			ec.deleteEstado(id);
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
 
 		return Response.ok().build();
 	}

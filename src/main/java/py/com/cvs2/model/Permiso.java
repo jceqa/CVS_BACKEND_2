@@ -8,7 +8,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "permiso")
 public class Permiso {
 
 	@Id
@@ -43,6 +43,9 @@ public class Permiso {
 
 	@Column(name = "exportar")
 	private boolean exportar;
+
+	@Column(name = "estado")
+	String estado;
 
 	public Permiso() {
 	}
@@ -139,6 +142,14 @@ public class Permiso {
 
 	public void setExportar(boolean exportar) {
 		this.exportar = exportar;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	@Override
