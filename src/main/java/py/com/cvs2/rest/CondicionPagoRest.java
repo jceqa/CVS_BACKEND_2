@@ -67,7 +67,14 @@ public class CondicionPagoRest {
     public Response deleteCondicionPago(@PathParam("id") Integer id) {
         CondicionPagoController cpc = new CondicionPagoController();
 
-        cpc.deleteCondicionPago(id);
+        try {
+            cpc.deleteCondicionPago(id);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
 
         return Response.ok().build();
     }

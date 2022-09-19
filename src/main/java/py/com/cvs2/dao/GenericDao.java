@@ -29,8 +29,9 @@ public class GenericDao<T> {
 
         String tableName = type.toString().substring(type.toString().lastIndexOf(".") + 1);
 
-        Query q = em.createQuery("SELECT t FROM " + tableName + " t ORDER BY t.id " +
-                "WHERE t.estado = 'ACTIVO'");
+        Query q = em.createQuery("SELECT t FROM " + tableName + " t " +
+                " WHERE t.estado = " + "'ACTIVO'" +
+                " ORDER BY t.id ");
 
         tL = q.getResultList();
 

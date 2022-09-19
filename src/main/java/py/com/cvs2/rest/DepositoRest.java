@@ -66,7 +66,14 @@ public class DepositoRest {
     public Response deleteDeposito(@PathParam("id") Integer id) {
         DepositoController dc = new DepositoController();
 
-        dc.deleteDeposito(id);
+        try {
+            dc.deleteDeposito(id);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
 
         return Response.ok().build();
     }
