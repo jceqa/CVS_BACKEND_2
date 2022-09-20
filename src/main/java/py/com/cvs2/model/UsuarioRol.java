@@ -31,7 +31,7 @@ public class UsuarioRol implements Serializable{
 	private Rol rol;
 
 	@Column(name = "estado")
-	String estado;
+	private String estado;
 
 	public UsuarioRol() {
 	}

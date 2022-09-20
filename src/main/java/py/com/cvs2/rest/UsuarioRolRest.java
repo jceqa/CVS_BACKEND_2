@@ -9,7 +9,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import py.com.cvs2.controller.UsuarioRolController;
-import py.com.cvs2.model.UsuarioRol;
+import py.com.cvs2.dto.UsuarioRolDto;
+
+import java.util.List;
 
 @Path("/usuariorol")
 @Produces(MediaType.APPLICATION_JSON)
@@ -17,14 +19,13 @@ import py.com.cvs2.model.UsuarioRol;
 public class UsuarioRolRest {
 
 	@GET
-	@Path("/{id}")
-	public Response getUsuarioRolById(@PathParam("id") Integer id) {
+	@Path("/{idusuario}")
+	public Response getUsuarioRolByIdUsuario(@PathParam("idusuario") Integer idUsuario) {
 		
 		UsuarioRolController urc = new UsuarioRolController();
 		
-		UsuarioRol ur = urc.getById(id);
+		List<UsuarioRolDto> ur = urc.getByIdUsuario(idUsuario);
 
 		return Response.ok(ur, MediaType.APPLICATION_JSON).build();
 	}
-
 }
