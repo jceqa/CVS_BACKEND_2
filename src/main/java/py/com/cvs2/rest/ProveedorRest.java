@@ -14,9 +14,9 @@ import java.util.List;
     public class ProveedorRest {
 
         @GET
-        public Response listProveedores() {
+        public Response listProveedores(@QueryParam("all") Boolean all) {
             ProveedorController pc = new ProveedorController();
-            List<Proveedor> proveedores = pc.listProveedores();
+            List<Proveedor> proveedores = pc.listProveedores(all);
 
             return Response.ok(proveedores, MediaType.APPLICATION_JSON).build();
         }

@@ -15,9 +15,9 @@ import java.util.List;
 public class SucursalRest {
 
     @GET
-    public Response listSucursales() {
+    public Response listSucursales(@QueryParam("all") Boolean all) {
         SucursalController sc = new SucursalController();
-        List<Sucursal> sucursales = sc.listSucursales();
+        List<Sucursal> sucursales = sc.listSucursales(all);
 
         return Response.ok(sucursales, MediaType.APPLICATION_JSON).build();
     }

@@ -15,9 +15,9 @@ import py.com.cvs2.model.Ciudad;
 
 public class CiudadController {
 
-	public List<Ciudad> listCiudades() {
+	public List<Ciudad> listCiudades(Boolean all) {
 		CiudadDao ciudadDAO = new CiudadDao();
-		return ciudadDAO.list();
+		return ciudadDAO.list(all);
 	}
 
 	public Ciudad getCiudadById(Integer id) {

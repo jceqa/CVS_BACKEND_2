@@ -12,9 +12,9 @@ import py.com.cvs2.model.CondicionPago;
 
 public class CondicionPagoController {
 
-	public List<CondicionPago> listCondicionPagos() {
+	public List<CondicionPago> listCondicionPagos(Boolean all) {
 		CondicionPagoDao condicionpagoDAO = new CondicionPagoDao();
-		return condicionpagoDAO.list();
+		return condicionpagoDAO.list(all);
 	}
 
 	public CondicionPago getCondicionPagoById(Integer id) {

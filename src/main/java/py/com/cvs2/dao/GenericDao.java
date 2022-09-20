@@ -1,17 +1,14 @@
 package py.com.cvs2.dao;
 
-import org.postgresql.util.PSQLException;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import javax.persistence.*;
 
 public class GenericDao<T> {
 
-    private Class<T> type;
+    private final Class<T> type;
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     public GenericDao() {
@@ -21,7 +18,7 @@ public class GenericDao<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public List<T> list() {
+    public List<T> list(Boolean all) {
         List<T> tL;
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
@@ -29,9 +26,15 @@ public class GenericDao<T> {
 
         String tableName = type.toString().substring(type.toString().lastIndexOf(".") + 1);
 
-        Query q = em.createQuery("SELECT t FROM " + tableName + " t " +
-                " WHERE t.estado = " + "'ACTIVO'" +
-                " ORDER BY t.id ");
+        String query = "SELECT t FROM " + tableName + " t ";
+
+        if(!all){
+            query+= " WHERE t.estado = " + "'ACTIVO'";
+        }
+
+        query += " ORDER BY t.id ";
+
+        Query q = em.createQuery(query);
 
         tL = q.getResultList();
 

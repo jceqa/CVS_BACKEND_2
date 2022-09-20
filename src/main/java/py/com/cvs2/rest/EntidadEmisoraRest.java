@@ -6,14 +6,7 @@ package py.com.cvs2.rest;
 
 
 import java.util.List;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -26,9 +19,9 @@ import py.com.cvs2.model.EntidadEmisora;
 public class EntidadEmisoraRest {
 
 	@GET
-	public Response listEntidadEmisoras() {
+	public Response listEntidadEmisoras(@QueryParam("all") Boolean all) {
 		EntidadEmisoraController ec = new EntidadEmisoraController();
-		List<EntidadEmisora> entidademisoras = ec.listEntidadEmisoras();
+		List<EntidadEmisora> entidademisoras = ec.listEntidadEmisoras(all);
 
 		return Response.ok(entidademisoras, MediaType.APPLICATION_JSON).build();
 	}

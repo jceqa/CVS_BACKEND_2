@@ -7,9 +7,9 @@ import py.com.cvs2.model.Marca;
 
 public class MarcaController {
 
-	public List<Marca> listMarcas() {
+	public List<Marca> listMarcas(Boolean all) {
 		MarcaDao marcaDAO = new MarcaDao();
-		return marcaDAO.list();
+		return marcaDAO.list(all);
 	}
 
 	public Marca getMarcaById(Integer id) {
@@ -35,5 +35,4 @@ public class MarcaController {
 		marcaDao.update(marca);
 		//marcaDao.delete(id);
 	}
-
 }

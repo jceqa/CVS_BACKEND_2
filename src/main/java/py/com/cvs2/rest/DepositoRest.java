@@ -15,9 +15,9 @@ import java.util.List;
 public class DepositoRest {
 
     @GET
-    public Response listDepositos() {
+    public Response listDepositos(@QueryParam("all") Boolean all) {
         DepositoController dc = new DepositoController();
-        List<Deposito> depositos = dc.listDepositos();
+        List<Deposito> depositos = dc.listDepositos(all);
 
         return Response.ok(depositos, MediaType.APPLICATION_JSON).build();
     }

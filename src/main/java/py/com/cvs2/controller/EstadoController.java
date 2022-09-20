@@ -12,9 +12,9 @@ import py.com.cvs2.model.Estado;
 
 public class EstadoController {
 
-	public List<Estado> listEstados() {
+	public List<Estado> listEstados(Boolean all) {
 		EstadoDao estadoDAO = new EstadoDao();
-		return estadoDAO.list();
+		return estadoDAO.list(all);
 	}
 
 	public Estado getEstadoById(Integer id) {

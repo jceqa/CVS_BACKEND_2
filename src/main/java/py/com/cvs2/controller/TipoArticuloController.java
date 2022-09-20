@@ -15,9 +15,9 @@ import py.com.cvs2.model.TipoArticulo;
 
 public class TipoArticuloController {
 
-	public List<TipoArticulo> listTipoArticulos() {
+	public List<TipoArticulo> listTipoArticulos(Boolean all) {
 		TipoArticuloDao tipoarticuloDAO = new TipoArticuloDao();
-		return tipoarticuloDAO.list();
+		return tipoarticuloDAO.list(all);
 	}
 
 	public TipoArticulo getTipoArticuloById(Integer id) {

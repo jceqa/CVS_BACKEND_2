@@ -8,9 +8,9 @@ import java.util.List;
 
 public class SucursalController {
 
-    public List<Sucursal> listSucursales() {
+    public List<Sucursal> listSucursales(Boolean all) {
         SucursalDao sucursalDAO = new SucursalDao();
-        return sucursalDAO.list();
+        return sucursalDAO.list(all);
     }
 
     public Sucursal getSucursalById(Integer id) {

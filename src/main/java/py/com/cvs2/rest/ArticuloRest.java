@@ -14,9 +14,9 @@ import java.util.List;
 public class ArticuloRest {
 
     @GET
-    public Response listArticulos() {
+    public Response listArticulos(@QueryParam("all") Boolean all) {
         ArticuloController ac = new ArticuloController();
-        List<Articulo> articulos = ac.listArticulos();
+        List<Articulo> articulos = ac.listArticulos(all);
 
         return Response.ok(articulos, MediaType.APPLICATION_JSON).build();
     }

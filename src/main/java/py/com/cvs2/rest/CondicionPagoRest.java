@@ -16,9 +16,9 @@ import java.util.List;
 public class CondicionPagoRest {
 
     @GET
-    public Response listCondicionPagos() {
+    public Response listCondicionPagos(@QueryParam("all") Boolean all) {
         CondicionPagoController cpc = new CondicionPagoController();
-        List<CondicionPago> condicionPagos = cpc.listCondicionPagos();
+        List<CondicionPago> condicionPagos = cpc.listCondicionPagos(all);
 
         return Response.ok(condicionPagos, MediaType.APPLICATION_JSON).build();
     }

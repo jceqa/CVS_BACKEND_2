@@ -6,14 +6,7 @@ package py.com.cvs2.rest;
 
 
 import java.util.List;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -26,9 +19,9 @@ import py.com.cvs2.model.Cargo;
 public class CargoRest {
 
     @GET
-    public Response listCargos() {
+    public Response listCargos(@QueryParam("all") Boolean all) {
         CargoController cc = new CargoController();
-        List<Cargo> cargos = cc.listCargos();
+        List<Cargo> cargos = cc.listCargos(all);
 
         return Response.ok(cargos, MediaType.APPLICATION_JSON).build();
     }

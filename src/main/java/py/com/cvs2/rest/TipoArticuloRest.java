@@ -5,14 +5,7 @@
 package py.com.cvs2.rest;
 
 import java.util.List;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -25,9 +18,9 @@ import py.com.cvs2.model.TipoArticulo;
 public class TipoArticuloRest {
 
 	@GET
-	public Response listTipoArticulos() {
+	public Response listTipoArticulos(@QueryParam("all") Boolean all) {
 		TipoArticuloController tac = new TipoArticuloController();
-		List<TipoArticulo> tipoarticulos = tac.listTipoArticulos();
+		List<TipoArticulo> tipoarticulos = tac.listTipoArticulos(all);
 
 		return Response.ok(tipoarticulos, MediaType.APPLICATION_JSON).build();
 	}

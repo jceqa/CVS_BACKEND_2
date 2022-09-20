@@ -7,9 +7,9 @@ import java.util.List;
 
 public class ArticuloController {
 
-    public List<Articulo> listArticulos() {
+    public List<Articulo> listArticulos(Boolean all) {
         ArticuloDao articuloDAO = new ArticuloDao();
-        return articuloDAO.list();
+        return articuloDAO.list(all);
     }
 
     public Articulo getArticuloById(Integer id) {
