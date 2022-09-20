@@ -12,9 +12,9 @@ import py.com.cvs2.model.EntidadEmisora;
 
 public class EntidadEmisoraController {
 
-	public List<EntidadEmisora> listEntidadEmisoras() {
+	public List<EntidadEmisora> listEntidadEmisoras(Boolean all) {
 		EntidadEmisoraDao entidademisoraDAO = new EntidadEmisoraDao();
-		return entidademisoraDAO.list();
+		return entidademisoraDAO.list(all);
 	}
 
 	public EntidadEmisora getEntidadEmisoraById(Integer id) {

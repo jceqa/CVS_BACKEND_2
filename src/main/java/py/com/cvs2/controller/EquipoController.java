@@ -7,9 +7,9 @@ import py.com.cvs2.model.Equipo;
 
 public class EquipoController {
 
-	public List<Equipo> listEquipos() {
+	public List<Equipo> listEquipos(Boolean all) {
 		EquipoDao equipoDao = new EquipoDao();
-		return equipoDao.list();
+		return equipoDao.list(all);
 	}
 
 	public Equipo getEquipoById(Integer id) {

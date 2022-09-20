@@ -8,9 +8,9 @@ import py.com.cvs2.model.Proveedor;
 import java.util.List;
 public class ProveedorController {
 
-    public List<Proveedor> listProveedores() {
+    public List<Proveedor> listProveedores(Boolean all) {
         ProveedorDao proveedorDAO = new ProveedorDao();
-        return proveedorDAO.list();
+        return proveedorDAO.list(all);
     }
 
     public Proveedor getProveedorById(Integer id) {

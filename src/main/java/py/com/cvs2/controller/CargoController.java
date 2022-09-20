@@ -12,9 +12,9 @@ import py.com.cvs2.model.Cargo;
 
 public class CargoController {
 
-	public List<Cargo> listCargos() {
+	public List<Cargo> listCargos(Boolean all) {
 		CargoDao cargoDAO = new CargoDao();
-		return cargoDAO.list();
+		return cargoDAO.list(all);
 	}
 
 	public Cargo getCargoById(Integer id) {

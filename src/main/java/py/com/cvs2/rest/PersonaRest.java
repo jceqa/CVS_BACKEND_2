@@ -14,9 +14,9 @@ import java.util.List;
 public class PersonaRest {
 
     @GET
-    public Response listPersonas() {
+    public Response listPersonas(@QueryParam("all") Boolean all) {
         PersonaController pc = new PersonaController();
-        List<Persona> personas = pc.listPersonas();
+        List<Persona> personas = pc.listPersonas(all);
 
         return Response.ok(personas, MediaType.APPLICATION_JSON).build();
     }

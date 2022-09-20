@@ -15,9 +15,9 @@ import py.com.cvs2.model.Impuesto;
 
 public class ImpuestoController {
 
-	public List<Impuesto> listImpuestos() {
+	public List<Impuesto> listImpuestos(Boolean all) {
 		ImpuestoDao impuestoDAO = new ImpuestoDao();
-		return impuestoDAO.list();
+		return impuestoDAO.list(all);
 	}
 
 	public Impuesto getImpuestoById(Integer id) {

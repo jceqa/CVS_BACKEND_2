@@ -30,6 +30,7 @@
 			py.com.cvs2.rest.ProveedorRest,
 			py.com.cvs2.rest.SucursalRest,
 			py.com.cvs2.rest.DepositoRest,
+			py.com.cvs2.rest.MenuRest
 		</param-value>
 	</context-param>
 

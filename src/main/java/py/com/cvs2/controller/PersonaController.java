@@ -7,9 +7,9 @@ import java.util.List;
 
 public class PersonaController {
 
-    public List<Persona> listPersonas() {
+    public List<Persona> listPersonas(Boolean all) {
         PersonaDao personaDAO = new PersonaDao();
-        return personaDAO.list();
+        return personaDAO.list(all);
     }
 
     public Persona getPersonaById(Integer id) {

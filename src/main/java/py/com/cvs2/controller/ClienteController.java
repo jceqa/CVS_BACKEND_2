@@ -7,9 +7,9 @@ import java.util.List;
 
 public class ClienteController {
 
-    public List<Cliente> listClientes() {
+    public List<Cliente> listClientes(Boolean all) {
         ClienteDao clienteDAO = new ClienteDao();
-        return clienteDAO.list();
+        return clienteDAO.list(all);
     }
 
     public Cliente getClienteById(Integer id) {

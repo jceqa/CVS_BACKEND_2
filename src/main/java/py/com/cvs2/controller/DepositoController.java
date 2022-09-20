@@ -8,9 +8,9 @@ import java.util.List;
 
 public class DepositoController {
 
-    public List<Deposito> listDepositos() {
+    public List<Deposito> listDepositos(Boolean all) {
         DepositoDao depositoDAO = new DepositoDao();
-        return depositoDAO.list();
+        return depositoDAO.list(all);
     }
 
     public Deposito getDepositoById(Integer id) {

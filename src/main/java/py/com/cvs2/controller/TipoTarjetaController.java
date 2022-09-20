@@ -12,9 +12,9 @@ import py.com.cvs2.model.TipoTarjeta;
 
 public class TipoTarjetaController {
 
-	public List<TipoTarjeta> listTipoTarjetas() {
+	public List<TipoTarjeta> listTipoTarjetas(Boolean all) {
 		TipoTarjetaDao tipoTarjetaDAO = new TipoTarjetaDao();
-		return tipoTarjetaDAO.list();
+		return tipoTarjetaDAO.list(all);
 	}
 
 	public TipoTarjeta getTipoTarjetaById(Integer id) {
