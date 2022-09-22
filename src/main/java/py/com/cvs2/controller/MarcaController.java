@@ -12,10 +12,10 @@ public class MarcaController {
 		return marcaDAO.list(all);
 	}
 
-	public Marca getMarcaById(Integer id) {
-		MarcaDao marcaDAO = new MarcaDao();
-		return marcaDAO.findById(id);
-	}
+    public Marca getMarcaById(Integer id) {
+        MarcaDao marcaDAO = new MarcaDao();
+        return marcaDAO.findById(id);
+    }
 
 	public Marca saveMarca(Marca marca) throws Exception {
 		MarcaDao marcaDao = new MarcaDao();
