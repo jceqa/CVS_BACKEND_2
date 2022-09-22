@@ -44,6 +44,9 @@ public class Permiso {
 	@Column(name = "exportar")
 	private boolean exportar;
 
+	@Column(name = "reactivar")
+	private boolean reactivar;
+
 	@Column(name = "estado")
 	String estado;
 
@@ -150,6 +153,14 @@ public class Permiso {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public boolean isReactivar() {
+		return reactivar;
+	}
+
+	public void setReactivar(boolean reactivar) {
+		this.reactivar = reactivar;
 	}
 
 	@Override

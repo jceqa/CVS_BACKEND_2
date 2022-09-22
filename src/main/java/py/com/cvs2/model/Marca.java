@@ -12,9 +12,6 @@ import javax.persistence.Table;
 @Table(name = "marca")
 public class Marca implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6533574310851771145L;
 
 	@Id

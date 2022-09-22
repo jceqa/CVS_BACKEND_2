@@ -23,6 +23,15 @@ public class DepositoRest {
     }
 
     @GET
+    @Path("/sucursal/{id}")
+    public Response listDepositosBySucursal(@PathParam("id") Integer idSucursal) {
+        DepositoController dc = new DepositoController();
+        List<Deposito> depositos = dc.listDepositosBySucursal(idSucursal);
+
+        return Response.ok(depositos, MediaType.APPLICATION_JSON).build();
+    }
+
+    @GET
     @Path("/{id}")
     public Response getDepositoById(@PathParam("id") Integer id) {
         DepositoController dc = new DepositoController();

@@ -13,6 +13,11 @@ public class SucursalController {
         return sucursalDAO.list(all);
     }
 
+    public List<Sucursal> getSucursalByUserId(Integer userId) {
+        SucursalDao sucursalDAO = new SucursalDao();
+        return sucursalDAO.getByUserId(userId);
+    }
+
     public Sucursal getSucursalById(Integer id) {
         SucursalDao sucursalDAO = new SucursalDao();
         return sucursalDAO.findById(id);

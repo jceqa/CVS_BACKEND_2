@@ -31,6 +31,15 @@ public class SucursalRest {
         return Response.ok(sucursal, MediaType.APPLICATION_JSON).build();
     }
 
+    @GET
+    @Path("/user/{id}")
+    public Response getSucursalByUserId(@PathParam("id") Integer userId) {
+        SucursalController sc = new SucursalController();
+        List<Sucursal> sucursal = sc.getSucursalByUserId(userId);
+
+        return Response.ok(sucursal, MediaType.APPLICATION_JSON).build();
+    }
+
     @POST
     public Response saveSucursal(Sucursal sucursal) {
         SucursalController sc = new SucursalController();

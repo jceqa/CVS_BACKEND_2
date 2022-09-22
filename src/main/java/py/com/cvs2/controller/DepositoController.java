@@ -18,6 +18,11 @@ public class DepositoController {
         return depositoDAO.findById(id);
     }
 
+    public List<Deposito> listDepositosBySucursal(Integer idSucursal){
+        DepositoDao depositoDAO = new DepositoDao();
+        return depositoDAO.listDepositosBySucursal(idSucursal);
+    }
+
     public Deposito saveDeposito(Deposito deposito) throws Exception {
         DepositoDao depositoDao = new DepositoDao();
         deposito.setEstado("ACTIVO");
