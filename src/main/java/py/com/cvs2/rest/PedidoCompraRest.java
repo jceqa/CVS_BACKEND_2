@@ -24,6 +24,15 @@ public class PedidoCompraRest {
         return Response.ok(pedidoCompraList, MediaType.APPLICATION_JSON).build();
     }
 
+    @GET
+    @Path("/pendientes")
+    public Response listPedidosCompraPendientes(){
+        PedidoCompraController pcc = new PedidoCompraController();
+        List<PedidoCompra> pedidoCompraList = pcc.listPedidosCompraPendientes();
+
+        return Response.ok(pedidoCompraList, MediaType.APPLICATION_JSON).build();
+    }
+
     @POST
     public Response savePedidoCompra(PedidoCompra pedidoCompra) {
         PedidoCompraController pcc = new PedidoCompraController();

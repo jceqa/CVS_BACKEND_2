@@ -22,6 +22,11 @@ public class PedidoCompraController {
         return pedidoCompraDao.list(all);
     }
 
+    public List<PedidoCompra> listPedidosCompraPendientes() {
+        PedidoCompraDao pedidoCompraDao = new PedidoCompraDao();
+        return pedidoCompraDao.listPendientes();
+    }
+
     public PedidoCompra cancelPedidoCompra(PedidoCompra pedidoCompra) throws Exception {
         PedidoCompraDao pedidoCompraDao = new PedidoCompraDao();
         Estado estado = new Estado(2, "ANULADO");

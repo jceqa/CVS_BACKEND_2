@@ -1,0 +1,54 @@
+package py.com.cvs2.rest;
+
+import py.com.cvs2.controller.PresupuestoCompraController;
+import py.com.cvs2.model.PresupuestoCompra;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.List;
+
+@Path("/presupuestocompra")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+public class PresupuestoCompraRest {
+
+    @GET
+    public Response listPresupuestosCompra(@QueryParam("all") Boolean all){
+        PresupuestoCompraController pcc = new PresupuestoCompraController();
+        List<PresupuestoCompra> presupuestoCompraList = pcc.listPresupuestosCompra(all);
+
+        return Response.ok(presupuestoCompraList, MediaType.APPLICATION_JSON).build();
+    }
+
+    @POST
+    public Response savePresupuestoCompra(PresupuestoCompra presupuestoCompra) {
+        PresupuestoCompraController pcc = new PresupuestoCompraController();
+        try {
+            presupuestoCompra = pcc.savePresupuestoCompra(presupuestoCompra);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
+        return Response.ok(presupuestoCompra, MediaType.APPLICATION_JSON).build();
+    }
+
+    @PUT
+    @Path("/anular")
+    public Response cancelPresupuestoCompra(PresupuestoCompra presupuestoCompra) {
+        PresupuestoCompraController pcc = new PresupuestoCompraController();
+
+        try {
+            pcc.cancelPresupuestoCompra(presupuestoCompra);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
+
+        return Response.ok().build();
+    }
+}
