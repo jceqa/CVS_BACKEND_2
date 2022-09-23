@@ -17,17 +17,20 @@ public class OrdenCompra implements Serializable {
     @Column(name = "fecha")
     private Date fecha;
 
+    @Column(name = "observacion")
+    private String observacion;
+
     @Column(name = "estado")
     private String estado;
 
     @Column(name = "intervalo")
     private Integer intervalo;
 
-    @Column(name = "cantidadcuota")
-    private Integer cantidadcuota;
+    @Column(name = "cantidad_cuota")
+    private Integer cantidadCuota;
 
-    @Column(name = "montocuota")
-    private Long montocuota;
+    @Column(name = "monto_cuota")
+    private Long montoCuota;
 
     @OneToOne
     @JoinColumn(name = "id_estado", referencedColumnName = "id")
@@ -52,13 +55,13 @@ public class OrdenCompra implements Serializable {
     public OrdenCompra() {
     }
 
-    public OrdenCompra(int id, Date fecha, String estado, Integer intervalo, Integer cantidadcuota,  Long montocuota, Estado estadoOrdenCompra, Usuario usuario, PresupuestoCompra presupuestoCompra, List<OrdenCompraDetalle> ordenCompraDetalle) {
+    public OrdenCompra(int id, Date fecha, String estado, Integer intervalo, Integer cantidadCuota,  Long montoCuota, Estado estadoOrdenCompra, Usuario usuario, PresupuestoCompra presupuestoCompra, List<OrdenCompraDetalle> ordenCompraDetalle) {
         this.id = id;
         this.fecha = fecha;
         this.estado = estado;
         this.intervalo = intervalo;
-        this.cantidadcuota = cantidadcuota;
-        this.montocuota = montocuota;
+        this.cantidadCuota = cantidadCuota;
+        this.montoCuota = montoCuota;
         this.estadoOrdenCompra=estadoOrdenCompra;
         this.usuario = usuario;
         this.presupuestoCompra = presupuestoCompra;
@@ -96,17 +99,17 @@ public class OrdenCompra implements Serializable {
         this.intervalo = intervalo;
     }
 
-    public Integer getCantidadcuota() { return cantidadcuota;
+    public Integer getCantidadCuota() { return cantidadCuota;
     }
 
-    public void setCantidadcuota(Integer cantidadcuota) {
-        this.cantidadcuota = cantidadcuota;
+    public void setCantidadCuota(Integer cantidadCuota) {
+        this.cantidadCuota = cantidadCuota;
     }
 
-    public Long getMontocuota() {return montocuota;
+    public Long getMontoCuota() {return montoCuota;
     }
 
-    public void setMontocuota(Long montocuota) {this.montocuota = montocuota;
+    public void setMontoCuota(Long montoCuota) {this.montoCuota = montoCuota;
     }
 
     public Estado getEstadoOrdenCompra() {
@@ -149,6 +152,22 @@ public class OrdenCompra implements Serializable {
         this.condicionPago = condicionPago;
     }
 
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
+
+    public List<OrdenCompraDetalle> getOrdenCompraDetalle() {
+        return ordenCompraDetalle;
+    }
+
+    public void setOrdenCompraDetalle(List<OrdenCompraDetalle> ordenCompraDetalle) {
+        this.ordenCompraDetalle = ordenCompraDetalle;
+    }
+
     @Override
     public String toString() {
         return "OrdenCompra{" +
@@ -156,8 +175,8 @@ public class OrdenCompra implements Serializable {
                 ", fecha=" + fecha +
                 ", estado='" + estado + '\'' +
                 ", intervalo='" + intervalo + '\'' +
-                ", cantidadcuota='" + cantidadcuota + '\'' +
-                ", montocuota=" + montocuota +
+                ", cantidadCuota='" + cantidadCuota + '\'' +
+                ", montoCuota=" + montoCuota +
                 ", estadoOrdenCompra=" + estadoOrdenCompra +
                 ", usuario=" + usuario +
                 ", PresupuestoCompra=" + presupuestoCompra +

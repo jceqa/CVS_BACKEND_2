@@ -32,7 +32,8 @@
 			py.com.cvs2.rest.DepositoRest,
 			py.com.cvs2.rest.MenuRest,
 			py.com.cvs2.rest.PedidoCompraRest,
-			py.com.cvs2.rest.PresupuestoCompraRest
+			py.com.cvs2.rest.PresupuestoCompraRest,
+			py.com.cvs2.rest.OrdenCompraRest
 		</param-value>
 	</context-param>
 
