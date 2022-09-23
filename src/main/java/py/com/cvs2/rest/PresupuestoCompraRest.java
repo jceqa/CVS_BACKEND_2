@@ -1,6 +1,8 @@
 package py.com.cvs2.rest;
 
+import py.com.cvs2.controller.PedidoCompraController;
 import py.com.cvs2.controller.PresupuestoCompraController;
+import py.com.cvs2.model.PedidoCompra;
 import py.com.cvs2.model.PresupuestoCompra;
 
 import javax.ws.rs.*;
@@ -17,6 +19,15 @@ public class PresupuestoCompraRest {
     public Response listPresupuestosCompra(@QueryParam("all") Boolean all){
         PresupuestoCompraController pcc = new PresupuestoCompraController();
         List<PresupuestoCompra> presupuestoCompraList = pcc.listPresupuestosCompra(all);
+
+        return Response.ok(presupuestoCompraList, MediaType.APPLICATION_JSON).build();
+    }
+
+    @GET
+    @Path("/pendientes")
+    public Response listPresupuestoCompraPendientes(){
+        PresupuestoCompraController pcc = new PresupuestoCompraController();
+        List<PresupuestoCompra> presupuestoCompraList = pcc.listPresupuestoCompraPendientes();
 
         return Response.ok(presupuestoCompraList, MediaType.APPLICATION_JSON).build();
     }

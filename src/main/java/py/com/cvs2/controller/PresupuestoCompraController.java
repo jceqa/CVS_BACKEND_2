@@ -28,6 +28,11 @@ public class PresupuestoCompraController {
         return presupuestoCompraDao.list(all);
     }
 
+    public List<PresupuestoCompra> listPresupuestoCompraPendientes() {
+        PresupuestoCompraDao presupuestoCompraDao = new PresupuestoCompraDao();
+        return presupuestoCompraDao.listPendientes();
+    }
+
     public PresupuestoCompra cancelPresupuestoCompra(PresupuestoCompra presupuestoCompra) throws Exception {
         PresupuestoCompraDao presupuestoCompraDao = new PresupuestoCompraDao();
         PedidoCompraDao pedidoCompraDao = new PedidoCompraDao();

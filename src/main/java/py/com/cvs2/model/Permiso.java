@@ -47,6 +47,9 @@ public class Permiso {
 	@Column(name = "reactivar")
 	private boolean reactivar;
 
+	@Column(name = "anular")
+	private boolean anular;
+
 	@Column(name = "estado")
 	String estado;
 
@@ -161,6 +164,14 @@ public class Permiso {
 
 	public void setReactivar(boolean reactivar) {
 		this.reactivar = reactivar;
+	}
+
+	public boolean isAnular() {
+		return anular;
+	}
+
+	public void setAnular(boolean anular) {
+		this.anular = anular;
 	}
 
 	@Override
