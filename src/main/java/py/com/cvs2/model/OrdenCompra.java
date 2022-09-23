@@ -135,11 +135,7 @@ public class OrdenCompra implements Serializable {
     public void setPresupuestoCompra(PresupuestoCompra presupuestoCompra) {
         this.presupuestoCompra = presupuestoCompra;
     }
-
-    public List<OrdenCompraDetalle> getOrdenCompraDetallesCompraDetalle() {
-        return ordenCompraDetalle;
-    }
-
+    
     public void setOrdenCompraDetalles(List<OrdenCompraDetalle> ordenCompraDetalles) {
         this.ordenCompraDetalle = ordenCompraDetalles;
     }
