@@ -1,10 +1,8 @@
 package py.com.cvs2.controller;
-
 import py.com.cvs2.dao.ClienteDao;
 import py.com.cvs2.model.Cliente;
 
 import java.util.List;
-
 public class ClienteController {
 
     public List<Cliente> listClientes(Boolean all) {

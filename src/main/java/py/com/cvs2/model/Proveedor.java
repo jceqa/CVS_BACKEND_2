@@ -114,7 +114,7 @@ public class Proveedor implements Serializable{
 
     @Override
     public String toString() {
-        return "Articulo{" +
+        return "Proveedor{" +
                 "id=" + id +
                 ", razon_social='" + razonSocial + '\'' +
                 ", direccion='" + direccion + '\'' +
