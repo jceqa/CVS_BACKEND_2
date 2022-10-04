@@ -1,0 +1,137 @@
+package py.com.cvs2.controller;
+
+import py.com.cvs2.dao.*;
+import py.com.cvs2.model.*;
+
+import java.util.List;
+
+public class FacturaCompraController {
+
+    public FacturaCompra saveFacturaCompra(FacturaCompra facturaCompra) throws Exception {
+        FacturaCompraDao facturaCompraDao = new FacturaCompraDao();
+        OrdenCompraDao ordenCompraDao = new OrdenCompraDao();
+        StockDao stockDao = new StockDao();
+        ArticuloDao articuloDao = new ArticuloDao();
+        LibroCompraDetalleDao libroCompraDetalleDao = new LibroCompraDetalleDao();
+        NotaDebitoCompraDetalleDao notaDebitoCompraDetalleDao = new NotaDebitoCompraDetalleDao();
+
+        OrdenCompra ordenCompra = facturaCompra.getOrdenCompra();
+        ordenCompra.setEstadoOrdenCompra(new Estado(4, "PROCESADO"));
+        ordenCompraDao.update(ordenCompra);
+
+        for(PresupuestoCompra pc : ordenCompra.getPresupuestosCompra()){
+            for(PresupuestoCompraDetalle pcD : pc.getPresupuestoCompraDetalles()){
+                Stock stock = stockDao.getByArticuloAndDeposito(pcD.getPedidoCompraDetalle().getArticulo().getId(), 1);
+                if(stock != null){
+                    stock.setExistencia(stock.getExistencia() + pcD.getPedidoCompraDetalle().getCantidad());
+                    stockDao.update(stock);
+                } else {
+                    stock = new Stock();
+                    stock.setExistencia(pcD.getPedidoCompraDetalle().getCantidad());
+                    Deposito deposito = new Deposito();
+                    deposito.setId(1);
+                    stock.setDeposito(deposito);
+                    stock.setArticulo(pcD.getPedidoCompraDetalle().getArticulo());
+                    stock.setEstado("ACTIVO");
+                    stockDao.save(stock);
+                }
+
+
+                Articulo articulo = pcD.getPedidoCompraDetalle().getArticulo();
+                articulo.setPrecioCompraAnterior(articulo.getPrecioCompra());
+                articulo.setPrecioCompra(pcD.getMonto());
+                articuloDao.update(articulo);
+            }
+        }
+
+        facturaCompra = facturaCompraDao.save(facturaCompra);
+
+        List<LibroCompraDetalle> libroCompraDetalleList = facturaCompra.getLibroCompra().getLibroCompraDetalles();
+        List<FacturaCompraDetalle> facturaCompraDetalleList = facturaCompra.getFacturaCompraDetalle();
+        List<NotaDebitoCompra> notaDebitoCompraList = facturaCompra.getNotaDebitoCompraList();
+
+        for(int i = 0; i < facturaCompraDetalleList.size(); i++){
+            libroCompraDetalleList.get(i).setFacturaCompraDetalle(facturaCompraDetalleList.get(i));
+            libroCompraDetalleDao.update(libroCompraDetalleList.get(i));
+        }
+
+        for(NotaDebitoCompra notaDebitoCompra : notaDebitoCompraList){
+            for(int j = 0; j < facturaCompraDetalleList.size(); j++){
+                notaDebitoCompra.getNotaDebitoCompraDetalle().get(j).setFacturaCompraDetalle(facturaCompraDetalleList.get(j));
+                notaDebitoCompraDetalleDao.update(notaDebitoCompra.getNotaDebitoCompraDetalle().get(j));
+            }
+        }
+
+        return facturaCompra;
+    }
+
+    public List<FacturaCompra> listFacturasCompra(Boolean all) {
+        FacturaCompraDao facturaCompraDao = new FacturaCompraDao();
+        return facturaCompraDao.list(all);
+    }
+
+    public FacturaCompra cancelFacturaCompra(FacturaCompra facturaCompra) throws Exception {
+        FacturaCompraDao facturaCompraDao = new FacturaCompraDao();
+        OrdenCompraDao ordenCompraDao = new OrdenCompraDao();
+        LibroCompraDao libroCompraDao = new LibroCompraDao();
+        LibroCompraDetalleDao libroCompraDetalleDao = new LibroCompraDetalleDao();
+        NotaRemisionDao notaRemisionDao = new NotaRemisionDao();
+        ArticuloDao articuloDao = new ArticuloDao();
+        StockDao stockDao = new StockDao();
+        NotaDebitoCompraDao notaDebitoCompraDao = new NotaDebitoCompraDao();
+        CuentaAPagarDao cuentaAPagarDao = new CuentaAPagarDao();
+        NotaCreditoCompraDao notaCreditoCompraDao = new NotaCreditoCompraDao();
+
+        OrdenCompra ordenCompra = facturaCompra.getOrdenCompra();
+        ordenCompra.setEstadoOrdenCompra(new Estado(1, "PENDIENTE"));
+        ordenCompraDao.update(ordenCompra);
+
+        facturaCompra.setEstadoFacturaCompra(new Estado(2, "ANULADO"));
+
+        LibroCompra libroCompra = facturaCompra.getLibroCompra();
+        for(LibroCompraDetalle lCD: libroCompra.getLibroCompraDetalles()){
+            lCD.setEstado("INACTIVO");
+            libroCompraDetalleDao.update(lCD);
+            //libroCompraDetalleDao.delete(lCD.getId());
+        }
+        libroCompra.setEstado("INACTIVO");
+        libroCompraDao.update(libroCompra);
+        //libroCompraDao.delete(libroCompra.getId());
+
+        List<NotaRemision> notaRemisionList = facturaCompra.getNotaRemisionList();
+        for(NotaRemision notaRemision : notaRemisionList){
+            for(PedidoCompraDetalle pedidoCompraDetalle : notaRemision.getPedidoCompra().getDetallePedidoCompras()) {
+                Articulo articulo = pedidoCompraDetalle.getArticulo();
+                articulo.setPrecioCompra(articulo.getPrecioCompraAnterior());
+                articuloDao.update(articulo);
+
+                Stock stock;
+                if (notaRemision.getEstadoNotaRemision().getId() == 4 || notaRemision.getEstadoNotaRemision().getId() == 3) {
+                    stock = stockDao.getByArticuloAndDeposito(articulo.getId(), notaRemision.getPedidoCompra().getDeposito().getId());
+                } else {
+                    stock = stockDao.getByArticuloAndDeposito(articulo.getId(), 1);
+                }
+                stock.setExistencia(stock.getExistencia() - pedidoCompraDetalle.getCantidad());
+                stockDao.update(stock);
+            }
+            notaRemision.setEstadoNotaRemision(new Estado(2, "ANULADO"));
+            notaRemisionDao.update(notaRemision);
+        }
+
+        for(NotaDebitoCompra notaDebitoCompra : facturaCompra.getNotaDebitoCompraList()){
+            CuentaAPagar cuentaAPagar = notaDebitoCompra.getCuentaAPagar();
+            cuentaAPagar.setEstadoCuentaAPagar(new Estado(2, "ANULADO"));
+            cuentaAPagarDao.update(cuentaAPagar);
+
+            notaDebitoCompra.setEstadoNotaDebitoCompra(new Estado(2, "ANULADO"));
+            notaDebitoCompraDao.update(notaDebitoCompra);
+        }
+
+        for(NotaCreditoCompra notaCreditoCompra : facturaCompra.getNotaCreditoComprasCancelacion()){
+            notaCreditoCompra.setEstadoNotaCreditoCompra(new Estado(1, "PENDIENTE"));
+            notaCreditoCompraDao.update(notaCreditoCompra);
+        }
+
+        return facturaCompraDao.update(facturaCompra);
+    }
+}

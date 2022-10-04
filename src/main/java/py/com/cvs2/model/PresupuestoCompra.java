@@ -28,7 +28,7 @@ public class PresupuestoCompra implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "id_estado", referencedColumnName = "id")
-    private Estado estadoPresupuesto;
+    private Estado estadoPresupuestoCompra;
 
     @OneToOne
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
@@ -49,15 +49,16 @@ public class PresupuestoCompra implements Serializable {
     public PresupuestoCompra() {
     }
 
-    public PresupuestoCompra(int id, Date fecha, String estado, String observacion, Long total, Estado estadoPresupuesto, Usuario usuario, PedidoCompra pedidoCompra, List<PresupuestoCompraDetalle> presupuestoCompraDetalles) {
+    public PresupuestoCompra(int id, Date fecha, String estado, String observacion, Long total, Estado estadoPresupuestoCompra, Usuario usuario, PedidoCompra pedidoCompra, Proveedor proveedor, List<PresupuestoCompraDetalle> presupuestoCompraDetalles) {
         this.id = id;
         this.fecha = fecha;
         this.estado = estado;
         this.observacion = observacion;
         this.total = total;
-        this.estadoPresupuesto = estadoPresupuesto;
+        this.estadoPresupuestoCompra = estadoPresupuestoCompra;
         this.usuario = usuario;
         this.pedidoCompra = pedidoCompra;
+        this.proveedor = proveedor;
         this.presupuestoCompraDetalles = presupuestoCompraDetalles;
     }
 
@@ -101,12 +102,12 @@ public class PresupuestoCompra implements Serializable {
         this.total = total;
     }
 
-    public Estado getEstadoPresupuesto() {
-        return estadoPresupuesto;
+    public Estado getEstadoPresupuestoCompra() {
+        return estadoPresupuestoCompra;
     }
 
-    public void setEstadoPresupuesto(Estado estadoPresupuesto) {
-        this.estadoPresupuesto = estadoPresupuesto;
+    public void setEstadoPresupuestoCompra(Estado estadoPresupuestoCompra) {
+        this.estadoPresupuestoCompra = estadoPresupuestoCompra;
     }
 
     public Usuario getUsuario() {
@@ -125,20 +126,20 @@ public class PresupuestoCompra implements Serializable {
         this.pedidoCompra = pedidoCompra;
     }
 
-    public List<PresupuestoCompraDetalle> getPresupuestoCompraDetalles() {
-        return presupuestoCompraDetalles;
-    }
-
-    public void setPresupuestoCompraDetalles(List<PresupuestoCompraDetalle> presupuestoCompraDetalles) {
-        this.presupuestoCompraDetalles = presupuestoCompraDetalles;
-    }
-
     public Proveedor getProveedor() {
         return proveedor;
     }
 
     public void setProveedor(Proveedor proveedor) {
         this.proveedor = proveedor;
+    }
+
+    public List<PresupuestoCompraDetalle> getPresupuestoCompraDetalles() {
+        return presupuestoCompraDetalles;
+    }
+
+    public void setPresupuestoCompraDetalles(List<PresupuestoCompraDetalle> presupuestoCompraDetalles) {
+        this.presupuestoCompraDetalles = presupuestoCompraDetalles;
     }
 
     @Override
@@ -149,9 +150,10 @@ public class PresupuestoCompra implements Serializable {
                 ", estado='" + estado + '\'' +
                 ", observacion='" + observacion + '\'' +
                 ", total=" + total +
-                ", estadoPresupuesto=" + estadoPresupuesto +
+                ", estadoPresupuestoCompra=" + estadoPresupuestoCompra +
                 ", usuario=" + usuario +
                 ", pedidoCompra=" + pedidoCompra +
+                ", proveedor=" + proveedor +
                 ", presupuestoCompraDetalles=" + presupuestoCompraDetalles +
                 '}';
     }

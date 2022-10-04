@@ -20,8 +20,14 @@ public class Articulo implements Serializable {
     @Column(name = "precio_compra")
     private Long precioCompra;
 
+    @Column(name = "precio_compra_anterior")
+    private Long precioCompraAnterior;
+
     @Column(name = "precio_venta")
     private Long precioVenta;
+
+    @Column(name = "precio_venta_anterior")
+    private Long precioVentaAnterior;
 
     @Column(name = "codigo_generico")
     private String codigoGenerico;
@@ -125,6 +131,22 @@ public class Articulo implements Serializable {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Long getPrecioCompraAnterior() {
+        return precioCompraAnterior;
+    }
+
+    public void setPrecioCompraAnterior(Long precioCompraAnterior) {
+        this.precioCompraAnterior = precioCompraAnterior;
+    }
+
+    public Long getPrecioVentaAnterior() {
+        return precioVentaAnterior;
+    }
+
+    public void setPrecioVentaAnterior(Long precioVentaAnterior) {
+        this.precioVentaAnterior = precioVentaAnterior;
     }
 
     @Override

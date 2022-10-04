@@ -15,7 +15,7 @@ public class PresupuestoCompraController {
         PedidoCompraDao pedidoCompraDao = new PedidoCompraDao();
 
         PedidoCompra pedidoCompra = presupuestoCompra.getPedidoCompra();
-        pedidoCompra.setEstadoPedido(new Estado(4, "PROCESADO"));
+        pedidoCompra.setEstadoPedidoCompra(new Estado(4, "PROCESADO"));
         pedidoCompraDao.update(pedidoCompra);
 
         presupuestoCompra = presupuestoCompraDao.save(presupuestoCompra);
@@ -28,9 +28,19 @@ public class PresupuestoCompraController {
         return presupuestoCompraDao.list(all);
     }
 
+    public List<PresupuestoCompra> listPresupuestosCompraBySucursal(Integer idSucursal) {
+        PresupuestoCompraDao presupuestoCompraDao = new PresupuestoCompraDao();
+        return presupuestoCompraDao.listBySucursal(idSucursal);
+    }
+
     public List<PresupuestoCompra> listPresupuestoCompraPendientes() {
         PresupuestoCompraDao presupuestoCompraDao = new PresupuestoCompraDao();
         return presupuestoCompraDao.listPendientes();
+    }
+
+    public List<PresupuestoCompra> listPresupuestoCompraPendientesByProveedor(Integer idProveedor) {
+        PresupuestoCompraDao presupuestoCompraDao = new PresupuestoCompraDao();
+        return presupuestoCompraDao.listPendientesByProveedor(idProveedor);
     }
 
     public PresupuestoCompra cancelPresupuestoCompra(PresupuestoCompra presupuestoCompra) throws Exception {
@@ -38,10 +48,10 @@ public class PresupuestoCompraController {
         PedidoCompraDao pedidoCompraDao = new PedidoCompraDao();
 
         PedidoCompra pedidoCompra = presupuestoCompra.getPedidoCompra();
-        pedidoCompra.setEstadoPedido(new Estado(1, "PENDIENTE"));
+        pedidoCompra.setEstadoPedidoCompra(new Estado(1, "PENDIENTE"));
         pedidoCompraDao.update(pedidoCompra);
 
-        presupuestoCompra.setEstadoPresupuesto(new Estado(2, "ANULADO"));
+        presupuestoCompra.setEstadoPresupuestoCompra(new Estado(2, "ANULADO"));
 
         return presupuestoCompraDao.update(presupuestoCompra);
     }
