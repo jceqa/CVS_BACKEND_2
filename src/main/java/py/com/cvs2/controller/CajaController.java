@@ -12,6 +12,11 @@ public class CajaController {
         return cajaDAO.list(all);
     }
 
+    public List<Caja> listCajasBySucursal(List<Integer> id){
+        CajaDao cajaDao = new CajaDao();
+        return cajaDao.listBySucursal(id);
+    }
+
     public Caja getCajaById(Integer id) {
         CajaDao cajaDAO = new CajaDao();
         return cajaDAO.findById(id);

@@ -20,6 +20,13 @@ public class Caja implements Serializable {
     @Column(name = "estado")
     String estado;
 
+    @Column(name = "numero")
+    private Integer numero;
+
+    @OneToOne
+    @JoinColumn(name = "id_sucursal", referencedColumnName = "id")
+    private Sucursal sucursal;
+
     public Caja() {
     }
 
@@ -51,6 +58,22 @@ public class Caja implements Serializable {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
     }
 
     @Override

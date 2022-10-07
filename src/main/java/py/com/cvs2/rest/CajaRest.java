@@ -22,6 +22,15 @@ public class CajaRest {
     }
 
     @GET
+    @Path("/sucursal/")
+    public Response listCajasBySucursal(@QueryParam("id") List<Integer> id){
+        CajaController cc = new CajaController();
+        List<Caja> cajas = cc.listCajasBySucursal(id);
+
+        return Response.ok(cajas, MediaType.APPLICATION_JSON).build();
+    }
+
+    @GET
     @Path("/{id}")
     public Response getCajaById(@PathParam("id") Integer id) {
         CajaController mc = new CajaController();
