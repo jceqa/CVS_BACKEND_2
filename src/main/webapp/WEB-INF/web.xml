@@ -39,7 +39,9 @@
 			py.com.cvs2.rest.CuentaAPagarRest,
 			py.com.cvs2.rest.NotaCreditoCompraRest,
 			py.com.cvs2.rest.LibroCompraRest,
-			py.com.cvs2.rest.NotaDebitoCompraRest
+			py.com.cvs2.rest.NotaDebitoCompraRest,
+			py.com.cvs2.rest.CajaRest,
+			py.com.cvs2.rest.AperturaCierreCajaRest
 		</param-value>
 	</context-param>
 

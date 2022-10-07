@@ -46,6 +46,10 @@ public class AperturaCierreCaja implements Serializable {
     @JoinColumn(name = "id_caja", referencedColumnName = "id")
     private Caja caja;
 
+    @OneToOne
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    private Usuario usuario;
+
     public AperturaCierreCaja() {
     }
 
@@ -148,6 +152,14 @@ public class AperturaCierreCaja implements Serializable {
 
     public void setCaja(Caja caja) {
         this.caja = caja;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
