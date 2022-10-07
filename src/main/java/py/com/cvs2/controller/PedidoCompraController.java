@@ -22,6 +22,11 @@ public class PedidoCompraController {
         return pedidoCompraDao.list(all);
     }
 
+    public List<PedidoCompra> listPedidosCompraBySucursal(Integer idSucursal) {
+        PedidoCompraDao pedidoCompraDao = new PedidoCompraDao();
+        return pedidoCompraDao.listBySucursal(idSucursal);
+    }
+
     public List<PedidoCompra> listPedidosCompraPendientes() {
         PedidoCompraDao pedidoCompraDao = new PedidoCompraDao();
         return pedidoCompraDao.listPendientes();
@@ -30,7 +35,7 @@ public class PedidoCompraController {
     public PedidoCompra cancelPedidoCompra(PedidoCompra pedidoCompra) throws Exception {
         PedidoCompraDao pedidoCompraDao = new PedidoCompraDao();
         Estado estado = new Estado(2, "ANULADO");
-        pedidoCompra.setEstadoPedido(estado);
+        pedidoCompra.setEstadoPedidoCompra(estado);
 
         return pedidoCompraDao.update(pedidoCompra);
     }

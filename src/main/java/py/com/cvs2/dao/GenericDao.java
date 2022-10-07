@@ -1,5 +1,7 @@
 package py.com.cvs2.dao;
 
+import py.com.cvs2.model.PedidoCompra;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -39,6 +41,22 @@ public class GenericDao<T> {
         tL = q.getResultList();
 
         return tL;
+    }
+
+    public List<T> listPendientes(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
+        EntityManager em = emf.createEntityManager();
+
+        String tableName = type.toString().substring(type.toString().lastIndexOf(".") + 1);
+
+        String query = "SELECT t FROM " + tableName + " t "
+                + " WHERE t.estado = " + "'ACTIVO'"
+                + " AND t.estado" + tableName + ".id = 1"
+                + " ORDER BY t.id ";
+
+        Query q = em.createQuery(query);
+
+        return q.getResultList();
     }
 
     public T findById(Integer id) {

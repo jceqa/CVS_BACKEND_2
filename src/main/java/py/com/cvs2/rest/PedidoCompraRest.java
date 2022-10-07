@@ -25,6 +25,15 @@ public class PedidoCompraRest {
     }
 
     @GET
+    @Path("/sucursal/{idSucursal}")
+    public Response listPedidosCompraBySucursal(@PathParam("idSucursal") Integer idSucursal){
+        PedidoCompraController pcc = new PedidoCompraController();
+        List<PedidoCompra> pedidoCompraList = pcc.listPedidosCompraBySucursal(idSucursal);
+
+        return Response.ok(pedidoCompraList, MediaType.APPLICATION_JSON).build();
+    }
+
+    @GET
     @Path("/pendientes")
     public Response listPedidosCompraPendientes(){
         PedidoCompraController pcc = new PedidoCompraController();

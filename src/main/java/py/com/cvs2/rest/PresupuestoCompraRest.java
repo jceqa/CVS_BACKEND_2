@@ -24,10 +24,28 @@ public class PresupuestoCompraRest {
     }
 
     @GET
+    @Path("/sucursal/{idSucursal}")
+    public Response listPresupuestoCompraBySucursal(@PathParam("idSucursal") Integer idSucursal){
+        PresupuestoCompraController pcc = new PresupuestoCompraController();
+        List<PresupuestoCompra> presupuestoCompraList = pcc.listPresupuestosCompraBySucursal(idSucursal);
+
+        return Response.ok(presupuestoCompraList, MediaType.APPLICATION_JSON).build();
+    }
+
+    @GET
     @Path("/pendientes")
     public Response listPresupuestoCompraPendientes(){
         PresupuestoCompraController pcc = new PresupuestoCompraController();
         List<PresupuestoCompra> presupuestoCompraList = pcc.listPresupuestoCompraPendientes();
+
+        return Response.ok(presupuestoCompraList, MediaType.APPLICATION_JSON).build();
+    }
+
+    @GET
+    @Path("/pendientes/{idProveedor}")
+    public Response listPresupuestoCompraPendientesByProveedor(@PathParam("idProveedor") Integer idProveedor){
+        PresupuestoCompraController pcc = new PresupuestoCompraController();
+        List<PresupuestoCompra> presupuestoCompraList = pcc.listPresupuestoCompraPendientesByProveedor(idProveedor);
 
         return Response.ok(presupuestoCompraList, MediaType.APPLICATION_JSON).build();
     }

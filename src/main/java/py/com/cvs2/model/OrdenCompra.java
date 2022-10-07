@@ -32,6 +32,9 @@ public class OrdenCompra implements Serializable {
     @Column(name = "monto_cuota")
     private Long montoCuota;
 
+    @Column(name = "monto")
+    private Long monto;
+
     @OneToOne
     @JoinColumn(name = "id_estado", referencedColumnName = "id")
     private Estado estadoOrdenCompra;
@@ -41,30 +44,39 @@ public class OrdenCompra implements Serializable {
     private Usuario usuario;
 
     @OneToOne
-    @JoinColumn(name = "id_presupuesto_compra", referencedColumnName = "id")
-    private PresupuestoCompra presupuestoCompra;
-
-    @OneToOne
     @JoinColumn(name = "id_condicion_pago", referencedColumnName = "id")
     private CondicionPago condicionPago;
 
+    @OneToOne
+    @JoinColumn(name = "id_proveedor", referencedColumnName = "id")
+    private Proveedor proveedor;
+
+    @OneToMany
+    @JoinColumn(name = "id_orden_compra", referencedColumnName = "id")
+    private List<PresupuestoCompra> presupuestosCompra;
+
     @OneToMany(cascade= {CascadeType.ALL})
-    @JoinColumn(name = "id_orden_compra_detalle", referencedColumnName = "id")
+    @JoinColumn(name = "id_orden_compra", referencedColumnName = "id")
     private List<OrdenCompraDetalle> ordenCompraDetalle;
 
     public OrdenCompra() {
     }
 
-    public OrdenCompra(int id, Date fecha, String estado, Integer intervalo, Integer cantidadCuota,  Long montoCuota, Estado estadoOrdenCompra, Usuario usuario, PresupuestoCompra presupuestoCompra, List<OrdenCompraDetalle> ordenCompraDetalle) {
+    public OrdenCompra(int id, Date fecha, String observacion, String estado, Integer intervalo, Integer cantidadCuota, Long montoCuota, Long monto, Estado estadoOrdenCompra, Usuario usuario, CondicionPago condicionPago, Proveedor proveedor, List<PresupuestoCompra> presupuestosCompra, List<OrdenCompraDetalle> ordenCompraDetalle) {
         this.id = id;
         this.fecha = fecha;
+        this.observacion = observacion;
         this.estado = estado;
         this.intervalo = intervalo;
         this.cantidadCuota = cantidadCuota;
         this.montoCuota = montoCuota;
-        this.estadoOrdenCompra=estadoOrdenCompra;
+        this.monto = monto;
+        this.estadoOrdenCompra = estadoOrdenCompra;
         this.usuario = usuario;
-        this.presupuestoCompra = presupuestoCompra;
+        this.condicionPago = condicionPago;
+        this.proveedor = proveedor;
+        this.presupuestosCompra = presupuestosCompra;
+        this.ordenCompraDetalle = ordenCompraDetalle;
     }
 
     public int getId() {
@@ -83,6 +95,14 @@ public class OrdenCompra implements Serializable {
         this.fecha = fecha;
     }
 
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
+
     public String getEstado() {
         return estado;
     }
@@ -99,17 +119,28 @@ public class OrdenCompra implements Serializable {
         this.intervalo = intervalo;
     }
 
-    public Integer getCantidadCuota() { return cantidadCuota;
+    public Integer getCantidadCuota() {
+        return cantidadCuota;
     }
 
     public void setCantidadCuota(Integer cantidadCuota) {
         this.cantidadCuota = cantidadCuota;
     }
 
-    public Long getMontoCuota() {return montoCuota;
+    public Long getMontoCuota() {
+        return montoCuota;
     }
 
-    public void setMontoCuota(Long montoCuota) {this.montoCuota = montoCuota;
+    public void setMontoCuota(Long montoCuota) {
+        this.montoCuota = montoCuota;
+    }
+
+    public Long getMonto() {
+        return monto;
+    }
+
+    public void setMonto(Long monto) {
+        this.monto = monto;
     }
 
     public Estado getEstadoOrdenCompra() {
@@ -128,18 +159,6 @@ public class OrdenCompra implements Serializable {
         this.usuario = usuario;
     }
 
-    public PresupuestoCompra getPresupuestoCompra() {
-        return presupuestoCompra;
-    }
-
-    public void setPresupuestoCompra(PresupuestoCompra presupuestoCompra) {
-        this.presupuestoCompra = presupuestoCompra;
-    }
-    
-    public void setOrdenCompraDetalles(List<OrdenCompraDetalle> ordenCompraDetalles) {
-        this.ordenCompraDetalle = ordenCompraDetalles;
-    }
-
     public CondicionPago getCondicionPago() {
         return condicionPago;
     }
@@ -148,12 +167,20 @@ public class OrdenCompra implements Serializable {
         this.condicionPago = condicionPago;
     }
 
-    public String getObservacion() {
-        return observacion;
+    public Proveedor getProveedor() {
+        return proveedor;
     }
 
-    public void setObservacion(String observacion) {
-        this.observacion = observacion;
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    public List<PresupuestoCompra> getPresupuestosCompra() {
+        return presupuestosCompra;
+    }
+
+    public void setPresupuestosCompra(List<PresupuestoCompra> presupuestosCompra) {
+        this.presupuestosCompra = presupuestosCompra;
     }
 
     public List<OrdenCompraDetalle> getOrdenCompraDetalle() {
@@ -169,13 +196,17 @@ public class OrdenCompra implements Serializable {
         return "OrdenCompra{" +
                 "id=" + id +
                 ", fecha=" + fecha +
+                ", observacion='" + observacion + '\'' +
                 ", estado='" + estado + '\'' +
-                ", intervalo='" + intervalo + '\'' +
-                ", cantidadCuota='" + cantidadCuota + '\'' +
+                ", intervalo=" + intervalo +
+                ", cantidadCuota=" + cantidadCuota +
                 ", montoCuota=" + montoCuota +
+                ", monto=" + monto +
                 ", estadoOrdenCompra=" + estadoOrdenCompra +
                 ", usuario=" + usuario +
-                ", PresupuestoCompra=" + presupuestoCompra +
+                ", condicionPago=" + condicionPago +
+                ", proveedor=" + proveedor +
+                ", presupuestosCompra=" + presupuestosCompra +
                 ", ordenCompraDetalle=" + ordenCompraDetalle +
                 '}';
     }
