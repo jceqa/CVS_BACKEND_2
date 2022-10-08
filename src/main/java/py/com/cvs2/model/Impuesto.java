@@ -36,6 +36,9 @@ public class Impuesto implements Serializable {
 	@Column(name = "estado")
 	String estado;
 
+	@Column(name = "porcentaje_impuesto")
+	private Integer porcentajeImpuesto;
+
 	public Impuesto() {
 	}
 
@@ -66,6 +69,14 @@ public class Impuesto implements Serializable {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public Integer getPorcentajeImpuesto() {
+		return porcentajeImpuesto;
+	}
+
+	public void setPorcentajeImpuesto(Integer porcentajeImpuesto) {
+		this.porcentajeImpuesto = porcentajeImpuesto;
 	}
 
 	@Override

@@ -2,7 +2,9 @@ package py.com.cvs2.rest;
 
 
 import py.com.cvs2.controller.OrdenCompraController;
+import py.com.cvs2.controller.PresupuestoCompraController;
 import py.com.cvs2.model.OrdenCompra;
+import py.com.cvs2.model.PresupuestoCompra;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -21,6 +23,24 @@ public class OrdenCompraRest {
 
         return Response.ok(ordenCompraList, MediaType.APPLICATION_JSON).build();
     }
+
+    @GET
+    @Path("/pendientes")
+    public Response listOrdenCompraPendientes(){
+        OrdenCompraController occ = new OrdenCompraController();
+        List<OrdenCompra> ordenCompraList = occ.listOrdenCompraPendientes();
+
+        return Response.ok(ordenCompraList, MediaType.APPLICATION_JSON).build();
+    }
+
+    /*@GET
+    @Path("/sucursal/{idSucursal}")
+    public Response listOrdenCompraBySucursal(@PathParam("idSucursal") Integer idSucursal){
+        OrdenCompraController pcc = new OrdenCompraController();
+        List<OrdenCompra> ordenCompraList = pcc.listOrdenCompraBySucursal(idSucursal);
+
+        return Response.ok(ordenCompraList, MediaType.APPLICATION_JSON).build();
+    }*/
 
     @POST
     public Response saveOrdenCompra(OrdenCompra ordenCompra) {
