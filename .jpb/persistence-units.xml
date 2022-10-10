@@ -12,6 +12,11 @@
           <package value="" />
         </packages>
       </persistence-unit>
+      <persistence-unit name="cvs2" persistenceXmlPath="src/main/resources/META-INF/persistence.xml">
+        <packages>
+          <package value="" />
+        </packages>
+      </persistence-unit>
     </persistence-units>
   </component>
 </project>
