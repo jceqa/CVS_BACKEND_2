@@ -1,8 +1,10 @@
 package py.com.cvs2.controller;
 
 import py.com.cvs2.dao.NotaCreditoCompraDao;
+import py.com.cvs2.dao.NotaDebitoCompraDao;
 import py.com.cvs2.model.Estado;
 import py.com.cvs2.model.NotaCreditoCompra;
+import py.com.cvs2.model.NotaDebitoCompra;
 
 import java.util.List;
 
@@ -17,6 +19,11 @@ public class NotaCreditoCompraController {
     public List<NotaCreditoCompra> listNotasCreditoCompra(Boolean all) {
         NotaCreditoCompraDao notaCreditoCompraDao = new NotaCreditoCompraDao();
         return notaCreditoCompraDao.list(all);
+    }
+
+    public List<NotaCreditoCompra> listNotasCreditoCompraPendientes() {
+        NotaCreditoCompraDao notaCreditoCompraDao = new NotaCreditoCompraDao();
+        return notaCreditoCompraDao.listPendientes();
     }
 
     public NotaCreditoCompra cancelNotaCreditoCompra(NotaCreditoCompra notaCreditoCompra) throws Exception {

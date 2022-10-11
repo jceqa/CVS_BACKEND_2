@@ -8,9 +8,11 @@ import java.util.List;
 public class FacturaCompraController {
 
     public FacturaCompra saveFacturaCompra(FacturaCompra facturaCompra) throws Exception {
+        StockController stockController = new StockController();
+
         FacturaCompraDao facturaCompraDao = new FacturaCompraDao();
         OrdenCompraDao ordenCompraDao = new OrdenCompraDao();
-        StockDao stockDao = new StockDao();
+
         ArticuloDao articuloDao = new ArticuloDao();
         LibroCompraDetalleDao libroCompraDetalleDao = new LibroCompraDetalleDao();
         NotaDebitoCompraDetalleDao notaDebitoCompraDetalleDao = new NotaDebitoCompraDetalleDao();
@@ -21,21 +23,7 @@ public class FacturaCompraController {
 
         for(PresupuestoCompra pc : ordenCompra.getPresupuestosCompra()){
             for(PresupuestoCompraDetalle pcD : pc.getPresupuestoCompraDetalles()){
-                Stock stock = stockDao.getByArticuloAndDeposito(pcD.getPedidoCompraDetalle().getArticulo().getId(), 1);
-                if(stock != null){
-                    stock.setExistencia(stock.getExistencia() + pcD.getPedidoCompraDetalle().getCantidad());
-                    stockDao.update(stock);
-                } else {
-                    stock = new Stock();
-                    stock.setExistencia(pcD.getPedidoCompraDetalle().getCantidad());
-                    Deposito deposito = new Deposito();
-                    deposito.setId(1);
-                    stock.setDeposito(deposito);
-                    stock.setArticulo(pcD.getPedidoCompraDetalle().getArticulo());
-                    stock.setEstado("ACTIVO");
-                    stockDao.save(stock);
-                }
-
+                stockController.updateStock(1, pcD.getPedidoCompraDetalle().getArticulo(), pcD.getPedidoCompraDetalle().getCantidad(), "AUMENTO");
 
                 Articulo articulo = pcD.getPedidoCompraDetalle().getArticulo();
                 articulo.setPrecioCompraAnterior(articulo.getPrecioCompra());

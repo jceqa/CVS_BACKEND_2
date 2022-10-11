@@ -30,6 +30,21 @@ public class NotaRemsionRest {
         return Response.ok(notaRemisionList, MediaType.APPLICATION_JSON).build();
     }
 
+    @PUT
+    @Path("/procesar")
+    public Response processNotaRemision(NotaRemision notaRemision) {
+        NotaRemisionController nrc = new NotaRemisionController();
+        try {
+            notaRemision = nrc.processNotaRemision(notaRemision);
+        }  catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            return rb.build();
+        }
+        return Response.ok(notaRemision, MediaType.APPLICATION_JSON).build();
+    }
+
+
     @POST
     public Response saveNotaRemision(NotaRemision notaRemision) {
         NotaRemisionController nrc = new NotaRemisionController();

@@ -45,7 +45,8 @@
 			py.com.cvs2.rest.NotaDebitoCompraRest,
 			py.com.cvs2.rest.CajaRest,
 			py.com.cvs2.rest.AperturaCierreCajaRest,
-			py.com.cvs2.rest.AjusteRest
+			py.com.cvs2.rest.AjusteRest,
+			py.com.cvs2.rest.StockRest
 		</param-value>
 	</context-param>
 

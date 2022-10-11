@@ -21,6 +21,15 @@ public class NotaDebitoCompraRest {
         return Response.ok(notaDebitoCompraList, MediaType.APPLICATION_JSON).build();
     }
 
+    @GET
+    @Path("/pendientes")
+    public Response listNotasDebitoCompraPendientes(){
+        NotaDebitoCompraController nrc = new NotaDebitoCompraController();
+        List<NotaDebitoCompra> notaDebitoCompraList = nrc.listNotasDebitoCompraPendientes();
+
+        return Response.ok(notaDebitoCompraList, MediaType.APPLICATION_JSON).build();
+    }
+
     @POST
     public Response saveNotaDebitoCompra(NotaDebitoCompra notaDebitoCompra) {
         NotaDebitoCompraController nrc = new NotaDebitoCompraController();

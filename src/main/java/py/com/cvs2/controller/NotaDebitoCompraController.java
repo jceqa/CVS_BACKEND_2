@@ -20,6 +20,11 @@ public class NotaDebitoCompraController {
         return notaDebitoCompraDao.list(all);
     }
 
+    public List<NotaDebitoCompra> listNotasDebitoCompraPendientes() {
+        NotaDebitoCompraDao notaDebitoCompraDao = new NotaDebitoCompraDao();
+        return notaDebitoCompraDao.listPendientes();
+    }
+
     public NotaDebitoCompra cancelNotaDebitoCompra(NotaDebitoCompra notaDebitoCompra) throws Exception {
         NotaDebitoCompraDao notaDebitoCompraDao = new NotaDebitoCompraDao();
         Estado estado = new Estado(2, "ANULADO");

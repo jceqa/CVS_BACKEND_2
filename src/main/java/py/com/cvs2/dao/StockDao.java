@@ -1,5 +1,6 @@
 package py.com.cvs2.dao;
 
+import py.com.cvs2.model.Deposito;
 import py.com.cvs2.model.Stock;
 
 import javax.persistence.EntityManager;
@@ -31,5 +32,28 @@ public class StockDao extends GenericDao<Stock>{
         }
 
         return null;
+    }
+    public List<Stock> listStockByDeposito(Integer idDeposito){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
+        EntityManager em = emf.createEntityManager();
+
+        Query q = em.createQuery("SELECT s FROM Stock s "
+                + " WHERE s.deposito.id = :idDeposito");
+
+        q.setParameter("idDeposito", idDeposito);
+
+        return q.getResultList();
+    }
+
+    public List<Stock> listStockByArticulo(Integer idArticulo){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
+        EntityManager em = emf.createEntityManager();
+
+        Query q = em.createQuery("SELECT s FROM Stock s "
+                + " WHERE s.articulo.id = :idArticulo");
+
+        q.setParameter("idArticulo", idArticulo);
+
+        return q.getResultList();
     }
 }

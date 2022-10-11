@@ -27,6 +27,17 @@ public class NotaRemisionController {
         return notaRemisionDao.listPendientes();
     }
 
+    public NotaRemision processNotaRemision(NotaRemision notaRemision) throws Exception {
+        NotaRemisionDao notaRemisionDao = new NotaRemisionDao();
+        StockController stockController = new StockController();
+
+        /**
+         * TODO
+         * Hacer el proceso de la nota de remision
+         */
+        return  notaRemision;
+    }
+
     public NotaRemision cancelNotaRemision(NotaRemision notaRemision) throws Exception {
         NotaRemisionDao notaRemisionDao = new NotaRemisionDao();
         Estado estado = new Estado(2, "ANULADO");
