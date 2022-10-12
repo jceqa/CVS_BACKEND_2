@@ -29,6 +29,10 @@ public class NotaRemision implements Serializable {
     private Date fecha;
 
     @OneToOne
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    private Usuario usuario;
+
+    @OneToOne
     @JoinColumn(name = "id_estado", referencedColumnName = "id")
     private Estado estadoNotaRemision;
 
@@ -141,6 +145,14 @@ public class NotaRemision implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

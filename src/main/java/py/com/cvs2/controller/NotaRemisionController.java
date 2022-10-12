@@ -4,6 +4,7 @@ import py.com.cvs2.dao.NotaRemisionDao;
 import py.com.cvs2.dao.PedidoCompraDao;
 import py.com.cvs2.model.Estado;
 import py.com.cvs2.model.NotaRemision;
+import py.com.cvs2.model.NotaRemisionDetalle;
 import py.com.cvs2.model.PedidoCompra;
 
 import java.util.List;
@@ -27,15 +28,17 @@ public class NotaRemisionController {
         return notaRemisionDao.listPendientes();
     }
 
-    public NotaRemision processNotaRemision(NotaRemision notaRemision) throws Exception {
+    public NotaRemision  processNotaRemision(NotaRemision notaRemision) throws Exception {
         NotaRemisionDao notaRemisionDao = new NotaRemisionDao();
         StockController stockController = new StockController();
 
-        /**
-         * TODO
-         * Hacer el proceso de la nota de remision
-         */
-        return  notaRemision;
+        for(NotaRemisionDetalle notaRemisionDetalle : notaRemision.getNotaRemisionDetalle()) {
+            stockController.updateStock(notaRemision.getOrigen().getId(), notaRemisionDetalle.getArticulo(), notaRemisionDetalle.getCantidad(), "DESCUENTO");
+            stockController.updateStock(notaRemision.getDestino().getId(), notaRemisionDetalle.getArticulo(), notaRemisionDetalle.getCantidad(), "AUMENTO");
+        }
+        notaRemision.setEstadoNotaRemision(new Estado(4, "PROCESADO"));
+
+        return  notaRemisionDao.update(notaRemision);
     }
 
     public NotaRemision cancelNotaRemision(NotaRemision notaRemision) throws Exception {

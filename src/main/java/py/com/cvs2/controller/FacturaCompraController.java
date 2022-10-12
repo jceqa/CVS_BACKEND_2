@@ -19,7 +19,6 @@ public class FacturaCompraController {
 
         OrdenCompra ordenCompra = facturaCompra.getOrdenCompra();
         ordenCompra.setEstadoOrdenCompra(new Estado(4, "PROCESADO"));
-        ordenCompraDao.update(ordenCompra);
 
         for(PresupuestoCompra pc : ordenCompra.getPresupuestosCompra()){
             for(PresupuestoCompraDetalle pcD : pc.getPresupuestoCompraDetalles()){
@@ -50,6 +49,8 @@ public class FacturaCompraController {
             }
         }
 
+        ordenCompraDao.update(ordenCompra);
+
         return facturaCompra;
     }
 
@@ -72,7 +73,6 @@ public class FacturaCompraController {
 
         OrdenCompra ordenCompra = facturaCompra.getOrdenCompra();
         ordenCompra.setEstadoOrdenCompra(new Estado(1, "PENDIENTE"));
-        ordenCompraDao.update(ordenCompra);
 
         facturaCompra.setEstadoFacturaCompra(new Estado(2, "ANULADO"));
 
@@ -80,11 +80,9 @@ public class FacturaCompraController {
         for(LibroCompraDetalle lCD: libroCompra.getLibroCompraDetalles()){
             lCD.setEstado("INACTIVO");
             libroCompraDetalleDao.update(lCD);
-            //libroCompraDetalleDao.delete(lCD.getId());
         }
         libroCompra.setEstado("INACTIVO");
         libroCompraDao.update(libroCompra);
-        //libroCompraDao.delete(libroCompra.getId());
 
         List<NotaRemision> notaRemisionList = facturaCompra.getNotaRemisionList();
         for(NotaRemision notaRemision : notaRemisionList){
@@ -119,6 +117,8 @@ public class FacturaCompraController {
             notaCreditoCompra.setEstadoNotaCreditoCompra(new Estado(1, "PENDIENTE"));
             notaCreditoCompraDao.update(notaCreditoCompra);
         }
+
+        ordenCompraDao.update(ordenCompra);
 
         return facturaCompraDao.update(facturaCompra);
     }

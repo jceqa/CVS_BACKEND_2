@@ -35,7 +35,5 @@ public class ArticuloController {
         articulo.setEstado("INACTIVO");
 
         articuloDao.update(articulo);
-
-        //articuloDao.delete(id);
     }
 }

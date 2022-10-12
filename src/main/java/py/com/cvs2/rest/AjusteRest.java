@@ -1,7 +1,9 @@
 package py.com.cvs2.rest;
 
 import py.com.cvs2.controller.AjusteController;
+import py.com.cvs2.controller.NotaRemisionController;
 import py.com.cvs2.model.Ajuste;
+import py.com.cvs2.model.NotaRemision;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -75,5 +77,36 @@ public class AjusteRest {
         }
 
         return Response.ok().build();
+    }
+
+    @PUT
+    @Path("/anular")
+    public Response cancelAjuste(Ajuste ajuste) {
+        AjusteController ac = new AjusteController();
+
+        try {
+            ac.cancelAjuste(ajuste);
+        } catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            //throw new RuntimeException(e);
+            return rb.build();
+        }
+
+        return Response.ok().build();
+    }
+
+    @PUT
+    @Path("/procesar")
+    public Response processAjuste(Ajuste ajuste) {
+        AjusteController ac = new AjusteController();
+        try {
+            ajuste = ac.processAjuste(ajuste);
+        }  catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            return rb.build();
+        }
+        return Response.ok(ajuste, MediaType.APPLICATION_JSON).build();
     }
 }

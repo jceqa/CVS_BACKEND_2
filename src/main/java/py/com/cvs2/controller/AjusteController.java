@@ -1,7 +1,11 @@
 package py.com.cvs2.controller;
 
 import py.com.cvs2.dao.AjusteDao;
+import py.com.cvs2.dao.NotaRemisionDao;
 import py.com.cvs2.model.Ajuste;
+import py.com.cvs2.model.Estado;
+import py.com.cvs2.model.NotaRemision;
+import py.com.cvs2.model.NotaRemisionDetalle;
 
 import java.util.List;
 
@@ -34,6 +38,26 @@ public class AjusteController {
         ajuste.setEstado("INACTIVO");
         ajusteDao.update(ajuste);
         //ajusteDao.delete(id);
+    }
+
+    public Ajuste cancelAjuste(Ajuste ajuste) throws Exception {
+        AjusteDao ajusteDao = new AjusteDao();
+        Estado estado = new Estado(2, "ANULADO");
+        ajuste.setEstadoAjuste(estado);
+
+        return ajusteDao.update(ajuste);
+    }
+
+    public Ajuste  processAjuste(Ajuste ajuste) throws Exception {
+        AjusteDao ajusteDao = new AjusteDao();
+        StockController stockController = new StockController();
+
+        stockController.updateStock( ajuste.getStock().getDeposito().getId(), ajuste.getStock().getArticulo(), ajuste.getCantidad(), ajuste.getTipo());
+        //stockController.updateStock(notaRemision.getDestino().getId(), notaRemisionDetalle.getArticulo(), notaRemisionDetalle.getCantidad(), "AUMENTO");
+
+        ajuste.setEstadoAjuste(new Estado(4, "PROCESADO"));
+
+        return  ajusteDao.update(ajuste);
     }
 
 }

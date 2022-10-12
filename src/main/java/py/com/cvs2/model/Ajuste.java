@@ -34,6 +34,10 @@ public class Ajuste implements Serializable {
     @JoinColumn(name = "id_stock", referencedColumnName = "id")
     private Stock stock;
 
+    @OneToOne
+    @JoinColumn(name = "id_estado", referencedColumnName = "id")
+    private Estado estadoAjuste;
+
     public Ajuste() {
     }
 
@@ -101,6 +105,14 @@ public class Ajuste implements Serializable {
 
     public void setStock(Stock stock) {
         this.stock = stock;
+    }
+
+    public Estado getEstadoAjuste() {
+        return estadoAjuste;
+    }
+
+    public void setEstadoAjuste(Estado estadoAjuste) {
+        this.estadoAjuste = estadoAjuste;
     }
 
     @Override
