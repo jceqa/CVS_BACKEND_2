@@ -24,9 +24,9 @@ public class StockController {
         StockDao stockDao = new StockDao();
         Stock stock = stockDao.getByArticuloAndDeposito(articulo.getId(), idDeposito);
         if(stock != null){
-            if(tipoOperacion == "AUMENTO"){
+            if(tipoOperacion.equals("AUMENTO")){
                 stock.setExistencia(stock.getExistencia() + cantidad);
-            } else if(tipoOperacion == "DESCUENTO") {
+            } else if(tipoOperacion.equals("DESCUENTO")) {
                 if(stock.getExistencia() - cantidad < 0){
                     throw new Exception("No hay existencia para realizar esta operación");
                 }

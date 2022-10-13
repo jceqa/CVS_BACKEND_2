@@ -1,9 +1,7 @@
 package py.com.cvs2.rest;
 
 import py.com.cvs2.controller.AjusteController;
-import py.com.cvs2.controller.NotaRemisionController;
 import py.com.cvs2.model.Ajuste;
-import py.com.cvs2.model.NotaRemision;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -30,6 +28,15 @@ public class AjusteRest {
         Ajuste ajuste = mc.getAjusteById(id);
 
         return Response.ok(ajuste, MediaType.APPLICATION_JSON).build();
+    }
+
+    @GET
+    @Path("/pendientes")
+    public Response listAjustesPendientes(){
+        AjusteController nrc = new AjusteController();
+        List<Ajuste> ajusteList = nrc.listAjustesPendientes();
+
+        return Response.ok(ajusteList, MediaType.APPLICATION_JSON).build();
     }
 
     @POST
