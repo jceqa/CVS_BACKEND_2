@@ -34,9 +34,13 @@ public class PresupuestoServicio implements Serializable {
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     private Usuario usuario;
 
-  //  @OneToOne
-    //@JoinColumn(name = "id_promocion", referencedColumnName = "id")
-    //private Promocion promocion;
+    @ManyToOne
+    @JoinColumn(name = "id_servicio")
+    private Servicio servicio;
+
+    @OneToOne
+    @JoinColumn(name = "id_promo_descuento", referencedColumnName = "id")
+    private PromoDescuento promodescuento;
 
     @OneToOne
     @JoinColumn(name = "id_diagnostico", referencedColumnName = "id")
@@ -50,7 +54,7 @@ public class PresupuestoServicio implements Serializable {
     }
 
     public PresupuestoServicio(int id, Date fecha, String estado, String observacion, Long total, Estado estadoPresupuestoServicio,
-                               Usuario usuario, Diagnostico diagnostico, List<PresupuestoServicioDetalle> presupuestoServicioDetalles) {
+                               Usuario usuario,Servicio servicio, PromoDescuento promodescuento,  Diagnostico diagnostico, List<PresupuestoServicioDetalle> presupuestoServicioDetalles) {
         this.id = id;
         this.fecha = fecha;
         this.estado = estado;
@@ -58,6 +62,8 @@ public class PresupuestoServicio implements Serializable {
         this.total = total;
         this.estadoPresupuestoServicio = estadoPresupuestoServicio;
         this.usuario = usuario;
+        this.servicio = servicio;
+        this.promodescuento = promodescuento;
         this.diagnostico = diagnostico;
         this.presupuestoServicioDetalles = presupuestoServicioDetalles;
     }
@@ -110,12 +116,23 @@ public class PresupuestoServicio implements Serializable {
         this.estadoPresupuestoServicio = estadoPresupuestoServicio;
     }
 
+    public PromoDescuento getPromodescuento() {return promodescuento;
+    }
+
+    public void setPromodescuento(PromoDescuento promodescuento) {this.promodescuento = promodescuento;
+    }
     public Usuario getUsuario() {
         return usuario;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Servicio getServicio() {return servicio;
+    }
+
+    public void setServicio(Servicio servicio) {this.servicio = servicio;
     }
 
     public Diagnostico getDiagnostico() {

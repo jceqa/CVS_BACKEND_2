@@ -37,7 +37,9 @@ public class Recepcion implements Serializable {
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     private Usuario usuario;
 
-
+    @OneToOne
+    @JoinColumn(name = "id_deposito", referencedColumnName = "id")
+    private Deposito deposito;
 
     @OneToOne
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
@@ -81,8 +83,13 @@ public class Recepcion implements Serializable {
     public List<RecepcionDetalle> getRecepcionDetalles() {return recepcionDetalles;}
 
     public void setRecepcionDetalles(List<RecepcionDetalle> recepcionDetalles) {
-        this.recepcionDetalles = recepcionDetalles;
-    }
+        this.recepcionDetalles = recepcionDetalles;}
+
+    public Deposito getDeposito() {
+        return deposito;}
+
+    public void setDeposito(Deposito deposito) {
+        this.deposito = deposito;}
 
     public Estado getEstadoRecepcion() {
         return estadoRecepcion;
