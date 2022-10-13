@@ -8,34 +8,21 @@ import java.util.List;
 public class FacturaCompraController {
 
     public FacturaCompra saveFacturaCompra(FacturaCompra facturaCompra) throws Exception {
+        StockController stockController = new StockController();
+
         FacturaCompraDao facturaCompraDao = new FacturaCompraDao();
         OrdenCompraDao ordenCompraDao = new OrdenCompraDao();
-        StockDao stockDao = new StockDao();
+
         ArticuloDao articuloDao = new ArticuloDao();
         LibroCompraDetalleDao libroCompraDetalleDao = new LibroCompraDetalleDao();
         NotaDebitoCompraDetalleDao notaDebitoCompraDetalleDao = new NotaDebitoCompraDetalleDao();
 
         OrdenCompra ordenCompra = facturaCompra.getOrdenCompra();
         ordenCompra.setEstadoOrdenCompra(new Estado(4, "PROCESADO"));
-        ordenCompraDao.update(ordenCompra);
 
         for(PresupuestoCompra pc : ordenCompra.getPresupuestosCompra()){
             for(PresupuestoCompraDetalle pcD : pc.getPresupuestoCompraDetalles()){
-                Stock stock = stockDao.getByArticuloAndDeposito(pcD.getPedidoCompraDetalle().getArticulo().getId(), 1);
-                if(stock != null){
-                    stock.setExistencia(stock.getExistencia() + pcD.getPedidoCompraDetalle().getCantidad());
-                    stockDao.update(stock);
-                } else {
-                    stock = new Stock();
-                    stock.setExistencia(pcD.getPedidoCompraDetalle().getCantidad());
-                    Deposito deposito = new Deposito();
-                    deposito.setId(1);
-                    stock.setDeposito(deposito);
-                    stock.setArticulo(pcD.getPedidoCompraDetalle().getArticulo());
-                    stock.setEstado("ACTIVO");
-                    stockDao.save(stock);
-                }
-
+                stockController.updateStock(1, pcD.getPedidoCompraDetalle().getArticulo(), pcD.getPedidoCompraDetalle().getCantidad(), "AUMENTO");
 
                 Articulo articulo = pcD.getPedidoCompraDetalle().getArticulo();
                 articulo.setPrecioCompraAnterior(articulo.getPrecioCompra());
@@ -62,6 +49,8 @@ public class FacturaCompraController {
             }
         }
 
+        ordenCompraDao.update(ordenCompra);
+
         return facturaCompra;
     }
 
@@ -84,7 +73,6 @@ public class FacturaCompraController {
 
         OrdenCompra ordenCompra = facturaCompra.getOrdenCompra();
         ordenCompra.setEstadoOrdenCompra(new Estado(1, "PENDIENTE"));
-        ordenCompraDao.update(ordenCompra);
 
         facturaCompra.setEstadoFacturaCompra(new Estado(2, "ANULADO"));
 
@@ -92,11 +80,9 @@ public class FacturaCompraController {
         for(LibroCompraDetalle lCD: libroCompra.getLibroCompraDetalles()){
             lCD.setEstado("INACTIVO");
             libroCompraDetalleDao.update(lCD);
-            //libroCompraDetalleDao.delete(lCD.getId());
         }
         libroCompra.setEstado("INACTIVO");
         libroCompraDao.update(libroCompra);
-        //libroCompraDao.delete(libroCompra.getId());
 
         List<NotaRemision> notaRemisionList = facturaCompra.getNotaRemisionList();
         for(NotaRemision notaRemision : notaRemisionList){
@@ -131,6 +117,8 @@ public class FacturaCompraController {
             notaCreditoCompra.setEstadoNotaCreditoCompra(new Estado(1, "PENDIENTE"));
             notaCreditoCompraDao.update(notaCreditoCompra);
         }
+
+        ordenCompraDao.update(ordenCompra);
 
         return facturaCompraDao.update(facturaCompra);
     }

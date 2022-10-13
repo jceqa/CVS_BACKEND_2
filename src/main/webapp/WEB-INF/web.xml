@@ -36,7 +36,11 @@
 			py.com.cvs2.rest.OrdenCompraRest,
 			py.com.cvs2.rest.ClienteRest,
 			py.com.cvs2.rest.RecepcionRest,
+<<<<<<< HEAD
 			py.com.cvs2.rest.PedidoVentaRest
+=======
+			py.com.cvs2.rest.PedidoVentaRest,
+>>>>>>> d35f27d1ab89bdb7f01a01771bb848cf07b5acd2
 			py.com.cvs2.rest.FacturaCompraRest,
 			py.com.cvs2.rest.NotaRemsionRest,
 			py.com.cvs2.rest.CuentaAPagarRest,
@@ -44,6 +48,7 @@
 			py.com.cvs2.rest.LibroCompraRest,
 			py.com.cvs2.rest.NotaDebitoCompraRest,
 			py.com.cvs2.rest.CajaRest,
+<<<<<<< HEAD
 			py.com.cvs2.rest.AperturaCierreCajaRest
 			py.com.cvs2.rest.ServicioRest
 			py.com.cvs2.rest.PromoDescuentoRest
@@ -52,6 +57,11 @@
 			py.com.cvs2.rest.PresupuestoServicioRest
 			py.com.cvs2.rest.OrdenServicioRest
 
+=======
+			py.com.cvs2.rest.AperturaCierreCajaRest,
+			py.com.cvs2.rest.AjusteRest,
+			py.com.cvs2.rest.StockRest
+>>>>>>> d35f27d1ab89bdb7f01a01771bb848cf07b5acd2
 		</param-value>
 	</context-param>
 

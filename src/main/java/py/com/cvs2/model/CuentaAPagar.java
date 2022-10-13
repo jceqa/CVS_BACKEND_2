@@ -1,5 +1,7 @@
 package py.com.cvs2.model;
 
+import org.eclipse.persistence.annotations.ReadOnly;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -29,6 +31,10 @@ public class CuentaAPagar implements Serializable {
 
     @Column(name = "estado")
     private String estado;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_pago", referencedColumnName = "id")
+    private Pago pago;
 
     @OneToOne
     @JoinColumn(name = "id_estado", referencedColumnName = "id")
@@ -101,6 +107,14 @@ public class CuentaAPagar implements Serializable {
 
     public void setEstadoCuentaAPagar(Estado estadoCuentaAPagar) {
         this.estadoCuentaAPagar = estadoCuentaAPagar;
+    }
+
+    public Pago getPago() {
+        return pago;
+    }
+
+    public void setPago(Pago pago) {
+        this.pago = pago;
     }
 
     @Override

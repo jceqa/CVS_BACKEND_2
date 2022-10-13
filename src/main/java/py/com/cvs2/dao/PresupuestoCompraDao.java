@@ -28,14 +28,12 @@ public class PresupuestoCompraDao extends GenericDao<PresupuestoCompra> {
     }
 
     public List<PresupuestoCompra> listPendientesByProveedor(Integer idProveedor){
-        List<PresupuestoCompra> presupuestoCompraList;
-
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
         EntityManager em = emf.createEntityManager();
 
         String query = "SELECT pc FROM PresupuestoCompra pc "
                 + " WHERE pc.estado = " + "'ACTIVO' "
-                + " AND pc.estadoPresupuesto.id = 1 "
+                + " AND pc.estadoPresupuestoCompra.id = 1 "
                 + " AND pc.proveedor.id = :idProveedor "
                 + " ORDER BY pc.id ";
 
