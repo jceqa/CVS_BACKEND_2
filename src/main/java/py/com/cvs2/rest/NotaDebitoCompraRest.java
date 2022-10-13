@@ -30,6 +30,20 @@ public class NotaDebitoCompraRest {
         return Response.ok(notaDebitoCompraList, MediaType.APPLICATION_JSON).build();
     }
 
+    @PUT
+    @Path("/procesar")
+    public Response processNotaDebitoCompra(NotaDebitoCompra notaDebitoCompra) {
+        NotaDebitoCompraController nrc = new NotaDebitoCompraController();
+        try {
+            notaDebitoCompra = nrc.processNotaDebitoCompra(notaDebitoCompra);
+        }  catch (Exception e) {
+            Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+            rb.entity(e.getMessage());
+            return rb.build();
+        }
+        return Response.ok(notaDebitoCompra, MediaType.APPLICATION_JSON).build();
+    }
+
     @POST
     public Response saveNotaDebitoCompra(NotaDebitoCompra notaDebitoCompra) {
         NotaDebitoCompraController nrc = new NotaDebitoCompraController();
