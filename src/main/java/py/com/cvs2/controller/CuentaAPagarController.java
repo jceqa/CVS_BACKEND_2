@@ -19,6 +19,11 @@ public class CuentaAPagarController {
         return cuentaAPagarDao.list(all);
     }
 
+    public List<CuentaAPagar> listCuentasAPagarPendientes() {
+        CuentaAPagarDao cuentaAPagarDao = new CuentaAPagarDao();
+        return cuentaAPagarDao.listPendientes();
+    }
+
     public CuentaAPagar cancelCuentaAPagar(CuentaAPagar cuentaAPagar) throws Exception {
         CuentaAPagarDao cuentaAPagarDao = new CuentaAPagarDao();
         Estado estado = new Estado(2, "ANULADO");

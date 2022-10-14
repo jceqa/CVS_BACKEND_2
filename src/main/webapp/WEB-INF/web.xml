@@ -53,7 +53,8 @@
 			py.com.cvs2.rest.OrdenServicioRest,
 			py.com.cvs2.rest.AperturaCierreCajaRest,
 			py.com.cvs2.rest.AjusteRest,
-			py.com.cvs2.rest.StockRest
+			py.com.cvs2.rest.StockRest,
+			py.com.cvs2.rest.PagoRest
 		</param-value>
 	</context-param>
 

@@ -21,6 +21,15 @@ public class CuentaAPagarRest {
         return Response.ok(cuentaAPagarList, MediaType.APPLICATION_JSON).build();
     }
 
+    @GET
+    @Path("/pendientes")
+    public Response listCuentasAPagarPendientes(){
+        CuentaAPagarController nrc = new CuentaAPagarController();
+        List<CuentaAPagar> cuentaAPagarList = nrc.listCuentasAPagarPendientes();
+
+        return Response.ok(cuentaAPagarList, MediaType.APPLICATION_JSON).build();
+    }
+
     @POST
     public Response saveCuentaAPagar(CuentaAPagar cuentaAPagar) {
         CuentaAPagarController cpc = new CuentaAPagarController();
