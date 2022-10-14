@@ -30,7 +30,7 @@ public class PedidoVentaController {
     public PedidoVenta cancelPedidoVenta(PedidoVenta pedidoVenta) throws Exception {
         PedidoVentaDao pedidoVentaDao = new PedidoVentaDao();
         Estado estado = new Estado(2, "ANULADO");
-        pedidoVenta.setEstadoPedido(estado);
+        pedidoVenta.setEstadoPedidoVenta(estado);
 
         return pedidoVentaDao.update(pedidoVenta);
     }

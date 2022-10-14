@@ -28,7 +28,7 @@ public class PedidoVenta implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "id_estado", referencedColumnName = "id")
-    private Estado estadoPedido;
+    private Estado estadoPedidoVenta;
 
     @OneToMany(cascade= {CascadeType.ALL})
     @JoinColumn(name = "id_pedido_venta", referencedColumnName = "id")
@@ -41,6 +41,10 @@ public class PedidoVenta implements Serializable {
     @OneToOne
     @JoinColumn(name = "id_deposito", referencedColumnName = "id")
     private Deposito deposito;
+
+    @OneToOne
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id")
+    private Cliente cliente;
 
     public PedidoVenta() {
     }
@@ -84,12 +88,12 @@ public class PedidoVenta implements Serializable {
         this.pedidoVentaDetalles = pedidoVentaDetalles;
     }
 
-    public Estado getEstadoPedido() {
-        return estadoPedido;
+    public Estado getEstadoPedidoVenta() {
+        return estadoPedidoVenta;
     }
 
-    public void setEstadoPedido(Estado estadoPedido) {
-        this.estadoPedido = estadoPedido;
+    public void setEstadoPedidoVenta(Estado estadoPedidoVenta) {
+        this.estadoPedidoVenta = estadoPedidoVenta;
     }
 
     public Usuario getUsuario() {
@@ -114,6 +118,14 @@ public class PedidoVenta implements Serializable {
 
     public void setObservacion(String observacion) {
         this.observacion = observacion;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @Override
