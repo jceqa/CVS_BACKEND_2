@@ -14,10 +14,9 @@ public class OrdenServicioController {
         OrdenServicioDao ordenServicioDao = new OrdenServicioDao();
         PresupuestoServicioDao presupuestoServicioDao = new PresupuestoServicioDao();
 
-        for(PresupuestoServicio presupuestoServicio : ordenServicio.getPresupuestosServicio()){
-            presupuestoServicio.setEstadoPresupuestoServicio(new Estado(4, "PROCESADO"));
-            presupuestoServicioDao.update(presupuestoServicio);
-        }
+        PresupuestoServicio presupuestoServicio = ordenServicio.getPresupuestoServicio();
+        presupuestoServicio.setEstadoPresupuestoServicio(new Estado(4, "PROCESADO"));
+        presupuestoServicioDao.update(presupuestoServicio);
 
         ordenServicio = ordenServicioDao.save(ordenServicio);
 
@@ -29,10 +28,15 @@ public class OrdenServicioController {
         return ordenServicioDao.listPendientes();
     }
 
-    /*public List<OrdenCompra> listOrdenCompraBySucursal(Integer idSucursal) {
-        OrdenCompraDao ordenCompraDao = new OrdenCompraDao();
-        return ordenCompraDao.listBySucursal(idSucursal);
-    }*
+    public List<OrdenServicio> listOrdenServicioBySucursal(Integer idSucursal) {
+        OrdenServicioDao ordenServicioDao = new OrdenServicioDao();
+        return ordenServicioDao.listBySucursal(idSucursal);
+    }
+
+    public List<OrdenServicio> listOrdenServicioPendientesBySucursal(Integer idSucursal) {
+        OrdenServicioDao ordenServicioDao = new OrdenServicioDao();
+        return ordenServicioDao.listByPendientesSucursal(idSucursal);
+    }
 
     public List<OrdenServicio> listOrdenServicio(Boolean all) {
         OrdenServicioDao ordenServicioDao = new OrdenServicioDao();
@@ -43,10 +47,9 @@ public class OrdenServicioController {
         OrdenServicioDao ordenServicioDao = new OrdenServicioDao();
         PresupuestoServicioDao presupuestoServicioDao = new PresupuestoServicioDao();
 
-        for(PresupuestoServicio presupuestoServicio : ordenServicio.getPresupuestosServicio()){
-            presupuestoServicio.setEstadoPresupuestoServicio(new Estado(1, "PENDIENTE"));
-            presupuestoServicioDao.update(presupuestoServicio);
-        }
+        PresupuestoServicio presupuestoServicio = ordenServicio.getPresupuestoServicio();
+        presupuestoServicio.setEstadoPresupuestoServicio(new Estado(1, "PENDIENTE"));
+        presupuestoServicioDao.update(presupuestoServicio);
 
         ordenServicio.setEstadoOrdenServicio(new Estado(2, "ANULADO"));
 

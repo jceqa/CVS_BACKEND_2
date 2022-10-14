@@ -41,10 +41,10 @@ public class DiagnosticoRest {
     }
 
     @GET
-    @Path("/pendientes/{idProveedor}")
-    public Response listDiagnosticoPendientesByProveedor(@PathParam("idProveedor") Integer idProveedor){
+    @Path("/pendientes/{idSucursal}")
+    public Response listDiagnosticoPendientesByProveedorBySucursal(@PathParam("idSucursal") Integer idSucursal){
         DiagnosticoController dc = new DiagnosticoController();
-        List<Diagnostico> diagnosticoList = dc.listDiagnosticoPendientesByProveedor(idProveedor);
+        List<Diagnostico> diagnosticoList = dc.listDiagnosticoPendientesBySucursal(idSucursal);
 
         return Response.ok(diagnosticoList, MediaType.APPLICATION_JSON).build();
     }

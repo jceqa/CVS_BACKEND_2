@@ -42,10 +42,10 @@ public class PresupuestoServicioRest {
     }
 
     @GET
-    @Path("/pendientes/{idProveedor}")
-    public Response listPresupuestoCompraPendientesByProveedor(@PathParam("idProveedor") Integer idProveedor){
+    @Path("/pendientes/{idSucursal}")
+    public Response listPresupuestoCompraPendientesBySucursal(@PathParam("idSucursal") Integer idSucursal){
         PresupuestoServicioController pcc = new PresupuestoServicioController();
-        List<PresupuestoServicio> presupuestoServicioList = pcc.listPresupuestoServicioPendientesByProveedor(idProveedor);
+        List<PresupuestoServicio> presupuestoServicioList = pcc.listPresupuestoServicioPendientesBySucursal(idSucursal);
 
         return Response.ok(presupuestoServicioList, MediaType.APPLICATION_JSON).build();
     }

@@ -20,7 +20,7 @@ public class OrdenServicioRest {
     @GET
     public Response listOrdenServicios(@QueryParam("all") Boolean all){
         OrdenServicioController pcc = new OrdenServicioController();
-        List<OrdenServicio> presupuestoCompraList = pcc.listOrdenServicios(all);
+        List<OrdenServicio> ordenServicioList = pcc.listOrdenServicio(all);
 
         return Response.ok(ordenServicioList, MediaType.APPLICATION_JSON).build();
     }
@@ -47,7 +47,7 @@ public class OrdenServicioRest {
     @Path("/pendientes/{idSucursal}")
     public Response listOrdenServicioPendientesBySucursal(@PathParam("idSucursal") Integer idSucursal){
         OrdenServicioController pcc = new OrdenServicioController();
-        List<OrdenServicio> ordenServicioList = pcc.listOrdenServicioPendientesByProveedor(idSucursal);
+        List<OrdenServicio> ordenServicioList = pcc.listOrdenServicioPendientesBySucursal(idSucursal);
 
         return Response.ok(ordenServicioList, MediaType.APPLICATION_JSON).build();
     }

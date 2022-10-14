@@ -16,7 +16,7 @@ public class PresupuestoServicioController {
         PresupuestoServicioDao presupuestoServicioDao = new PresupuestoServicioDao();
         RecepcionDao recepcionDao = new RecepcionDao();
 
-        Recepcion recepcion = presupuestoServicio.getRecepcion();
+        Recepcion recepcion = presupuestoServicio.getDiagnostico().getRecepcion();
         recepcion.setEstadoRecepcion(new Estado(4, "PROCESADO"));
         recepcionDao.update(recepcion);
 
@@ -25,7 +25,7 @@ public class PresupuestoServicioController {
         return presupuestoServicio;
     }
 
-    public List<PresupuestoServicio> listPresupuestosCompra(Boolean all) {
+    public List<PresupuestoServicio> listPresupuestosServicio(Boolean all) {
         PresupuestoServicioDao presupuestoServicioDao = new PresupuestoServicioDao();
         return presupuestoServicioDao.list(all);
     }
@@ -36,15 +36,20 @@ public class PresupuestoServicioController {
     }
 
     public List<PresupuestoServicio> listPresupuestoServicioPendientes() {
-        PresupuestoServicioDao presupuestoServicioDao = new PresupuestoServicioaDao();
+        PresupuestoServicioDao presupuestoServicioDao = new PresupuestoServicioDao();
         return presupuestoServicioDao.listPendientes();
+    }
+
+    public List<PresupuestoServicio> listPresupuestoServicioPendientesBySucursal(Integer idSucursal) {
+        PresupuestoServicioDao presupuestoServicioDao = new PresupuestoServicioDao();
+        return presupuestoServicioDao.listPendientesBySucursal(idSucursal);
     }
 
     public PresupuestoServicio cancelPresupuestoServicio(PresupuestoServicio presupuestoServicio) throws Exception {
         PresupuestoServicioDao presupuestoServicioDao = new PresupuestoServicioDao();
         RecepcionDao recepcionDao = new RecepcionDao();
 
-        Recepcion recepcion = presupuestoServicio.getPedidoServicio();
+        Recepcion recepcion = presupuestoServicio.getDiagnostico().getRecepcion();
         recepcion.setEstadoRecepcion(new Estado(1, "PENDIENTE"));
         recepcionDao.update(recepcion);
 

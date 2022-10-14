@@ -18,7 +18,23 @@ public class PresupuestoServicioDao extends GenericDao<PresupuestoServicio> {
 
         String query = "SELECT psc FROM PresupuestoServicio psc "
                 + " WHERE psc.estado = " + "'ACTIVO'"
-                + " AND psc.recepcion.deposito.sucursal.id = :idSucursal"
+                + " AND psc.diagnostico.recepcion.deposito.sucursal.id = :idSucursal"
+                + " ORDER BY psc.id ";
+
+        Query q = em.createQuery(query);
+        q.setParameter("idSucursal", idSucursal);
+
+        return q.getResultList();
+    }
+
+    public List<PresupuestoServicio> listPendientesBySucursal(Integer idSucursal){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
+        EntityManager em = emf.createEntityManager();
+
+        String query = "SELECT psc FROM PresupuestoServicio psc "
+                + " WHERE psc.estado = " + "'ACTIVO'"
+                + " AND psc.estadoPresupuestoServicio.id = 1 "
+                + " AND psc.diagnostico.recepcion.deposito.sucursal.id = :idSucursal"
                 + " ORDER BY psc.id ";
 
         Query q = em.createQuery(query);

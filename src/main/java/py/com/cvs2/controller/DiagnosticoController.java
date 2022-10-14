@@ -14,11 +14,11 @@ import java.util.List;
 public class DiagnosticoController {
 
     public Diagnostico saveDiagnostico(Diagnostico diagnostico) throws Exception {
-        DiagnosticoDao diagnosticoCompraDao = new DiagnosticoDao();
         DiagnosticoDao diagnosticoDao = new DiagnosticoDao();
+        RecepcionDao recepcionDao = new RecepcionDao();
 
-        Recepcion recepcion = recepcion.getRecepcion();
-        recepcion.setEstadoDiagnostico(new Estado(4, "PROCESADO"));
+        Recepcion recepcion = diagnostico.getRecepcion();
+        recepcion.setEstadoRecepcion(new Estado(4, "PROCESADO"));
         recepcionDao.update(recepcion);
 
         diagnostico = diagnosticoDao.save(diagnostico);
@@ -41,13 +41,18 @@ public class DiagnosticoController {
         return diagnosticoDao.listPendientes();
     }
 
+    public List<Diagnostico> listDiagnosticoPendientesBySucursal(Integer idSucursal) {
+        DiagnosticoDao diagnosticoDao = new DiagnosticoDao();
+        return diagnosticoDao.listPendientesBySucursal(idSucursal);
+    }
+
 
     public Diagnostico cancelDiagnostico(Diagnostico diagnostico) throws Exception {
         DiagnosticoDao diagnosticoDao = new DiagnosticoDao();
-        recepcionDao recepcionDao = new RecepcionDao();
+        RecepcionDao recepcionDao = new RecepcionDao();
 
-        Recepcion recepcion = recepcion.getRecepcion();
-        recepcion.setEstadoDiagnostico(new Estado(1, "PENDIENTE"));
+        Recepcion recepcion = diagnostico.getRecepcion();
+        recepcion.setEstadoRecepcion(new Estado(1, "PENDIENTE"));
         recepcionDao.update(recepcion);
 
         diagnostico.setEstadoDiagnostico(new Estado(2, "ANULADO"));

@@ -18,7 +18,23 @@ public class DiagnosticoDao extends GenericDao<Diagnostico> {
 
         String query = "SELECT dc FROM Diagnostico dc "
                 + " WHERE dc.estado = " + "'ACTIVO'"
-                + " AND dc.diagnostico.deposito.sucursal.id = :idSucursal"
+                + " AND dc.recepcion.deposito.sucursal.id = :idSucursal"
+                + " ORDER BY dc.id ";
+
+        Query q = em.createQuery(query);
+        q.setParameter("idSucursal", idSucursal);
+
+        return q.getResultList();
+    }
+
+    public List<Diagnostico> listPendientesBySucursal(Integer idSucursal) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
+        EntityManager em = emf.createEntityManager();
+
+        String query = "SELECT dc FROM Diagnostico dc "
+                + " WHERE dc.estado = " + "'ACTIVO'"
+                + " AND dc.estadoDiagnostico.id = 1 "
+                + " AND dc.recepcion.deposito.sucursal.id = :idSucursal"
                 + " ORDER BY dc.id ";
 
         Query q = em.createQuery(query);
