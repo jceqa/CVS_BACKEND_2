@@ -21,6 +21,15 @@ public class FacturaCompraRest {
         return Response.ok(facturaCompraList, MediaType.APPLICATION_JSON).build();
     }
 
+    @GET
+    @Path("/procesadas")
+    public Response listFacturasCompraProcesadas(){
+        FacturaCompraController fcc = new FacturaCompraController();
+        List<FacturaCompra> facturaCompraList = fcc.listFacturasCompraProcesadas();
+
+        return Response.ok(facturaCompraList, MediaType.APPLICATION_JSON).build();
+    }
+
     @POST
     public Response saveFacturaCompra(FacturaCompra facturaCompra) {
         FacturaCompraController pcc = new FacturaCompraController();

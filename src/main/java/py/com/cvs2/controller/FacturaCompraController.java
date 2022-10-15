@@ -59,6 +59,11 @@ public class FacturaCompraController {
         return facturaCompraDao.list(all);
     }
 
+    public List<FacturaCompra> listFacturasCompraProcesadas(){
+        FacturaCompraDao facturaCompraDao = new FacturaCompraDao();
+        return facturaCompraDao.listProcesadas();
+    }
+
     public FacturaCompra cancelFacturaCompra(FacturaCompra facturaCompra) throws Exception {
         FacturaCompraDao facturaCompraDao = new FacturaCompraDao();
         OrdenCompraDao ordenCompraDao = new OrdenCompraDao();
@@ -117,6 +122,11 @@ public class FacturaCompraController {
             notaCreditoCompra.setEstadoNotaCreditoCompra(new Estado(1, "PENDIENTE"));
             notaCreditoCompraDao.update(notaCreditoCompra);
         }
+
+        /***
+         * TODO
+         * REVISAR ANULACION NOTA CREDITO
+         */
 
         ordenCompraDao.update(ordenCompra);
 
