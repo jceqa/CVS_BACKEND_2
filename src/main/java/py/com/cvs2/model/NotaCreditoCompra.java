@@ -29,6 +29,10 @@ public class NotaCreditoCompra implements Serializable {
     private Date fecha;
 
     @OneToOne
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    private Usuario usuario;
+
+    @OneToOne
     @JoinColumn(name = "id_proveedor", referencedColumnName = "id")
     private Proveedor proveedor;
 
@@ -129,6 +133,14 @@ public class NotaCreditoCompra implements Serializable {
 
     public void setNotaCreditoCompraDetalle(List<NotaCreditoCompraDetalle> notaCreditoCompraDetalle) {
         this.notaCreditoCompraDetalle = notaCreditoCompraDetalle;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

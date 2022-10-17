@@ -1,6 +1,5 @@
 package py.com.cvs2.controller;
 
-import py.com.cvs2.dao.DepositoDao;
 import py.com.cvs2.dao.StockDao;
 import py.com.cvs2.model.Articulo;
 import py.com.cvs2.model.Deposito;
@@ -9,6 +8,11 @@ import py.com.cvs2.model.Stock;
 import java.util.List;
 
 public class StockController {
+
+    public List<Stock> listStocks(Boolean all) {
+        StockDao sucursalDAO = new StockDao();
+        return sucursalDAO.list(all);
+    }
 
     public List<Stock> listStockByDeposito(Integer idDeposito){
         StockDao stockDao = new StockDao();

@@ -59,6 +59,10 @@ public class OrdenCompra implements Serializable {
     @JoinColumn(name = "id_orden_compra", referencedColumnName = "id")
     private List<OrdenCompraDetalle> ordenCompraDetalle;
 
+    @OneToMany
+    @JoinColumn(name = "id_orden_compra_cancelacion", referencedColumnName = "id")
+    private List<NotaCreditoCompra> notaCreditoComprasCancelacion;
+
     public OrdenCompra() {
     }
 
@@ -189,6 +193,14 @@ public class OrdenCompra implements Serializable {
 
     public void setOrdenCompraDetalle(List<OrdenCompraDetalle> ordenCompraDetalle) {
         this.ordenCompraDetalle = ordenCompraDetalle;
+    }
+
+    public List<NotaCreditoCompra> getNotaCreditoComprasCancelacion() {
+        return notaCreditoComprasCancelacion;
+    }
+
+    public void setNotaCreditoComprasCancelacion(List<NotaCreditoCompra> notaCreditoComprasCancelacion) {
+        this.notaCreditoComprasCancelacion = notaCreditoComprasCancelacion;
     }
 
     @Override

@@ -14,6 +14,14 @@ import java.util.List;
 public class StockRest {
 
     @GET
+    public Response listStocks(@QueryParam("all") Boolean all) {
+        StockController sc = new StockController();
+        List<Stock> sucursales = sc.listStocks(all);
+
+        return Response.ok(sucursales, MediaType.APPLICATION_JSON).build();
+    }
+
+    @GET
     @Path("/deposito/{id}")
     public Response listStockByDeposito(@PathParam("id") Integer idDeposito) {
         StockController sc = new StockController();

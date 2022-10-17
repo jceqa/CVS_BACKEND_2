@@ -59,9 +59,7 @@ public class FacturaCompra implements Serializable {
     @JoinColumn(name = "id_factura_compra", referencedColumnName = "id")
     private List<NotaDebitoCompra> notaDebitoCompraList;
 
-    @OneToMany
-    @JoinColumn(name = "id_factura_compra_cancelacion", referencedColumnName = "id")
-    private List<NotaCreditoCompra> notaCreditoComprasCancelacion;
+
 
     public FacturaCompra() {
     }
@@ -180,14 +178,6 @@ public class FacturaCompra implements Serializable {
 
     public void setNotaDebitoCompraList(List<NotaDebitoCompra> notaDebitoCompraList) {
         this.notaDebitoCompraList = notaDebitoCompraList;
-    }
-
-    public List<NotaCreditoCompra> getNotaCreditoComprasCancelacion() {
-        return notaCreditoComprasCancelacion;
-    }
-
-    public void setNotaCreditoComprasCancelacion(List<NotaCreditoCompra> notaCreditoComprasCancelacion) {
-        this.notaCreditoComprasCancelacion = notaCreditoComprasCancelacion;
     }
 
     @Override

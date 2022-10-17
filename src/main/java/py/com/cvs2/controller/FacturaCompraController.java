@@ -118,7 +118,7 @@ public class FacturaCompraController {
             notaDebitoCompraDao.update(notaDebitoCompra);
         }
 
-        for(NotaCreditoCompra notaCreditoCompra : facturaCompra.getNotaCreditoComprasCancelacion()){
+        for(NotaCreditoCompra notaCreditoCompra : facturaCompra.getOrdenCompra().getNotaCreditoComprasCancelacion()){
             notaCreditoCompra.setEstadoNotaCreditoCompra(new Estado(1, "PENDIENTE"));
             notaCreditoCompraDao.update(notaCreditoCompra);
         }
