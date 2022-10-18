@@ -123,11 +123,6 @@ public class FacturaCompraController {
             notaCreditoCompraDao.update(notaCreditoCompra);
         }
 
-        /***
-         * TODO
-         * REVISAR ANULACION NOTA CREDITO
-         */
-
         ordenCompraDao.update(ordenCompra);
 
         return facturaCompraDao.update(facturaCompra);
