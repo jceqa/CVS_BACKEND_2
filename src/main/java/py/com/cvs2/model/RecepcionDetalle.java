@@ -14,9 +14,6 @@ public class RecepcionDetalle implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "cantidad")
-    private Integer cantidad;
-
     @Column(name = "estado")
     private String estado;
 
@@ -27,9 +24,8 @@ public class RecepcionDetalle implements Serializable {
     public RecepcionDetalle() {
     }
 
-    public RecepcionDetalle(int id, Integer cantidad, String estado, Equipo equipo) {
+    public RecepcionDetalle(int id, String estado, Equipo equipo) {
         this.id = id;
-        this.cantidad = cantidad;
         this.estado = estado;
         this.equipo = equipo;
     }
@@ -40,14 +36,6 @@ public class RecepcionDetalle implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
     }
 
     public String getEstado() {
@@ -70,7 +58,6 @@ public class RecepcionDetalle implements Serializable {
     public String toString() {
         return "RecepcionDetalle{" +
                 "id=" + id +
-                ", cantidad=" + cantidad +
                 ", estado='" + estado + '\'' +
                 ", equipo=" + equipo +
                 '}';

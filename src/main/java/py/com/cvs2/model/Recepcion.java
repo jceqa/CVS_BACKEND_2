@@ -38,12 +38,12 @@ public class Recepcion implements Serializable {
     private Usuario usuario;
 
     @OneToOne
-    @JoinColumn(name = "id_deposito", referencedColumnName = "id")
-    private Deposito deposito;
-
-    @OneToOne
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     private Cliente cliente;
+
+    @OneToOne
+    @JoinColumn(name = "id_sucursal", referencedColumnName = "id")
+    private Sucursal sucursal;
 
 
     public Recepcion() {
@@ -85,17 +85,11 @@ public class Recepcion implements Serializable {
     public void setRecepcionDetalles(List<RecepcionDetalle> recepcionDetalles) {
         this.recepcionDetalles = recepcionDetalles;}
 
-    public Deposito getDeposito() {
-        return deposito;}
-
-    public void setDeposito(Deposito deposito) {
-        this.deposito = deposito;}
-
     public Estado getEstadoRecepcion() {
         return estadoRecepcion;
     }
 
-    public void setEstadoRecepcion(Estado estadoPedido) {
+    public void setEstadoRecepcion(Estado estadoRecepcion) {
         this.estadoRecepcion = estadoRecepcion;
     }
 
@@ -119,6 +113,14 @@ public class Recepcion implements Serializable {
     }
 
     public void setCliente(Cliente cliente) {this.cliente = cliente;
+    }
+
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
     }
 
     @Override
