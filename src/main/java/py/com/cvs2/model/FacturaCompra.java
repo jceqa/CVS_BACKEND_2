@@ -59,8 +59,6 @@ public class FacturaCompra implements Serializable {
     @JoinColumn(name = "id_factura_compra", referencedColumnName = "id")
     private List<NotaDebitoCompra> notaDebitoCompraList;
 
-
-
     public FacturaCompra() {
     }
 
