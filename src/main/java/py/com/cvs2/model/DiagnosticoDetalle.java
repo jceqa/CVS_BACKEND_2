@@ -2,6 +2,7 @@ package py.com.cvs2.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "diagnostico_detalle")
@@ -19,6 +20,10 @@ public class DiagnosticoDetalle {
 
     @Column(name = "diagnostico")
     private String diagnostico;
+
+    @OneToMany
+    @JoinColumn(name = "id_servicio", referencedColumnName = "id_servicio")
+    private List<Servicio> servicios;
 
     @OneToOne
     @JoinColumn(name = "id_recepcion_detalle", referencedColumnName = "id")
@@ -64,6 +69,14 @@ public class DiagnosticoDetalle {
 
     public void setRecepcionDetalle(RecepcionDetalle recepcionDetalle) {
         this.recepcionDetalle = recepcionDetalle;
+    }
+
+    public List<Servicio> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(List<Servicio> servicios) {
+        this.servicios = servicios;
     }
 
     @Override

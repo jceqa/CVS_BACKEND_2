@@ -1,12 +1,7 @@
 package py.com.cvs2.model;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "servicio")
@@ -27,6 +22,11 @@ public class Servicio implements Serializable {
 
     @Column(name = "estado")
     String estado;
+
+    @OneToOne
+    @JoinColumn(name = "id_impuesto", referencedColumnName = "id")
+    private Impuesto impuesto;
+
 
     public Servicio() {
     }
@@ -64,6 +64,14 @@ public class Servicio implements Serializable {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Impuesto getImpuesto() {
+        return impuesto;
+    }
+
+    public void setImpuesto(Impuesto impuesto) {
+        this.impuesto = impuesto;
     }
 
     @Override

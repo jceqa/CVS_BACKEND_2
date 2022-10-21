@@ -1,6 +1,8 @@
 package py.com.cvs2.model;
 
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity

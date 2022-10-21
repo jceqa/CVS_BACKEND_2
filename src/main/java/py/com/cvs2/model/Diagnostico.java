@@ -35,7 +35,6 @@ public class Diagnostico implements Serializable {
     @OneToOne
     @JoinColumn(name = "id_recepcion", referencedColumnName = "id")
     private Recepcion recepcion;
-
     @OneToMany(cascade= {CascadeType.ALL})
     @JoinColumn(name = "id_diagnostico", referencedColumnName = "id")
     private List<DiagnosticoDetalle> diagnosticoDetalles;
@@ -118,7 +117,6 @@ public class Diagnostico implements Serializable {
     public void setDignosticoDetalles(List<DiagnosticoDetalle> diagnosticoDetalles) {
         this.diagnosticoDetalles = diagnosticoDetalles;
     }
-
 
     @Override
     public String toString() {

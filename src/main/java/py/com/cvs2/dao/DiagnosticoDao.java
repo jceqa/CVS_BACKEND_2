@@ -18,7 +18,7 @@ public class DiagnosticoDao extends GenericDao<Diagnostico> {
 
         String query = "SELECT dc FROM Diagnostico dc "
                 + " WHERE dc.estado = " + "'ACTIVO'"
-                + " AND dc.recepcion.deposito.sucursal.id = :idSucursal"
+                + " AND dc.recepcion.sucursal.id = :idSucursal"
                 + " ORDER BY dc.id ";
 
         Query q = em.createQuery(query);
@@ -34,7 +34,7 @@ public class DiagnosticoDao extends GenericDao<Diagnostico> {
         String query = "SELECT dc FROM Diagnostico dc "
                 + " WHERE dc.estado = " + "'ACTIVO'"
                 + " AND dc.estadoDiagnostico.id = 1 "
-                + " AND dc.recepcion.deposito.sucursal.id = :idSucursal"
+                + " AND dc.recepcion.sucursal.id = :idSucursal"
                 + " ORDER BY dc.id ";
 
         Query q = em.createQuery(query);

@@ -34,10 +34,6 @@ public class PresupuestoServicio implements Serializable {
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_servicio")
-    private Servicio servicio;
-
     @OneToOne
     @JoinColumn(name = "id_promo_descuento", referencedColumnName = "id")
     private PromoDescuento promodescuento;
@@ -54,7 +50,7 @@ public class PresupuestoServicio implements Serializable {
     }
 
     public PresupuestoServicio(int id, Date fecha, String estado, String observacion, Long total, Estado estadoPresupuestoServicio,
-                               Usuario usuario,Servicio servicio, PromoDescuento promodescuento,  Diagnostico diagnostico, List<PresupuestoServicioDetalle> presupuestoServicioDetalles) {
+                               Usuario usuario, PromoDescuento promodescuento,  Diagnostico diagnostico, List<PresupuestoServicioDetalle> presupuestoServicioDetalles) {
         this.id = id;
         this.fecha = fecha;
         this.estado = estado;
@@ -62,7 +58,6 @@ public class PresupuestoServicio implements Serializable {
         this.total = total;
         this.estadoPresupuestoServicio = estadoPresupuestoServicio;
         this.usuario = usuario;
-        this.servicio = servicio;
         this.promodescuento = promodescuento;
         this.diagnostico = diagnostico;
         this.presupuestoServicioDetalles = presupuestoServicioDetalles;
@@ -127,12 +122,6 @@ public class PresupuestoServicio implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    public Servicio getServicio() {return servicio;
-    }
-
-    public void setServicio(Servicio servicio) {this.servicio = servicio;
     }
 
     public Diagnostico getDiagnostico() {
