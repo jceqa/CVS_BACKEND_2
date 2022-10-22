@@ -21,13 +21,16 @@ public class DiagnosticoDetalle {
     @Column(name = "diagnostico")
     private String diagnostico;
 
-    @OneToMany
-    @JoinColumn(name = "id_servicio", referencedColumnName = "id_servicio")
-    private List<Servicio> servicios;
-
     @OneToOne
     @JoinColumn(name = "id_recepcion_detalle", referencedColumnName = "id")
     private RecepcionDetalle recepcionDetalle;
+
+    @ManyToMany
+    @JoinTable(name = "diagnostico_detalle_servicio",
+            joinColumns = @JoinColumn(name = "id_diagnostico_detalle", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_servicio", referencedColumnName = "id")
+    )
+    private List<Servicio> servicios;
 
     public DiagnosticoDetalle() {
     }
