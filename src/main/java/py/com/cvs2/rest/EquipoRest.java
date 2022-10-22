@@ -31,6 +31,15 @@ public class EquipoRest {
 		return Response.ok(equipo, MediaType.APPLICATION_JSON).build();
 	}
 
+	@GET
+	@Path("cliente/{idCliente}")
+	public Response listEquiposByCliente(@PathParam("idCliente") Integer idCliente) {
+		EquipoController ec = new EquipoController();
+		List<Equipo> equipos = ec.listEquiposByCliente(idCliente);
+
+		return Response.ok(equipos, MediaType.APPLICATION_JSON).build();
+	}
+
 	@POST
 	public Response saveEquipo(Equipo equipo) {
 		EquipoController ec = new EquipoController();

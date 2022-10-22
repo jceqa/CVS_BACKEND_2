@@ -16,6 +16,10 @@ public class PresupuestoServicioController {
         PresupuestoServicioDao presupuestoServicioDao = new PresupuestoServicioDao();
         RecepcionDao recepcionDao = new RecepcionDao();
 
+
+        /**
+         * Poner diagnostico
+         */
         Recepcion recepcion = presupuestoServicio.getDiagnostico().getRecepcion();
         recepcion.setEstadoRecepcion(new Estado(4, "PROCESADO"));
         recepcionDao.update(recepcion);
