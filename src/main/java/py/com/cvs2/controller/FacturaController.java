@@ -12,45 +12,35 @@ public class FacturaController {
 
         FacturaDao facturaDao = new FacturaDao();
         PedidoVentaDao pedidoVentaDao = new PedidoVentaDao();
+        OrdenServicioDao ordenServicioDao = new OrdenServicioDao();
+        LibroVentaDetalleDao libroVentaDetalleDao = new LibroVentaDetalleDao();
 
-        ArticuloDao articuloDao = new ArticuloDao();
-        LibroVentaDetalleDao libroDetalleDao = new LibroVentaDetalleDao();
-        //NotaDebitoDetalleDao notaDebitoDetalleDao = new NotaDebitoDetalleDao();
+        if (factura.getPedidoVenta() != null) {
+            PedidoVenta pedidoVenta = factura.getPedidoVenta();
+            pedidoVenta.setEstadoPedidoVenta(new Estado(4, "PROCESADO"));
 
-        PedidoVenta pedidoVenta = factura.getPedidoVenta();
-        pedidoVenta.setEstadoPedidoVenta(new Estado(4, "PROCESADO"));
-
-        for(PedidoVentaDetalle pVD : pedidoVenta.getPedidoVentaDetalles()){
-            //for(PresupuestoDetalle pcD : pc.getPresupuestoDetalles()){
+            for (PedidoVentaDetalle pVD : pedidoVenta.getPedidoVentaDetalles()) {
                 stockController.updateStock(pedidoVenta.getDeposito().getId(), pVD.getArticulo(), pVD.getCantidad(), "DESCUENTO");
-
-                /*Articulo articulo = pcD.getPedidoDetalle().getArticulo();
-                articulo.setPrecioAnterior(articulo.getPrecio());
-                articulo.setPrecio(pcD.getMonto());
-                articuloDao.update(articulo);*/
-            //}
+            }
+            pedidoVentaDao.update(pedidoVenta);
         }
 
         factura = facturaDao.save(factura);
 
-        List<LibroVentaDetalle> libroVentaDetalleList = factura.getLibroVenta().getLibroVentaDetalles();
-        List<FacturaDetalle> facturaDetalleList = factura.getFacturaDetalles();
-        //List<NotaDebito> notaDebitoList = factura.getNotaDebitoList();
-
-        for(int i = 0; i < facturaDetalleList.size(); i++){
-            libroVentaDetalleList.get(i).setFacturaDetalle(facturaDetalleList.get(i));
-            libroDetalleDao.update(libroVentaDetalleList.get(i));
+        if (factura.getOrdenServiciosList() != null && factura.getOrdenServiciosList().size() != 0) {
+            for (OrdenServicio ordenServicio : factura.getOrdenServiciosList()) {
+                ordenServicio.setEstadoOrdenServicio(new Estado(4, "PROCESADO"));
+                ordenServicioDao.update(ordenServicio);
+            }
         }
 
-        /*for(NotaDebito notaDebito : notaDebitoList){
-            for(int j = 0; j < facturaDetalleList.size(); j++){
-                notaDebito.getNotaDebitoDetalle().get(j).setFacturaDetalle(facturaDetalleList.get(j));
-                notaDebitoDetalleDao.update(notaDebito.getNotaDebitoDetalle().get(j));
-            }
-        }*/
+        List<LibroVentaDetalle> libroVentaDetalleList = factura.getLibroVenta().getLibroVentaDetalles();
+        List<FacturaDetalle> facturaDetalleList = factura.getFacturaDetalles();
 
-        pedidoVentaDao.update(pedidoVenta);
-        //ordenDao.update(orden);
+        for (int i = 0; i < facturaDetalleList.size(); i++) {
+            libroVentaDetalleList.get(i).setFacturaDetalle(facturaDetalleList.get(i));
+            libroVentaDetalleDao.update(libroVentaDetalleList.get(i));
+        }
 
         return factura;
     }
@@ -70,12 +60,7 @@ public class FacturaController {
         PedidoVentaDao pedidoVentaDao = new PedidoVentaDao();
         LibroVentaDao libroVentaDao = new LibroVentaDao();
         LibroVentaDetalleDao libroVentaDetalleDao = new LibroVentaDetalleDao();
-        //NotaRemisionDao notaRemisionDao = new NotaRemisionDao();
-        ArticuloDao articuloDao = new ArticuloDao();
-        StockDao stockDao = new StockDao();
-        //NotaDebitoDao notaDebitoDao = new NotaDebitoDao();
         CuentaACobrarDao cuentaACobrarDao = new CuentaACobrarDao();
-        //NotaCreditoDao notaCreditoDao = new NotaCreditoDao();
 
         PedidoVenta pedidoVenta = factura.getPedidoVenta();
         pedidoVenta.setEstadoPedidoVenta(new Estado(1, "PENDIENTE"));
@@ -83,45 +68,18 @@ public class FacturaController {
         factura.setEstadoFactura(new Estado(2, "ANULADO"));
 
         LibroVenta libroVenta = factura.getLibroVenta();
-        for(LibroVentaDetalle lVD: libroVenta.getLibroVentaDetalles()){
+        for (LibroVentaDetalle lVD : libroVenta.getLibroVentaDetalles()) {
             lVD.setEstado("INACTIVO");
             libroVentaDetalleDao.update(lVD);
         }
         libroVenta.setEstado("INACTIVO");
         libroVentaDao.update(libroVenta);
 
-        /*List<NotaRemision> notaRemisionList = factura.getNotaRemisionList();
-        for(NotaRemision notaRemision : notaRemisionList){
-            for(PedidoDetalle pedidoDetalle : notaRemision.getPedido().getDetallePedidos()) {
-                Articulo articulo = pedidoDetalle.getArticulo();
-                articulo.setPrecio(articulo.getPrecioAnterior());
-                articuloDao.update(articulo);
-
-                Stock stock;
-                if (notaRemision.getEstadoNotaRemision().getId() == 4 || notaRemision.getEstadoNotaRemision().getId() == 3) {
-                    stock = stockDao.getByArticuloAndDeposito(articulo.getId(), notaRemision.getPedido().getDeposito().getId());
-                } else {
-                    stock = stockDao.getByArticuloAndDeposito(articulo.getId(), 1);
-                }
-                stock.setExistencia(stock.getExistencia() - pedidoDetalle.getCantidad());
-                stockDao.update(stock);
-            }
-            notaRemision.setEstadoNotaRemision(new Estado(2, "ANULADO"));
-            notaRemisionDao.update(notaRemision);
-        }*/
-
-        for(CuentaACobrar cuentaACobrar : factura.getCuentaACobrarList()){
+        for (CuentaACobrar cuentaACobrar : factura.getCuentaACobrarList()) {
             cuentaACobrar.setEstadoCuentaACobrar(new Estado(2, "ANULADO"));
             cuentaACobrarDao.update(cuentaACobrar);
 
-            //notaDebito.setEstadoNotaDebito(new Estado(2, "ANULADO"));
-            //notaDebitoDao.update(notaDebito);
         }
-
-        /*for(NotaCredito notaCredito : factura.getOrden().getNotaCreditosCancelacion()){
-            notaCredito.setEstadoNotaCredito(new Estado(1, "PENDIENTE"));
-            notaCreditoDao.update(notaCredito);
-        }*/
 
         pedidoVentaDao.update(pedidoVenta);
 

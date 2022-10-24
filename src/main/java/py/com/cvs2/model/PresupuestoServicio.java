@@ -107,7 +107,7 @@ public class PresupuestoServicio implements Serializable {
         return estadoPresupuestoServicio;
     }
 
-    public void setEstadoPresupuestoServicio(Estado estadoPresupuesto) {
+    public void setEstadoPresupuestoServicio(Estado estadoPresupuestoServicio) {
         this.estadoPresupuestoServicio = estadoPresupuestoServicio;
     }
 

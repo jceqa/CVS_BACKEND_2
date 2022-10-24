@@ -10,8 +10,8 @@ import java.util.List;
 public class StockController {
 
     public List<Stock> listStocks(Boolean all) {
-        StockDao sucursalDAO = new StockDao();
-        return sucursalDAO.list(all);
+        StockDao stockDao = new StockDao();
+        return stockDao.list(all);
     }
 
     public List<Stock> listStockByDeposito(Integer idDeposito){
@@ -22,6 +22,11 @@ public class StockController {
     public List<Stock> listStockByArticulo(Integer idArticulo){
         StockDao stockDao = new StockDao();
         return stockDao.listStockByArticulo(idArticulo);
+    }
+
+    public Stock getStockByArticuloAndDeposito(Integer idArticulo, Integer idDeposito){
+        StockDao stockDao = new StockDao();
+        return stockDao.getByArticuloAndDeposito(idArticulo, idDeposito);
     }
 
     public Stock updateStock(Integer idDeposito, Articulo articulo, Integer cantidad, String tipoOperacion) throws Exception {

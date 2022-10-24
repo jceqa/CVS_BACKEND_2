@@ -49,7 +49,7 @@ public class Factura implements Serializable {
 
     @OneToMany
     @JoinColumn(name= "id_factura", referencedColumnName = "id")
-    private List<PresupuestoServicio> presupuestoServicios;
+    private List<OrdenServicio> ordenServiciosList;
 
     @OneToOne
     @JoinColumn(name = "id_caja", referencedColumnName = "id")
@@ -70,7 +70,7 @@ public class Factura implements Serializable {
     public Factura() {
     }
 
-    public Factura(int id, String observacion, String estado, Date fecha, Long monto, String numeroFactura, Estado estadoFactura, Timbrado timbrado, CondicionPago condicionPago, PedidoVenta pedidoVenta, List<PresupuestoServicio> presupuestoServicios, Caja caja, LibroVenta libroVenta, List<FacturaDetalle> facturaDetalles, List<CuentaACobrar> cuentaACobrarList) {
+    public Factura(int id, String observacion, String estado, Date fecha, Long monto, String numeroFactura, Estado estadoFactura, Timbrado timbrado, CondicionPago condicionPago, PedidoVenta pedidoVenta, List<OrdenServicio> ordenServiciosList, Caja caja, LibroVenta libroVenta, List<FacturaDetalle> facturaDetalles, List<CuentaACobrar> cuentaACobrarList) {
         this.id = id;
         this.observacion = observacion;
         this.estado = estado;
@@ -81,7 +81,7 @@ public class Factura implements Serializable {
         this.timbrado = timbrado;
         this.condicionPago = condicionPago;
         this.pedidoVenta = pedidoVenta;
-        this.presupuestoServicios = presupuestoServicios;
+        this.ordenServiciosList = ordenServiciosList;
         this.caja = caja;
         this.libroVenta = libroVenta;
         this.facturaDetalles = facturaDetalles;
@@ -168,20 +168,20 @@ public class Factura implements Serializable {
         this.pedidoVenta = pedidoVenta;
     }
 
-    public List<PresupuestoServicio> getPresupuestoServicios() {
-        return presupuestoServicios;
-    }
-
-    public void setPresupuestoServicios(List<PresupuestoServicio> presupuestoServicios) {
-        this.presupuestoServicios = presupuestoServicios;
-    }
-
     public Caja getCaja() {
         return caja;
     }
 
     public void setCaja(Caja caja) {
         this.caja = caja;
+    }
+
+    public List<OrdenServicio> getOrdenServiciosList() {
+        return ordenServiciosList;
+    }
+
+    public void setOrdenServiciosList(List<OrdenServicio> ordenServiciosList) {
+        this.ordenServiciosList = ordenServiciosList;
     }
 
     public LibroVenta getLibroVenta() {
@@ -221,7 +221,7 @@ public class Factura implements Serializable {
                 ", timbrado=" + timbrado +
                 ", condicionPago=" + condicionPago +
                 ", pedidoVenta=" + pedidoVenta +
-                ", presupuestoServicios=" + presupuestoServicios +
+                ", ordenServiciosList=" + ordenServiciosList +
                 ", caja=" + caja +
                 ", libroVenta=" + libroVenta +
                 ", facturaDetalles=" + facturaDetalles +

@@ -14,15 +14,13 @@ public class PresupuestoServicioController {
 
     public PresupuestoServicio savePresupuestoServicio(PresupuestoServicio presupuestoServicio) throws Exception {
         PresupuestoServicioDao presupuestoServicioDao = new PresupuestoServicioDao();
-        RecepcionDao recepcionDao = new RecepcionDao();
+        DiagnosticoDao diagnosticoDao = new DiagnosticoDao();
 
+        Diagnostico diagnostico = presupuestoServicio.getDiagnostico();
+        diagnostico.setEstadoDiagnostico(new Estado(4, "PROCESADO"));
+        diagnosticoDao.update(diagnostico);
 
-        /**
-         * Poner diagnostico
-         */
-        Recepcion recepcion = presupuestoServicio.getDiagnostico().getRecepcion();
-        recepcion.setEstadoRecepcion(new Estado(4, "PROCESADO"));
-        recepcionDao.update(recepcion);
+        presupuestoServicio.setEstadoPresupuestoServicio(new Estado(1, "PENDIENTE"));
 
         presupuestoServicio = presupuestoServicioDao.save(presupuestoServicio);
 
@@ -51,11 +49,11 @@ public class PresupuestoServicioController {
 
     public PresupuestoServicio cancelPresupuestoServicio(PresupuestoServicio presupuestoServicio) throws Exception {
         PresupuestoServicioDao presupuestoServicioDao = new PresupuestoServicioDao();
-        RecepcionDao recepcionDao = new RecepcionDao();
+        DiagnosticoDao diagnosticoDao = new DiagnosticoDao();
 
-        Recepcion recepcion = presupuestoServicio.getDiagnostico().getRecepcion();
-        recepcion.setEstadoRecepcion(new Estado(1, "PENDIENTE"));
-        recepcionDao.update(recepcion);
+        Diagnostico diagnostico = presupuestoServicio.getDiagnostico();
+        diagnostico.setEstadoDiagnostico(new Estado(1, "PENDIENTE"));
+        diagnosticoDao.update(diagnostico);
 
         presupuestoServicio.setEstadoPresupuestoServicio(new Estado(2, "ANULADO"));
 
