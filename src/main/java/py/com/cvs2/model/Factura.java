@@ -36,11 +36,11 @@ public class Factura implements Serializable {
     private Estado estadoFactura;
 
     @OneToOne
-    @JoinColumn(name =" id_timbrado", referencedColumnName = "id")
+    @JoinColumn(name = " id_timbrado", referencedColumnName = "id")
     private Timbrado timbrado;
 
     @OneToOne
-    @JoinColumn(name = "id_condicion_pago",  referencedColumnName = "id")
+    @JoinColumn(name = "id_condicion_pago", referencedColumnName = "id")
     private CondicionPago condicionPago;
 
     @OneToOne
@@ -48,7 +48,7 @@ public class Factura implements Serializable {
     private PedidoVenta pedidoVenta;
 
     @OneToMany
-    @JoinColumn(name= "id_factura", referencedColumnName = "id")
+    @JoinColumn(name = "id_factura", referencedColumnName = "id")
     private List<OrdenServicio> ordenServiciosList;
 
     @OneToOne
@@ -66,6 +66,10 @@ public class Factura implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_factura", referencedColumnName = "id")
     private List<CuentaACobrar> cuentaACobrarList;
+
+    @OneToOne
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    private Usuario usuario;
 
     public Factura() {
     }
@@ -168,20 +172,20 @@ public class Factura implements Serializable {
         this.pedidoVenta = pedidoVenta;
     }
 
-    public Caja getCaja() {
-        return caja;
-    }
-
-    public void setCaja(Caja caja) {
-        this.caja = caja;
-    }
-
     public List<OrdenServicio> getOrdenServiciosList() {
         return ordenServiciosList;
     }
 
     public void setOrdenServiciosList(List<OrdenServicio> ordenServiciosList) {
         this.ordenServiciosList = ordenServiciosList;
+    }
+
+    public Caja getCaja() {
+        return caja;
+    }
+
+    public void setCaja(Caja caja) {
+        this.caja = caja;
     }
 
     public LibroVenta getLibroVenta() {
@@ -208,6 +212,14 @@ public class Factura implements Serializable {
         this.cuentaACobrarList = cuentaACobrarList;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public String toString() {
         return "Factura{" +
@@ -229,3 +241,4 @@ public class Factura implements Serializable {
                 '}';
     }
 }
+
