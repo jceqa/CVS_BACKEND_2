@@ -2,6 +2,7 @@ package py.com.cvs2.controller;
 
 import py.com.cvs2.dao.DepositoDao;
 import py.com.cvs2.dao.OrdenServicioDao;
+import py.com.cvs2.dao.PedidoVentaDao;
 import py.com.cvs2.dao.PresupuestoServicioDao;
 import py.com.cvs2.model.*;
 
@@ -48,14 +49,9 @@ public class OrdenServicioController {
         return ordenServicioDao.listPendientes();
     }
 
-    public List<OrdenServicio> listOrdenServicioBySucursal(Integer idSucursal) {
+    public List<OrdenServicio> listOrdenServicioPendientesByCliente(Integer idCliente) {
         OrdenServicioDao ordenServicioDao = new OrdenServicioDao();
-        return ordenServicioDao.listBySucursal(idSucursal);
-    }
-
-    public List<OrdenServicio> listOrdenServicioPendientesBySucursal(Integer idSucursal) {
-        OrdenServicioDao ordenServicioDao = new OrdenServicioDao();
-        return ordenServicioDao.listByPendientesSucursal(idSucursal);
+        return ordenServicioDao.listPendientesByCliente(idCliente);
     }
 
     public List<OrdenServicio> listOrdenServicio(Boolean all) {

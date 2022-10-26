@@ -27,6 +27,11 @@ public class PedidoVentaController {
         return pedidoVentaDao.listPendientes();
     }
 
+    public List<PedidoVenta> listPedidosVentaPendientesByCliente(Integer idCliente) {
+        PedidoVentaDao pedidoVentaDao = new PedidoVentaDao();
+        return pedidoVentaDao.listPendientesByCliente(idCliente);
+    }
+
     public PedidoVenta cancelPedidoVenta(PedidoVenta pedidoVenta) throws Exception {
         PedidoVentaDao pedidoVentaDao = new PedidoVentaDao();
         Estado estado = new Estado(2, "ANULADO");

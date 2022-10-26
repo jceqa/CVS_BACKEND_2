@@ -33,6 +33,15 @@ public class PedidoVentaRest {
         return Response.ok(pedidoVentaList, MediaType.APPLICATION_JSON).build();
     }
 
+    @GET
+    @Path("/pendientes/cliente/{idCliente}")
+    public Response listPedidosVentaPendientesByCliente(@PathParam("idCliente") Integer idCliente){
+        PedidoVentaController pcc = new PedidoVentaController();
+        List<PedidoVenta> pedidoVentaList = pcc.listPedidosVentaPendientesByCliente(idCliente);
+
+        return Response.ok(pedidoVentaList, MediaType.APPLICATION_JSON).build();
+    }
+
     @POST
     public Response savePedidoVenta(PedidoVenta pedidoVenta) {
         PedidoVentaController pcc = new PedidoVentaController();

@@ -41,6 +41,10 @@ public class Recepcion implements Serializable {
     @JoinColumn(name = "id_sucursal", referencedColumnName = "id")
     private Sucursal sucursal;
 
+    @OneToOne
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id")
+    private Cliente cliente;
+
 
     public Recepcion() {
     }
@@ -111,6 +115,14 @@ public class Recepcion implements Serializable {
 
     public void setSucursal(Sucursal sucursal) {
         this.sucursal = sucursal;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @Override

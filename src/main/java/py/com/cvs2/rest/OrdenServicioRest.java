@@ -1,7 +1,9 @@
 package py.com.cvs2.rest;
 
+import py.com.cvs2.controller.PedidoVentaController;
 import py.com.cvs2.controller.RecepcionController;
 import py.com.cvs2.controller.PresupuestoServicioController;
+import py.com.cvs2.model.PedidoVenta;
 import py.com.cvs2.model.Recepcion;
 import py.com.cvs2.model.Servicio;
 import py.com.cvs2.controller.OrdenServicioController;
@@ -26,15 +28,6 @@ public class OrdenServicioRest {
     }
 
     @GET
-    @Path("/sucursal/{idSucursal}")
-    public Response listOrdenServicioBySucursal(@PathParam("idSucursal") Integer idSucursal){
-        OrdenServicioController pcc = new OrdenServicioController();
-        List<OrdenServicio> ordenServicioList = pcc.listOrdenServicioBySucursal(idSucursal);
-
-        return Response.ok(ordenServicioList, MediaType.APPLICATION_JSON).build();
-    }
-
-    @GET
     @Path("/pendientes")
     public Response listOrdenServicioPendientes(){
         OrdenServicioController pcc = new OrdenServicioController();
@@ -44,13 +37,14 @@ public class OrdenServicioRest {
     }
 
     @GET
-    @Path("/pendientes/{idSucursal}")
-    public Response listOrdenServicioPendientesBySucursal(@PathParam("idSucursal") Integer idSucursal){
+    @Path("/pendientes/cliente/{idCliente}")
+    public Response listOrdenServicioPendientesByCliente(@PathParam("idCliente") Integer idCliente){
         OrdenServicioController pcc = new OrdenServicioController();
-        List<OrdenServicio> ordenServicioList = pcc.listOrdenServicioPendientesBySucursal(idSucursal);
+        List<OrdenServicio> ordenServicioList = pcc.listOrdenServicioPendientesByCliente(idCliente);
 
         return Response.ok(ordenServicioList, MediaType.APPLICATION_JSON).build();
     }
+
 
     @POST
     public Response saveOrdenServicio(OrdenServicio ordenServicio) {
