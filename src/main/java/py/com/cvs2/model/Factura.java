@@ -55,7 +55,7 @@ public class Factura implements Serializable {
     @JoinColumn(name = "id_caja", referencedColumnName = "id")
     private Caja caja;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_libro_venta", referencedColumnName = "id")
     private LibroVenta libroVenta;
 

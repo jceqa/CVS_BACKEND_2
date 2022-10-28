@@ -14,6 +14,15 @@ import java.util.List;
 public class FacturaRest {
 
     @GET
+    @Path("/numeroactual")
+    public Response getNumeroActual() {
+        FacturaController fc = new FacturaController();
+        Integer numeroActual = fc.getNumeroActual();
+
+        return Response.ok(numeroActual, MediaType.APPLICATION_JSON).build();
+    }
+
+    @GET
     public Response listFacturas(@QueryParam("all") Boolean all){
         FacturaController pcc = new FacturaController();
         List<Factura> facturaList = pcc.listFacturas(all);

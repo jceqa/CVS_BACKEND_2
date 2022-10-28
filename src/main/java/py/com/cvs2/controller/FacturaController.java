@@ -7,6 +7,11 @@ import java.util.List;
 
 public class FacturaController {
 
+    public Integer getNumeroActual(){
+        FacturaDao facturaDao = new FacturaDao();
+        return facturaDao.getNumeroActual();
+    }
+
     public Factura saveFactura(Factura factura) throws Exception {
         StockController stockController = new StockController();
 
@@ -61,9 +66,19 @@ public class FacturaController {
         LibroVentaDao libroVentaDao = new LibroVentaDao();
         LibroVentaDetalleDao libroVentaDetalleDao = new LibroVentaDetalleDao();
         CuentaACobrarDao cuentaACobrarDao = new CuentaACobrarDao();
+        OrdenServicioDao ordenServicioDao = new OrdenServicioDao();
 
-        PedidoVenta pedidoVenta = factura.getPedidoVenta();
-        pedidoVenta.setEstadoPedidoVenta(new Estado(1, "PENDIENTE"));
+        StockController stockController = new StockController();
+
+        if (factura.getPedidoVenta() != null) {
+            PedidoVenta pedidoVenta = factura.getPedidoVenta();
+            pedidoVenta.setEstadoPedidoVenta(new Estado(1, "PENDIENTE"));
+
+            for (PedidoVentaDetalle pVD : pedidoVenta.getPedidoVentaDetalles()) {
+                stockController.updateStock(pedidoVenta.getDeposito().getId(), pVD.getArticulo(), pVD.getCantidad(), "DESCUENTO");
+            }
+            pedidoVentaDao.update(pedidoVenta);
+        }
 
         factura.setEstadoFactura(new Estado(2, "ANULADO"));
 
@@ -81,8 +96,11 @@ public class FacturaController {
 
         }
 
-        pedidoVentaDao.update(pedidoVenta);
-
+        for (OrdenServicio ordenServicio : factura.getOrdenServiciosList()){
+            ordenServicio.setEstadoOrdenServicio(new Estado(1, "PENDIENTE"));
+            ordenServicioDao.update(ordenServicio);
+        }
+        
         return facturaDao.update(factura);
     }
 }
