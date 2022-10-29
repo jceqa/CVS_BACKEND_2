@@ -56,7 +56,9 @@
 			py.com.cvs2.rest.StockRest,
 			py.com.cvs2.rest.PagoRest,
 			py.com.cvs2.rest.FacturaRest,
-			py.com.cvs2.rest.TimbradoRest
+			py.com.cvs2.rest.TimbradoRest,
+			py.com.cvs2.rest.CuentaACobrarRest,
+			py.com.cvs2.rest.LibroVentaRest
 		</param-value>
 	</context-param>
 
