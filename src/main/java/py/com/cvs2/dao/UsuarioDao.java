@@ -11,7 +11,7 @@ import javax.persistence.Query;
 import py.com.cvs2.dto.TokenDto;
 import py.com.cvs2.model.Usuario;
 
-public class UsuarioDao {
+public class UsuarioDao extends GenericDao<Usuario>{
 
 	public TokenDto validarAcceso(Usuario usuario) {
 		boolean ok = false;

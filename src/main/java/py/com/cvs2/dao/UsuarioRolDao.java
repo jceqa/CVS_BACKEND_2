@@ -11,7 +11,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.util.List;
 
-public class UsuarioRolDao{
+public class UsuarioRolDao extends GenericDao<UsuarioRol>{
 
     public List<UsuarioRolDto> findByIdUsuario(Integer idUsuario) {
 

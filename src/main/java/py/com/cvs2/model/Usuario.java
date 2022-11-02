@@ -27,6 +27,9 @@ public class Usuario implements Serializable {
 
 	@Column(name = "estado")
 	String estado;
+	
+	@Column(name = "intentos_fallidos")
+	private Integer intentosFallidos;
 
 	@OneToOne
 	@JoinColumn(name = "id_sucursal", referencedColumnName = "id")
@@ -88,6 +91,14 @@ public class Usuario implements Serializable {
 
 	public void setSucursal(Sucursal sucursal) {
 		this.sucursal = sucursal;
+	}
+
+	public Integer getIntentosFallidos() {
+		return intentosFallidos;
+	}
+
+	public void setIntentosFallidos(Integer intentosFallidos) {
+		this.intentosFallidos = intentosFallidos;
 	}
 
 	@Override
