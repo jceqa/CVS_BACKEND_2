@@ -9,9 +9,9 @@ import javax.persistence.Query;
 
 import py.com.cvs2.model.Permiso;
 
-public class PermisoDao {
+public class PermisoDao extends GenericDao<Permiso>{
 
-	public List<Permiso> findById(Integer idRol) {
+	public List<Permiso> findByRolId(Integer idRol) {
 
 		List<Permiso> permisos;
 

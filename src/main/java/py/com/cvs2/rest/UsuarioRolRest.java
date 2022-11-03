@@ -16,8 +16,8 @@ import java.util.List;
 public class UsuarioRolRest {
 
 	@GET
-	@Path("/{idusuario}")
-	public Response getUsuarioRolByIdUsuario(@PathParam("idusuario") Integer idUsuario) {
+	@Path("usuario/{idUsuario}")
+	public Response getUsuarioRolByIdUsuario(@PathParam("idUsuario") Integer idUsuario) {
 		UsuarioRolController urc = new UsuarioRolController();
 		List<UsuarioRolDto> ur = urc.getByIdUsuario(idUsuario);
 

@@ -11,8 +11,7 @@ import py.com.cvs2.model.Marca;
 @Path("/marca")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class
-MarcaRest {
+public class MarcaRest {
 
     @GET
     public Response listMarcas(@QueryParam("all") Boolean all) {

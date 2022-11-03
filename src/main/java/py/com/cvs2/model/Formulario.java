@@ -6,10 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 
-@Table
-@Entity(name = "formulario")
-public class Formulario {
+@Entity
+@Table(name = "formulario")
+public class Formulario implements Serializable {
 
 	@Id
 	@Column(name = "id")
