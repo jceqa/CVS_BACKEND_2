@@ -55,6 +55,22 @@ public class PermisoRest {
 		return Response.ok(permiso, MediaType.APPLICATION_JSON).build();
 	}
 
+	@POST
+	@Path("/list")
+	public Response savePermisosList(List<Permiso> permisos) {
+		PermisoController mc = new PermisoController();
+		try {
+			permisos = mc.savePermisosList(permisos);
+
+		} catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
+		return Response.ok(permisos, MediaType.APPLICATION_JSON).build();
+	}
+
 	@PUT
 	public Response updatePermiso(Permiso permiso) {
 		PermisoController mc = new PermisoController();

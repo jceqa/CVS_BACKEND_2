@@ -1,16 +1,17 @@
 package py.com.cvs2.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "sistema")
-public class Sistema {
+public class Sistema implements Serializable {
+
+	private static final long serialVersionUID = -6533574310851771145L;
 
 	@Id
 	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@Column(name = "nombre")

@@ -1,5 +1,6 @@
 package py.com.cvs2.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import py.com.cvs2.dao.PermisoDao;
@@ -28,6 +29,19 @@ public class PermisoController {
 		PermisoDao permisoDao = new PermisoDao();
 		permiso.setEstado("ACTIVO");
 		return permisoDao.save(permiso);
+	}
+
+	public List<Permiso> savePermisosList(List<Permiso> permisos) throws Exception {
+		PermisoDao permisoDao = new PermisoDao();
+		List<Permiso> permisosList = new ArrayList<Permiso>();
+
+		for(Permiso permiso: permisos){
+			permiso.setEstado("ACTIVO");
+			permiso = permisoDao.save(permiso);
+			permisosList.add(permiso);
+		}
+
+		return permisosList;
 	}
 
 	public Permiso updatePermiso(Permiso permiso) throws Exception {
