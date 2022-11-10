@@ -1,6 +1,10 @@
 package py.com.cvs2.controller;
 
+import py.com.cvs2.dao.PermisoDao;
 import py.com.cvs2.dao.RolDao;
+import py.com.cvs2.dto.RolPermisoDto;
+import py.com.cvs2.model.Formulario;
+import py.com.cvs2.model.Permiso;
 import py.com.cvs2.model.Rol;
 
 import java.util.List;
@@ -17,10 +21,20 @@ public class RolController {
         return rolDAO.findById(id);
     }
 
-    public Rol saveRol(Rol rol) throws Exception {
+    public RolPermisoDto saveRol(RolPermisoDto rolPermiso) throws Exception {
         RolDao rolDao = new RolDao();
+        PermisoDao permisoDao = new PermisoDao();
+
+        Rol rol = rolPermiso.getRol();
         rol.setEstado("ACTIVO");
-        return rolDao.save(rol);
+        rol = rolDao.save(rol);
+
+        for(Formulario formulario: rolPermiso.getFormularios()){
+            Permiso permiso = new Permiso(rol, formulario);
+            permisoDao.save(permiso);
+        }
+
+        return rolPermiso;
     }
 
     public Rol updateRol(Rol rol) throws Exception {

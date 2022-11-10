@@ -55,6 +55,22 @@ public class Permiso implements Serializable {
 	public Permiso() {
 	}
 
+	public Permiso(Rol rol, Formulario formulario){
+		this.id = 0;
+		this.rol = rol;
+		this.formulario = formulario;
+		this.agregar = true;
+		this.modificar = true;
+		this.eliminar = true;
+		this.consultar = true;
+		this.listar = true;
+		this.informe = true;
+		this.exportar = true;
+		this.reactivar = true;
+		this.anular = true;
+		this.estado = "ACTIVO";
+	}
+
 	public Permiso(int id, Rol rol, Formulario formulario, boolean agregar, boolean modificar, boolean eliminar,
 			boolean consultar, boolean listar, boolean informe, boolean exportar) {
 		this.id = id;

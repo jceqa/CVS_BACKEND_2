@@ -1,6 +1,7 @@
 package py.com.cvs2.rest;
 
 import py.com.cvs2.controller.RolController;
+import py.com.cvs2.dto.RolPermisoDto;
 import py.com.cvs2.model.Rol;
 
 import javax.ws.rs.*;
@@ -31,10 +32,10 @@ public class RolRest {
     }
 
     @POST
-    public Response saveRol(Rol rol) {
+    public Response saveRol(RolPermisoDto rolPermisoDto) {
         RolController mc = new RolController();
         try {
-            rol = mc.saveRol(rol);
+            rolPermisoDto = mc.saveRol(rolPermisoDto);
 
         } catch (Exception e) {
             Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
@@ -42,7 +43,7 @@ public class RolRest {
             //throw new RuntimeException(e);
             return rb.build();
         }
-        return Response.ok(rol, MediaType.APPLICATION_JSON).build();
+        return Response.ok(rolPermisoDto, MediaType.APPLICATION_JSON).build();
     }
 
     @PUT
