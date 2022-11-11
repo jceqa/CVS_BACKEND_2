@@ -17,7 +17,7 @@ public class RolRest {
     @GET
     public Response listRoles(@QueryParam("all") Boolean all) {
         RolController mc = new RolController();
-        List<Rol> roles = mc.listRoles(all);
+        List<RolPermisoDto> roles = mc.listRoles(all);
 
         return Response.ok(roles, MediaType.APPLICATION_JSON).build();
     }
@@ -26,7 +26,7 @@ public class RolRest {
     @Path("/{id}")
     public Response getRolById(@PathParam("id") Integer id) {
         RolController mc = new RolController();
-        Rol rol = mc.getRolById(id);
+        RolPermisoDto rol = mc.getRolById(id);
 
         return Response.ok(rol, MediaType.APPLICATION_JSON).build();
     }
@@ -47,10 +47,10 @@ public class RolRest {
     }
 
     @PUT
-    public Response updateRol(Rol rol) {
+    public Response updateRol(RolPermisoDto rolPermisoDto) {
         RolController mc = new RolController();
         try {
-            rol = mc.updateRol(rol);
+            rolPermisoDto = mc.updateRol(rolPermisoDto);
         } catch (Exception e) {
             Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
             rb.entity(e.getMessage());
@@ -58,7 +58,7 @@ public class RolRest {
             return rb.build();
         }
 
-        return Response.ok(rol, MediaType.APPLICATION_JSON).build();
+        return Response.ok(rolPermisoDto, MediaType.APPLICATION_JSON).build();
     }
 
     @DELETE
