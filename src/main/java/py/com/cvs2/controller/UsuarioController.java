@@ -4,7 +4,9 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import py.com.cvs2.dao.UsuarioDao;
 import py.com.cvs2.dao.UsuarioDao;
+import py.com.cvs2.dao.UsuarioRolDao;
 import py.com.cvs2.dto.TokenDto;
+import py.com.cvs2.dto.UsuarioDto;
 import py.com.cvs2.model.Usuario;
 import py.com.cvs2.model.Usuario;
 import py.com.cvs2.util.Configuracion;
@@ -34,10 +36,19 @@ public class UsuarioController {
 		return usuarioDAO.findById(id);
 	}
 
-	public Usuario saveUsuario(Usuario usuario) throws Exception {
+	public UsuarioDto saveUsuario(UsuarioDto usuarioDto) throws Exception {
 		UsuarioDao usuarioDao = new UsuarioDao();
+		UsuarioRolDao usuarioRolDao = new UsuarioRolDao();
+
+		Usuario usuario = usuarioDto.getUsuario();
 		usuario.setEstado("ACTIVO");
-		return usuarioDao.save(usuario);
+		usuarioDao.save(usuario);
+
+		/**
+		 * Insertar Roles
+		 */
+
+		return usuarioDto;
 	}
 
 	public Usuario updateUsuario(Usuario usuario) throws Exception {

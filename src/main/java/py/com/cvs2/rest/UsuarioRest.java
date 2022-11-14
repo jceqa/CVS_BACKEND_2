@@ -6,6 +6,7 @@ import javax.ws.rs.core.Response;
 
 import py.com.cvs2.controller.UsuarioController;
 import py.com.cvs2.dto.TokenDto;
+import py.com.cvs2.dto.UsuarioDto;
 import py.com.cvs2.model.Usuario;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 public class UsuarioRest {
 
 	@POST
-	@Path("validar")
+	@Path("/validar")
 	public Response validar(Usuario usuario) {
 		UsuarioController uc = new UsuarioController();
 		TokenDto datos = uc.validar(usuario);
@@ -24,6 +25,7 @@ public class UsuarioRest {
 	}
 
 	@GET
+	@Path("/token")
 	public Response getByToken(@QueryParam("token") String token) {
 		UsuarioController uc = new UsuarioController();
 		Usuario usuario = uc.getByToken(token);
@@ -49,10 +51,10 @@ public class UsuarioRest {
 	}
 
 	@POST
-	public Response saveUsuario(Usuario usuario) {
+	public Response saveUsuario(UsuarioDto usuarioDto) {
 		UsuarioController uc = new UsuarioController();
 		try {
-			usuario = uc.saveUsuario(usuario);
+			usuarioDto = uc.saveUsuario(usuarioDto);
 
 		} catch (Exception e) {
 			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
@@ -60,7 +62,7 @@ public class UsuarioRest {
 			//throw new RuntimeException(e);
 			return rb.build();
 		}
-		return Response.ok(usuario, MediaType.APPLICATION_JSON).build();
+		return Response.ok(usuarioDto, MediaType.APPLICATION_JSON).build();
 	}
 
 	@PUT
