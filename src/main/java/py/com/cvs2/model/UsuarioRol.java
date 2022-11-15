@@ -2,12 +2,7 @@ package py.com.cvs2.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "usuario_rol")
@@ -20,6 +15,7 @@ public class UsuarioRol implements Serializable{
 
 	@Id
 	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@OneToOne
@@ -34,6 +30,13 @@ public class UsuarioRol implements Serializable{
 	private String estado;
 
 	public UsuarioRol() {
+	}
+
+	public UsuarioRol(Usuario usuario, Rol rol) {
+		this.id = 0;
+		this.usuario = usuario;
+		this.rol = rol;
+		this.estado = "ACTIVO";
 	}
 
 	public UsuarioRol(int id, Usuario usuario, Rol rol) {

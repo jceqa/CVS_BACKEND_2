@@ -36,7 +36,7 @@ public class UsuarioRest {
 	@GET
 	public Response listUsuarios(@QueryParam("all") Boolean all) {
 		UsuarioController uc = new UsuarioController();
-		List<Usuario> usuarios = uc.listUsuarios(all);
+		List<UsuarioDto> usuarios = uc.listUsuarios(all);
 
 		return Response.ok(usuarios, MediaType.APPLICATION_JSON).build();
 	}
@@ -45,9 +45,9 @@ public class UsuarioRest {
 	@Path("/{id}")
 	public Response getUsuarioById(@PathParam("id") Integer id) {
 		UsuarioController uc = new UsuarioController();
-		Usuario usuario = uc.getUsuarioById(id);
+		UsuarioDto usuarioDto = uc.getUsuarioById(id);
 
-		return Response.ok(usuario, MediaType.APPLICATION_JSON).build();
+		return Response.ok(usuarioDto, MediaType.APPLICATION_JSON).build();
 	}
 
 	@POST
@@ -66,10 +66,10 @@ public class UsuarioRest {
 	}
 
 	@PUT
-	public Response updateUsuario(Usuario usuario) {
+	public Response updateUsuario(UsuarioDto usuarioDto) {
 		UsuarioController uc = new UsuarioController();
 		try {
-			usuario = uc.updateUsuario(usuario);
+			usuarioDto = uc.updateUsuario(usuarioDto);
 		} catch (Exception e) {
 			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
 			rb.entity(e.getMessage());
@@ -77,7 +77,7 @@ public class UsuarioRest {
 			return rb.build();
 		}
 
-		return Response.ok(usuario, MediaType.APPLICATION_JSON).build();
+		return Response.ok(usuarioDto, MediaType.APPLICATION_JSON).build();
 	}
 
 	@DELETE
