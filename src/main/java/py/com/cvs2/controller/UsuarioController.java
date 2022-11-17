@@ -91,7 +91,6 @@ public class UsuarioController {
 		UsuarioRolDao usuarioRolDao = new UsuarioRolDao();
 
 		Usuario usuario = usuarioDto.getUsuario();
-		usuario.setEstado("INACTIVO");
 		usuarioDao.update(usuario);
 
 		List<UsuarioRol> rolesViejos = usuarioRolDao.listByIdUsuario(usuario.getId());
