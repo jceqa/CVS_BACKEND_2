@@ -17,7 +17,7 @@ import java.util.List;
 
 public class UsuarioController {
 
-	public TokenDto validar(Usuario usuario) {
+	public TokenDto validar(Usuario usuario) throws Exception {
 		usuario.setClave(DigestUtils.md5Hex(usuario.getClave()));
 		UsuarioDao usuariosDAO = new UsuarioDao();
 		TokenDto datos = usuariosDAO.validarAcceso(usuario);
@@ -70,6 +70,8 @@ public class UsuarioController {
 
 		Usuario usuario = usuarioDto.getUsuario();
 		usuario.setEstado("ACTIVO");
+		usuario.setClave(DigestUtils.md5Hex(usuario.getClave()));
+		usuario.setIntentosFallidos(0);
 		usuario = usuarioDao.save(usuario);
 
 		for(Rol rol: usuarioDto.getRoles()){

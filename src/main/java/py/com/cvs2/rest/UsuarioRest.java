@@ -20,7 +20,17 @@ public class UsuarioRest {
 	@Path("/validar")
 	public Response validar(Usuario usuario) {
 		UsuarioController uc = new UsuarioController();
-		TokenDto datos = uc.validar(usuario);
+
+		TokenDto datos;
+		try {
+			datos = uc.validar(usuario);
+		}  catch (Exception e) {
+			Response.ResponseBuilder rb = Response.status(Response.Status.BAD_REQUEST);
+			rb.entity(e.getMessage());
+			//throw new RuntimeException(e);
+			return rb.build();
+		}
+
 		return Response.ok(datos, MediaType.APPLICATION_JSON).build();
 	}
 
