@@ -1,18 +1,17 @@
 package py.com.cvs2.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
-@Table
-@Entity(name = "formulario")
-public class Formulario {
+@Entity
+@Table(name = "formulario")
+public class Formulario implements Serializable {
+
+	private static final long serialVersionUID = -6533574310851771145L;
 
 	@Id
 	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@Column(name = "nombre")

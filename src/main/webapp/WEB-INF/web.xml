@@ -60,7 +60,9 @@
 			py.com.cvs2.rest.FacturaRest,
 			py.com.cvs2.rest.TimbradoRest,
 			py.com.cvs2.rest.CuentaACobrarRest,
-			py.com.cvs2.rest.LibroVentaRest
+			py.com.cvs2.rest.LibroVentaRest,
+			py.com.cvs2.rest.FormularioRest,
+			py.com.cvs2.rest.RolRest
 		</param-value>
 	</context-param>
 

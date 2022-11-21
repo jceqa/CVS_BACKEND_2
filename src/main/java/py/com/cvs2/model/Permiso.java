@@ -1,18 +1,17 @@
 package py.com.cvs2.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "permiso")
-public class Permiso {
+public class Permiso implements Serializable {
+
+	private static final long serialVersionUID = -6533574310851771145L;
 
 	@Id
 	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@OneToOne
@@ -54,6 +53,22 @@ public class Permiso {
 	String estado;
 
 	public Permiso() {
+	}
+
+	public Permiso(Rol rol, Formulario formulario){
+		this.id = 0;
+		this.rol = rol;
+		this.formulario = formulario;
+		this.agregar = true;
+		this.modificar = true;
+		this.eliminar = true;
+		this.consultar = true;
+		this.listar = true;
+		this.informe = true;
+		this.exportar = true;
+		this.reactivar = true;
+		this.anular = true;
+		this.estado = "ACTIVO";
 	}
 
 	public Permiso(int id, Rol rol, Formulario formulario, boolean agregar, boolean modificar, boolean eliminar,

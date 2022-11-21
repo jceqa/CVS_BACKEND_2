@@ -11,7 +11,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.util.List;
 
-public class UsuarioRolDao{
+public class UsuarioRolDao extends GenericDao<UsuarioRol>{
 
     public List<UsuarioRolDto> findByIdUsuario(Integer idUsuario) {
 
@@ -54,5 +54,48 @@ public class UsuarioRolDao{
         }
 
         return usuarioRolDtoList;
+    }
+
+    public List<UsuarioRol> listByIdUsuario(Integer idUsuario) {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
+        EntityManager em = emf.createEntityManager();
+
+        List<UsuarioRol> usuarioRolList;
+        List<UsuarioRolDto> usuarioRolDtoList;
+        UsuarioRolDtoConverter converter = new UsuarioRolDtoConverter();
+
+        Query q = em.createQuery("SELECT ur FROM UsuarioRol ur "
+                + " WHERE ur.usuario.id = :idUsuario "
+                + " AND ur.estado = 'ACTIVO' "
+                + " AND ur.rol.estado = 'ACTIVO' "
+                + " ORDER BY ur.id ");
+
+        q.setParameter("idUsuario", idUsuario);
+
+        usuarioRolList = q.getResultList();
+
+        return usuarioRolList;
+    }
+
+    public UsuarioRol getUsuarioRolByUsuarioAndRol(Integer idUsuario, Integer idRol) {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
+        EntityManager em = emf.createEntityManager();
+
+        Query q = em.createQuery("SELECT ur FROM UsuarioRol ur "
+                + " WHERE ur.rol.id=:idRol "
+                + " AND ur.usuario.id=:idUsuario "
+                + " ORDER BY ur.id DESC");
+
+        q.setParameter("idRol", idRol);
+        q.setParameter("idUsuario", idUsuario);
+
+        List<UsuarioRol> usuarioRoles = q.getResultList();
+        if(usuarioRoles != null && usuarioRoles.size() > 0){
+            return usuarioRoles.get(0);
+        }
+
+        return null;
     }
 }
