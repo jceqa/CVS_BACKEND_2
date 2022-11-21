@@ -10,14 +10,32 @@ import java.util.List;
 
 public class FacturaDao extends GenericDao<Factura> {
 
+    public Integer getNumeroActual(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
+        EntityManager em = emf.createEntityManager();
+
+        String query = "SELECT f FROM Factura f "
+                + " ORDER BY f.id DESC ";
+
+        Query q = em.createQuery(query);
+
+        List<Factura> facturas = q.getResultList();
+
+        if(facturas != null && facturas.size() > 0) {
+            return facturas.get(0).getId() + 1;
+        }
+
+        return 1;
+    }
+
     public List<Factura> listProcesadas(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
         EntityManager em = emf.createEntityManager();
 
-        String query = "SELECT fc FROM Factura fc "
-                + " WHERE fc.estado = " + "'ACTIVO'"
-                + " AND fc.estadoFactura.id = 4"
-                + " ORDER BY fc.id ";
+        String query = "SELECT f FROM Factura f "
+                + " WHERE f.estado = 'ACTIVO' "
+                + " AND f.estadoFactura.id = 4 "
+                + " ORDER BY f.id ";
 
         Query q = em.createQuery(query);
 

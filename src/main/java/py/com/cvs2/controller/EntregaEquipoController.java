@@ -43,7 +43,7 @@ public class EntregaEquipoController {
         EntregaEquipoDao entregaEquipoDao = new EntregaEquipoDao();
         FacturaDao facturaDao = new FacturaDao();
 
-        Factura factura = factura.getFactura();
+        Factura factura = entregaEquipo.getFactura();
         factura.setEstadoFactura(new Estado(1, "PENDIENTE"));
         facturaDao.update(factura);
 

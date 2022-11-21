@@ -24,6 +24,10 @@ public class Servicio implements Serializable {
     String estado;
 
     @OneToOne
+    @JoinColumn(name ="id_articulo", referencedColumnName = "id")
+    private Articulo articulo;
+
+    @OneToOne
     @JoinColumn(name = "id_impuesto", referencedColumnName = "id")
     private Impuesto impuesto;
 
@@ -72,6 +76,14 @@ public class Servicio implements Serializable {
 
     public void setImpuesto(Impuesto impuesto) {
         this.impuesto = impuesto;
+    }
+
+    public Articulo getArticulo() {
+        return articulo;
+    }
+
+    public void setArticulo(Articulo articulo) {
+        this.articulo = articulo;
     }
 
     @Override

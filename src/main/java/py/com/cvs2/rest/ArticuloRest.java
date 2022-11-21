@@ -22,6 +22,15 @@ public class ArticuloRest {
     }
 
     @GET
+    @Path("tipoarticulo/{idTipoArticulo}")
+    public Response listArticulosByTipoArticulo(@PathParam("idTipoArticulo") Integer idTipoArticulo) {
+        ArticuloController ac = new ArticuloController();
+        List<Articulo> articulos = ac.listArticulosByTipoArticulo(idTipoArticulo);
+
+        return Response.ok(articulos, MediaType.APPLICATION_JSON).build();
+    }
+
+    @GET
     @Path("/{id}")
     public Response getArticuloById(@PathParam("id") Integer id) {
         ArticuloController ac = new ArticuloController();

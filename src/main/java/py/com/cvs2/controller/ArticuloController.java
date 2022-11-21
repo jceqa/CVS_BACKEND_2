@@ -12,6 +12,11 @@ public class ArticuloController {
         return articuloDAO.list(all);
     }
 
+    public List<Articulo> listArticulosByTipoArticulo(Integer idTipoArticulo) {
+        ArticuloDao articuloDAO = new ArticuloDao();
+        return articuloDAO.listByTipoArticulo(idTipoArticulo);
+    }
+
     public Articulo getArticuloById(Integer id) {
         ArticuloDao articuloDAO = new ArticuloDao();
         return articuloDAO.findById(id);

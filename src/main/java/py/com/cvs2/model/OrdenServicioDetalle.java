@@ -16,18 +16,11 @@ public class OrdenServicioDetalle implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "cantidad")
-    private Integer cantidad;
-
     @Column(name = "estado")
     private String estado;
 
     @Column(name = "monto")
     private Long monto;
-
-    @OneToOne
-    @JoinColumn(name = "id_articulo", referencedColumnName = "id")
-    private Articulo articulo;
 
     @OneToOne
     @JoinColumn(name = "id_presupueto_servicio_detalle", referencedColumnName = "id")
@@ -36,13 +29,10 @@ public class OrdenServicioDetalle implements Serializable {
     public OrdenServicioDetalle() {
     }
 
-    public OrdenServicioDetalle(int id, String estado, Long monto, PresupuestoServicioDetalle presupuestoServicioDetalle,
-                              Articulo articulo) {
+    public OrdenServicioDetalle(int id, String estado, Long monto, PresupuestoServicioDetalle presupuestoServicioDetalle) {
         this.id = id;
-        this.cantidad = cantidad;
         this.estado = estado;
         this.monto = monto;
-        this.articulo= articulo;
         this.presupuestoServicioDetalle = presupuestoServicioDetalle;
     }
 
@@ -64,11 +54,6 @@ public class OrdenServicioDetalle implements Serializable {
     public void setMonto(Long monto) {this.monto = monto;
     }
 
-    public Articulo getArticulo() {return articulo;
-    }
-
-    public void setArticulo(Articulo articulo) {this.articulo = articulo;
-    }
     public PresupuestoServicioDetalle getPresupuestoServicioDetalle() {return presupuestoServicioDetalle;
     }
 
@@ -81,7 +66,6 @@ public class OrdenServicioDetalle implements Serializable {
                 "id=" + id +
                 ", estado='" + estado + '\'' +
                 ", monto=" + monto +
-                ", cantidad=" + cantidad +
                 '}';
     }
 }

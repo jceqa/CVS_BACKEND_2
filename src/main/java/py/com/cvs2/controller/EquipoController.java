@@ -17,6 +17,11 @@ public class EquipoController {
 		return equipoDao.findById(id);
 	}
 
+	public List<Equipo> listEquiposByCliente(Integer idCliente) {
+		EquipoDao equipoDao = new EquipoDao();
+		return equipoDao.listByCliente(idCliente);
+	}
+
 	public Equipo saveEquipo(Equipo equipo) throws Exception {
 		EquipoDao equipoDao = new EquipoDao();
 		equipo.setEstado("ACTIVO");

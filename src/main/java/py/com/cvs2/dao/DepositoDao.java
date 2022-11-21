@@ -17,7 +17,8 @@ public class DepositoDao extends GenericDao<Deposito>{
         EntityManager em = emf.createEntityManager();
 
         Query q = em.createQuery("SELECT d FROM Deposito d "
-            + " WHERE d.sucursal.id = :idSucursal");
+            + " WHERE d.sucursal.id = :idSucursal "
+            + " AND d.estado = 'ACTIVO'");
 
         q.setParameter("idSucursal", idSucursal);
 

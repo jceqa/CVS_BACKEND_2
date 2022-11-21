@@ -41,15 +41,6 @@ public class EntregaEquipoRest {
         return Response.ok(entregaEquipoList, MediaType.APPLICATION_JSON).build();
     }
 
-    @GET
-    @Path("/pendientes/{idProveedor}")
-    public Response listEntregaEquipoPendientesByProveedor(@PathParam("idProveedor") Integer idProveedor){
-        EntregaEquipoController pcc = new EntregaEquipoController();
-        List<EntregaEquipo> entregaEquipoList = pcc.listEntregaEquipoPendientesByProveedor(idProveedor);
-
-        return Response.ok(entregaEquipoList, MediaType.APPLICATION_JSON).build();
-    }
-
     @POST
     public Response saveEntregaEquipo(EntregaEquipo entregaEquipo) {
         EntregaEquipoController pcc = new EntregaEquipoController();

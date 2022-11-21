@@ -38,12 +38,12 @@ public class Recepcion implements Serializable {
     private Usuario usuario;
 
     @OneToOne
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id")
-    private Cliente cliente;
-
-    @OneToOne
     @JoinColumn(name = "id_sucursal", referencedColumnName = "id")
     private Sucursal sucursal;
+
+    @OneToOne
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id")
+    private Cliente cliente;
 
 
     public Recepcion() {
@@ -109,18 +109,20 @@ public class Recepcion implements Serializable {
         this.observacion = observacion;
     }
 
-    public Cliente getCliente() {return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {this.cliente = cliente;
-    }
-
     public Sucursal getSucursal() {
         return sucursal;
     }
 
     public void setSucursal(Sucursal sucursal) {
         this.sucursal = sucursal;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @Override

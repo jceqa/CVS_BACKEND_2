@@ -18,24 +18,24 @@ public class Timbrado implements Serializable {
     @Column(name = "estado")
     private String estado;
 
-    @Column(name = "fecha_inicio_vigencia")
-    private Date fechaInicioVigencia;
+    @Column(name = "inicio_vigencia")
+    private Date inicioVigencia;
 
-    @Column(name = "fecha_fin_vigencia")
-    private Date fechaFinVigencia;
+    @Column(name = "fin_vigencia")
+    private Date finVigencia;
 
-    @Column(name = "numero_timbrado")
-    private String numeroTimbrado;
+    @Column(name = "numero")
+    private String numero;
 
     public Timbrado() {
     }
 
-    public Timbrado(int id, String estado, Date fechaInicioVigencia, Date fechaFinVigencia, String numeroTimbrado) {
+    public Timbrado(int id, String estado, Date inicioVigencia, Date finVigencia, String numero) {
         this.id = id;
         this.estado = estado;
-        this.fechaInicioVigencia = fechaInicioVigencia;
-        this.fechaFinVigencia = fechaFinVigencia;
-        this.numeroTimbrado = numeroTimbrado;
+        this.inicioVigencia = inicioVigencia;
+        this.finVigencia = finVigencia;
+        this.numero = numero;
     }
 
     public int getId() {
@@ -54,28 +54,28 @@ public class Timbrado implements Serializable {
         this.estado = estado;
     }
 
-    public Date getFechaInicioVigencia() {
-        return fechaInicioVigencia;
+    public Date getInicioVigencia() {
+        return inicioVigencia;
     }
 
-    public void setFechaInicioVigencia(Date fechaInicioVigencia) {
-        this.fechaInicioVigencia = fechaInicioVigencia;
+    public void setInicioVigencia(Date inicioVigencia) {
+        this.inicioVigencia = inicioVigencia;
     }
 
-    public Date getFechaFinVigencia() {
-        return fechaFinVigencia;
+    public Date getFinVigencia() {
+        return finVigencia;
     }
 
-    public void setFechaFinVigencia(Date fechaFinVigencia) {
-        this.fechaFinVigencia = fechaFinVigencia;
+    public void setFinVigencia(Date finVigencia) {
+        this.finVigencia = finVigencia;
     }
 
-    public String getNumeroTimbrado() {
-        return numeroTimbrado;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setNumeroTimbrado(String numeroTimbrado) {
-        this.numeroTimbrado = numeroTimbrado;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     @Override
@@ -83,9 +83,9 @@ public class Timbrado implements Serializable {
         return "Timbrado{" +
                 "id=" + id +
                 ", estado='" + estado + '\'' +
-                ", fechaInicioVigencia=" + fechaInicioVigencia +
-                ", fechaFinVigencia=" + fechaFinVigencia +
-                ", numeroTimbrado='" + numeroTimbrado + '\'' +
+                ", inicioVigencia=" + inicioVigencia +
+                ", finVigencia=" + finVigencia +
+                ", numero=" + numero + '\'' +
                 '}';
     }
 }

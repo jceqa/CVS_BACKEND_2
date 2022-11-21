@@ -26,8 +26,11 @@ public class OrdenServicio implements Serializable {
     @Column(name = "total")
     private Long total;
 
-    @Column(name = "fechaentrega")
-    private Date fechaentrega;
+    @Column(name = "fecha_entrega")
+    private Date fechaEntrega;
+
+    @Column(name = "vencimiento_garantia")
+    private Date vencimientoGarantia;
 
     @Column(name = "garantia")
     private Date garantia;
@@ -48,10 +51,6 @@ public class OrdenServicio implements Serializable {
     @JoinColumn(name = "id_presupuesto_servicio", referencedColumnName = "id")
     private PresupuestoServicio presupuestoServicio;
 
-    @OneToOne
-    @JoinColumn(name = "id_proveedor", referencedColumnName = "id")
-    private Proveedor proveedor;
-
     @OneToMany(cascade= {CascadeType.ALL})
     @JoinColumn(name = "id_orden_servicio", referencedColumnName = "id")
     private List<OrdenServicioDetalle> ordenServicioDetalles;
@@ -59,18 +58,19 @@ public class OrdenServicio implements Serializable {
     public OrdenServicio() {
     }
 
-    public OrdenServicio(int id, Date fecha, String estado, String observacion, Long total, Date fechaentrega, Date garantia, Estado estadoOrdenServicio,
-                         Usuario usuario, Deposito deposito, PresupuestoServicio presupuestoServicio, List<PresupuestoServicioDetalle> presupuestoServicioDetalles) {
+
+    public OrdenServicio(int id, Date fecha, String estado, String observacion, Long total, Date fechaEntrega, Estado estadoOrdenServicio,
+                         Usuario usuario, PresupuestoServicio presupuestoServicio, List<OrdenServicioDetalle> ordenServicioDetalles) {
+
         this.id = id;
         this.fecha = fecha;
         this.estado = estado;
         this.observacion = observacion;
         this.total = total;
-        this.fechaentrega = fechaentrega;
         this.garantia = garantia;
+        this.fechaEntrega = fechaEntrega;
         this.estadoOrdenServicio = estadoOrdenServicio;
         this.usuario = usuario;
-        this.deposito = deposito;
         this.presupuestoServicio = presupuestoServicio;
         this.ordenServicioDetalles = ordenServicioDetalles;
     }
@@ -99,9 +99,9 @@ public class OrdenServicio implements Serializable {
         this.estado = estado;
     }
 
-    public Date getFechaentrega() {return fechaentrega;}
+    public Date getFechaEntrega() {return fechaEntrega;}
 
-    public void setFechaentrega(Date fechaentrega) {this.fechaentrega = fechaentrega;}
+    public void setFechaEntrega(Date fechaEntrega) {this.fechaEntrega = fechaEntrega;}
 
     public Date getGarantia() {return garantia;}
 
@@ -127,12 +127,21 @@ public class OrdenServicio implements Serializable {
         this.total = total;
     }
 
-    public Estado getEstadoo() {
+    public Date getVencimientoGarantia() {
+        return vencimientoGarantia;
+    }
+
+    public void setVencimientoGarantia(Date vencimientoGarantia) {
+        this.vencimientoGarantia = vencimientoGarantia;
+    }
+
+    public Estado getEstadoOrdenServicio() {
         return estadoOrdenServicio;
     }
 
     public void setEstadoOrdenServicio(Estado estadoOrdenServicio) {
-        this.estadoOrdenServicio = estadoOrdenServicio;}
+        this.estadoOrdenServicio = estadoOrdenServicio;
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -154,6 +163,10 @@ public class OrdenServicio implements Serializable {
         return ordenServicioDetalles;
     }
 
+    public void setOrdenServicioDetalles(List<OrdenServicioDetalle> ordenServicioDetalles) {
+        this.ordenServicioDetalles = ordenServicioDetalles;
+    }
+
     @Override
     public String toString() {
         return "OrdenServicio{" +
@@ -162,12 +175,10 @@ public class OrdenServicio implements Serializable {
                 ", estado='" + estado + '\'' +
                 ", observacion='" + observacion + '\'' +
                 ", total=" + total +
-                ", fechaentrega=" + fechaentrega +
+                ", fechaEntrega=" + fechaEntrega +
                 ", estadoOrdenServicio=" + estadoOrdenServicio +
                 ", usuario=" + usuario +
-                ", deposito=" + deposito +
                 ", presupuestoServicio=" + presupuestoServicio +
-                ", proveedor=" + proveedor +
                 ", ordenServicioDetalles=" + ordenServicioDetalles +
                 '}';
     }

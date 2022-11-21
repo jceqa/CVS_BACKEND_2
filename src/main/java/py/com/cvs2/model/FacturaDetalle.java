@@ -23,18 +23,18 @@ public class FacturaDetalle implements Serializable {
     private PedidoVentaDetalle pedidoVentaDetalle;
 
     @OneToOne
-    @JoinColumn(name = "id_presuspuesto_servicio_detalle", referencedColumnName = "id")
-    private PresupuestoServicioDetalle presupuestoServicioDetalle;
+    @JoinColumn(name = "id_oreden_servicio_detalle", referencedColumnName = "id")
+    private OrdenServicioDetalle ordenServicioDetalle;
 
     public FacturaDetalle() {
     }
 
-    public FacturaDetalle(int id, String estado, Long monto, PedidoVentaDetalle pedidoVentaDetalle, PresupuestoServicioDetalle presupuestoServicioDetalle) {
+    public FacturaDetalle(int id, String estado, Long monto, PedidoVentaDetalle pedidoVentaDetalle, OrdenServicioDetalle ordenServicioDetalle) {
         this.id = id;
         this.estado = estado;
         this.monto = monto;
         this.pedidoVentaDetalle = pedidoVentaDetalle;
-        this.presupuestoServicioDetalle = presupuestoServicioDetalle;
+        this.ordenServicioDetalle = ordenServicioDetalle;
     }
 
     public int getId() {
@@ -69,12 +69,12 @@ public class FacturaDetalle implements Serializable {
         this.pedidoVentaDetalle = pedidoVentaDetalle;
     }
 
-    public PresupuestoServicioDetalle getPresupuestoServicioDetalle() {
-        return presupuestoServicioDetalle;
+    public OrdenServicioDetalle getOrdenServicioDetalle() {
+        return ordenServicioDetalle;
     }
 
-    public void setPresupuestoServicioDetalle(PresupuestoServicioDetalle presupuestoServicioDetalle) {
-        this.presupuestoServicioDetalle = presupuestoServicioDetalle;
+    public void setOrdenServicioDetalle(OrdenServicioDetalle ordenServicioDetalle) {
+        this.ordenServicioDetalle = ordenServicioDetalle;
     }
 
     @Override
@@ -84,7 +84,7 @@ public class FacturaDetalle implements Serializable {
                 ", estado='" + estado + '\'' +
                 ", monto=" + monto +
                 ", pedidoVentaDetalle=" + pedidoVentaDetalle +
-                ", presupuestoServicioDetalle=" + presupuestoServicioDetalle +
+                ", ordenServicioDetalle=" + ordenServicioDetalle +
                 '}';
     }
 }

@@ -22,7 +22,7 @@ public class HelloWorldRest {
 
     @GET
     public Response sayHello() {
-        return Response.ok("Si lees esto quiero que sepas que te adoro. *.* ", MediaType.APPLICATION_JSON).build();
+        return Response.ok("Hola mundo desde Innovalogic", MediaType.APPLICATION_JSON).build();
     }
 
 }

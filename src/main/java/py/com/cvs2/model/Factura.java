@@ -36,11 +36,11 @@ public class Factura implements Serializable {
     private Estado estadoFactura;
 
     @OneToOne
-    @JoinColumn(name =" id_timbrado", referencedColumnName = "id")
+    @JoinColumn(name = " id_timbrado", referencedColumnName = "id")
     private Timbrado timbrado;
 
     @OneToOne
-    @JoinColumn(name = "id_condicion_pago",  referencedColumnName = "id")
+    @JoinColumn(name = "id_condicion_pago", referencedColumnName = "id")
     private CondicionPago condicionPago;
 
     @OneToOne
@@ -48,14 +48,14 @@ public class Factura implements Serializable {
     private PedidoVenta pedidoVenta;
 
     @OneToMany
-    @JoinColumn(name= "id_factura", referencedColumnName = "id")
-    private List<PresupuestoServicio> presupuestoServicios;
+    @JoinColumn(name = "id_factura", referencedColumnName = "id")
+    private List<OrdenServicio> ordenServiciosList;
 
     @OneToOne
     @JoinColumn(name = "id_caja", referencedColumnName = "id")
     private Caja caja;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_libro_venta", referencedColumnName = "id")
     private LibroVenta libroVenta;
 
@@ -67,10 +67,14 @@ public class Factura implements Serializable {
     @JoinColumn(name = "id_factura", referencedColumnName = "id")
     private List<CuentaACobrar> cuentaACobrarList;
 
+    @OneToOne
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    private Usuario usuario;
+
     public Factura() {
     }
 
-    public Factura(int id, String observacion, String estado, Date fecha, Long monto, String numeroFactura, Estado estadoFactura, Timbrado timbrado, CondicionPago condicionPago, PedidoVenta pedidoVenta, List<PresupuestoServicio> presupuestoServicios, Caja caja, LibroVenta libroVenta, List<FacturaDetalle> facturaDetalles, List<CuentaACobrar> cuentaACobrarList) {
+    public Factura(int id, String observacion, String estado, Date fecha, Long monto, String numeroFactura, Estado estadoFactura, Timbrado timbrado, CondicionPago condicionPago, PedidoVenta pedidoVenta, List<OrdenServicio> ordenServiciosList, Caja caja, LibroVenta libroVenta, List<FacturaDetalle> facturaDetalles, List<CuentaACobrar> cuentaACobrarList) {
         this.id = id;
         this.observacion = observacion;
         this.estado = estado;
@@ -81,7 +85,7 @@ public class Factura implements Serializable {
         this.timbrado = timbrado;
         this.condicionPago = condicionPago;
         this.pedidoVenta = pedidoVenta;
-        this.presupuestoServicios = presupuestoServicios;
+        this.ordenServiciosList = ordenServiciosList;
         this.caja = caja;
         this.libroVenta = libroVenta;
         this.facturaDetalles = facturaDetalles;
@@ -168,12 +172,12 @@ public class Factura implements Serializable {
         this.pedidoVenta = pedidoVenta;
     }
 
-    public List<PresupuestoServicio> getPresupuestoServicios() {
-        return presupuestoServicios;
+    public List<OrdenServicio> getOrdenServiciosList() {
+        return ordenServiciosList;
     }
 
-    public void setPresupuestoServicios(List<PresupuestoServicio> presupuestoServicios) {
-        this.presupuestoServicios = presupuestoServicios;
+    public void setOrdenServiciosList(List<OrdenServicio> ordenServiciosList) {
+        this.ordenServiciosList = ordenServiciosList;
     }
 
     public Caja getCaja() {
@@ -208,6 +212,14 @@ public class Factura implements Serializable {
         this.cuentaACobrarList = cuentaACobrarList;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public String toString() {
         return "Factura{" +
@@ -221,7 +233,7 @@ public class Factura implements Serializable {
                 ", timbrado=" + timbrado +
                 ", condicionPago=" + condicionPago +
                 ", pedidoVenta=" + pedidoVenta +
-                ", presupuestoServicios=" + presupuestoServicios +
+                ", ordenServiciosList=" + ordenServiciosList +
                 ", caja=" + caja +
                 ", libroVenta=" + libroVenta +
                 ", facturaDetalles=" + facturaDetalles +
@@ -229,3 +241,4 @@ public class Factura implements Serializable {
                 '}';
     }
 }
+

@@ -27,6 +27,8 @@ public class FacturaCompraController {
                 Articulo articulo = pcD.getPedidoCompraDetalle().getArticulo();
                 articulo.setPrecioCompraAnterior(articulo.getPrecioCompra());
                 articulo.setPrecioCompra(pcD.getMonto());
+                articulo.setPrecioVentaAnterior(articulo.getPrecioVenta());
+                articulo.setPrecioVenta((long) (pcD.getMonto() * 1.30));
                 articuloDao.update(articulo);
             }
         }
@@ -94,6 +96,7 @@ public class FacturaCompraController {
             for(PedidoCompraDetalle pedidoCompraDetalle : notaRemision.getPedidoCompra().getDetallePedidoCompras()) {
                 Articulo articulo = pedidoCompraDetalle.getArticulo();
                 articulo.setPrecioCompra(articulo.getPrecioCompraAnterior());
+                articulo.setPrecioVenta(articulo.getPrecioVentaAnterior());
                 articuloDao.update(articulo);
 
                 Stock stock;
