@@ -2,10 +2,8 @@ package py.com.cvs2.dao;
 
 import py.com.cvs2.model.Pago;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -28,15 +26,17 @@ public class PagoDao extends GenericDao<Pago>{
             query += "AND p.fecha < :fechaFin ";
         }
 
-        query += " ORDER BY t.id ";
+        query += " ORDER BY p.id ";
 
         Query q = em.createQuery(query);
 
         if(fechaInicio != null){
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             q.setParameter("fechaInicio", fechaInicio);
         }
 
         if(fechaFin != null){
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             q.setParameter("fechaFin", fechaFin);
         }
 

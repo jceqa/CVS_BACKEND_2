@@ -1,6 +1,7 @@
 package py.com.cvs2.rest;
 
 import py.com.cvs2.controller.PagoController;
+import py.com.cvs2.dto.FiltroDto;
 import py.com.cvs2.model.Pago;
 
 import javax.ws.rs.*;
@@ -22,11 +23,11 @@ public class PagoRest {
         return Response.ok(pagos, MediaType.APPLICATION_JSON).build();
     }
 
-    @GET
+    @POST
     @Path("/filter")
-    public Response filterPagosByDate(@QueryParam("fechaInicio") Date fechaInicio, @QueryParam("fechaFin")Date fechaFin){
+    public Response filterPagosByDate(FiltroDto filtroDto){
         PagoController pc = new PagoController();
-        List<Pago> pagos = pc.filterPagosByDate(fechaInicio, fechaFin);
+        List<Pago> pagos = pc.filterPagosByDate(filtroDto);
 
         return Response.ok(pagos, MediaType.APPLICATION_JSON).build();
     }

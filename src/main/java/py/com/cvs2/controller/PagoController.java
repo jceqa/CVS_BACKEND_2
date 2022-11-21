@@ -1,6 +1,7 @@
 package py.com.cvs2.controller;
 
 import py.com.cvs2.dao.PagoDao;
+import py.com.cvs2.dto.FiltroDto;
 import py.com.cvs2.model.Pago;
 
 import java.util.Date;
@@ -13,8 +14,8 @@ public class PagoController {
         return pagoDAO.list(all);
     }
 
-    public List<Pago> filterPagosByDate(Date fechaInicio, Date fechaFin){
+    public List<Pago> filterPagosByDate(FiltroDto filtroDto){
         PagoDao pagoDao = new PagoDao();
-        return pagoDao.filterByDate(fechaInicio, fechaFin);
+        return pagoDao.filterByDate(filtroDto.getFechaInicio(), filtroDto.getFechaFin());
     }
 }
