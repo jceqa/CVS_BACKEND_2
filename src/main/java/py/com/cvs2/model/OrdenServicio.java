@@ -32,9 +32,6 @@ public class OrdenServicio implements Serializable {
     @Column(name = "vencimiento_garantia")
     private Date vencimientoGarantia;
 
-    @Column(name = "garantia")
-    private Date garantia;
-
     @OneToOne
     @JoinColumn(name = "id_estado", referencedColumnName = "id")
     private Estado estadoOrdenServicio;
@@ -67,7 +64,6 @@ public class OrdenServicio implements Serializable {
         this.estado = estado;
         this.observacion = observacion;
         this.total = total;
-        this.garantia = garantia;
         this.fechaEntrega = fechaEntrega;
         this.estadoOrdenServicio = estadoOrdenServicio;
         this.usuario = usuario;
@@ -102,10 +98,6 @@ public class OrdenServicio implements Serializable {
     public Date getFechaEntrega() {return fechaEntrega;}
 
     public void setFechaEntrega(Date fechaEntrega) {this.fechaEntrega = fechaEntrega;}
-
-    public Date getGarantia() {return garantia;}
-
-    public void setGarantia(Date garantia) {this.garantia = garantia;}
 
     public Deposito getDeposito() {return deposito;}
 
