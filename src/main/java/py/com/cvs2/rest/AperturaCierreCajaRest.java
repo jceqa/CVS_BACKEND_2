@@ -30,6 +30,15 @@ public class AperturaCierreCajaRest {
         return Response.ok(aperturaCierreCaja, MediaType.APPLICATION_JSON).build();
     }
 
+    @GET
+    @Path("/abiertos/{idSucursal}")
+    public Response getAperturaCierreCajaAbiertaBySucursal(@PathParam("idSucursal") Integer idSucursal) {
+        AperturaCierreCajaController mc = new AperturaCierreCajaController();
+        List<AperturaCierreCaja> aperturaCierreCajas = mc.getAperturaCierreCajaAbiertaBySucursal(idSucursal);
+
+        return Response.ok(aperturaCierreCajas, MediaType.APPLICATION_JSON).build();
+    }
+
     @POST
     public Response saveAperturaCierreCaja(AperturaCierreCaja aperturaCierreCaja) {
         AperturaCierreCajaController mc = new AperturaCierreCajaController();

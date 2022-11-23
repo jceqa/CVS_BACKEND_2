@@ -2,11 +2,10 @@ package py.com.cvs2.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
-@Table(name = "cobro")
-public class Cobro implements Serializable {
+@Table(name = "tipo_cobro")
+public class TipoCobro implements Serializable {
 
     private static final long serialVersionUID = -6533574310851771145L;
 
@@ -21,25 +20,13 @@ public class Cobro implements Serializable {
     @Column(name = "estado")
     String estado;
 
-    @Column(name = "fecha")
-    private Date fecha;
-
-    @Column(name = "monto")
-    private Long monto;
-
-    @OneToOne
-    @JoinColumn(name ="id_tipo_cobro", referencedColumnName = "id")
-    private TipoCobro tipoCobro;
-
-    public Cobro() {
+    public TipoCobro() {
     }
 
-    public Cobro(int id, String descripcion, String estado, Date fecha, Long monto) {
+    public TipoCobro(int id, String descripcion, String estado) {
         this.id = id;
         this.descripcion = descripcion;
         this.estado = estado;
-        this.fecha = fecha;
-        this.monto = monto;
     }
 
     public int getId() {
@@ -66,38 +53,12 @@ public class Cobro implements Serializable {
         this.estado = estado;
     }
 
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public Long getMonto() {
-        return monto;
-    }
-
-    public void setMonto(Long monto) {
-        this.monto = monto;
-    }
-
-    public TipoCobro getTipoCobro() {
-        return tipoCobro;
-    }
-
-    public void setTipoCobro(TipoCobro tipoCobro) {
-        this.tipoCobro = tipoCobro;
-    }
-
     @Override
     public String toString() {
-        return "Cobro{" +
+        return "TipoCobro{" +
                 "id=" + id +
                 ", descripcion='" + descripcion + '\'' +
                 ", estado='" + estado + '\'' +
-                ", fecha=" + fecha +
-                ", monto=" + monto +
                 '}';
     }
 }
