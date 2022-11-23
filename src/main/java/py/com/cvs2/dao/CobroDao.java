@@ -1,19 +1,21 @@
 package py.com.cvs2.dao;
 
-import py.com.cvs2.model.Pago;
+import py.com.cvs2.model.Cobro;
 
-import javax.persistence.*;
-import java.text.SimpleDateFormat;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.Date;
 import java.util.List;
 
-public class PagoDao extends GenericDao<Pago>{
+public class CobroDao extends GenericDao<Cobro>{
 
-    public List<Pago> filterByDate(Date fechaInicio, Date fechaFin) {
+    public List<Cobro> filterByDate(Date fechaInicio, Date fechaFin) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
         EntityManager em = emf.createEntityManager();
 
-        String query = "SELECT p FROM Pago p "
+        String query = "SELECT p FROM Cobro p "
                 + " WHERE p.estado = " + "'ACTIVO' ";
 
         if(fechaInicio != null){
