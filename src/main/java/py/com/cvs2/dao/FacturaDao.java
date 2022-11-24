@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import java.util.Date;
 import java.util.List;
 
 public class FacturaDao extends GenericDao<Factura> {
@@ -38,6 +39,25 @@ public class FacturaDao extends GenericDao<Factura> {
                 + " ORDER BY f.id ";
 
         Query q = em.createQuery(query);
+
+        return q.getResultList();
+    }
+
+    public List<Factura> listByCaja(Integer idCaja){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
+        EntityManager em = emf.createEntityManager();
+
+        String query = "SELECT f FROM Factura f "
+                + " WHERE f.estado = 'ACTIVO' "
+                + " AND f.estadoFactura.id = 4 "
+                + " AND f.fecha = :fecha "
+                + " AND f.caja.id = :idCaja "
+                + " ORDER BY f.id ";
+
+        Query q = em.createQuery(query);
+
+        q.setParameter("fecha", new Date());
+        q.setParameter("idCaja", idCaja);
 
         return q.getResultList();
     }

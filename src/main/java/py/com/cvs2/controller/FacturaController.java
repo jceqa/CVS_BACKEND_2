@@ -60,6 +60,11 @@ public class FacturaController {
         return facturaDao.listProcesadas();
     }
 
+    public List<Factura> listFacturasByCaja(Integer idCaja){
+        FacturaDao facturaDao = new FacturaDao();
+        return facturaDao.listByCaja(idCaja);
+    }
+
     public Factura cancelFactura(Factura factura) throws Exception {
         FacturaDao facturaDao = new FacturaDao();
         PedidoVentaDao pedidoVentaDao = new PedidoVentaDao();
