@@ -39,6 +39,16 @@ public class FacturaRest {
         return Response.ok(facturaList, MediaType.APPLICATION_JSON).build();
     }
 
+    @GET
+    @Path("/caja/{idCaja}")
+    public Response listFacturasByCaja(@PathParam("idCaja") Integer idCaja){
+        FacturaController fcc = new FacturaController();
+        List<Factura> facturaList = fcc.listFacturasByCaja(idCaja);
+
+        return Response.ok(facturaList, MediaType.APPLICATION_JSON).build();
+    }
+
+
     @POST
     public Response saveFactura(Factura factura) {
         FacturaController pcc = new FacturaController();

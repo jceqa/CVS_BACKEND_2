@@ -17,6 +17,11 @@ public class AperturaCierreCajaController {
         return aperturaCierreCajaDAO.findById(id);
     }
 
+    public List<AperturaCierreCaja> getAperturaCierreCajaAbiertaBySucursal(Integer idSucursal) {
+        AperturaCierreCajaDao aperturaCierreCajaDAO = new AperturaCierreCajaDao();
+        return aperturaCierreCajaDAO.findAbiertaBySucursal(idSucursal);
+    }
+
     public AperturaCierreCaja saveAperturaCierreCaja(AperturaCierreCaja aperturaCierreCaja) throws Exception {
         AperturaCierreCajaDao aperturaCierreCajaDao = new AperturaCierreCajaDao();
         aperturaCierreCaja.setEstado("ACTIVO");
