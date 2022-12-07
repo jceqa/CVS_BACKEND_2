@@ -48,6 +48,11 @@ public class UsuarioController {
 		return usuarioDtoList;
 	}
 
+	public List<UsuarioRol> listUsuariosByRol(Integer rolId) {
+		UsuarioDao usuarioDao = new UsuarioDao();
+		return usuarioDao.listByRol(rolId);
+	}
+
 	public UsuarioDto getUsuarioById(Integer id) {
 		UsuarioDao usuarioDao = new UsuarioDao();
 		UsuarioRolDao usuarioRolDao = new UsuarioRolDao();

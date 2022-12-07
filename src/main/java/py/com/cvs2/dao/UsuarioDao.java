@@ -10,6 +10,9 @@ import javax.persistence.Query;
 
 import py.com.cvs2.dto.TokenDto;
 import py.com.cvs2.model.Usuario;
+import py.com.cvs2.model.UsuarioRol;
+
+import java.util.List;
 
 public class UsuarioDao extends GenericDao<Usuario>{
 
@@ -81,6 +84,23 @@ public class UsuarioDao extends GenericDao<Usuario>{
 		u = (Usuario) q.getResultList().get(0);
 
 		return u;
+	}
+
+	public List<UsuarioRol> listByRol(Integer rolId) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("CVS_PU");
+		EntityManager em = emf.createEntityManager();
+
+		String query = "SELECT u FROM UsuarioRol u " +
+				" WHERE u.estado = " + "'ACTIVO' " +
+				" AND u.rol.id = :rolId";
+
+		query += " ORDER BY u.id ";
+
+		Query q = em.createQuery(query);
+
+		q.setParameter("rolId", rolId);
+
+		return q.getResultList();
 	}
 
 }

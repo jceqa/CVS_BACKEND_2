@@ -8,6 +8,7 @@ import py.com.cvs2.controller.UsuarioController;
 import py.com.cvs2.dto.TokenDto;
 import py.com.cvs2.dto.UsuarioDto;
 import py.com.cvs2.model.Usuario;
+import py.com.cvs2.model.UsuarioRol;
 
 import java.util.List;
 
@@ -47,6 +48,15 @@ public class UsuarioRest {
 	public Response listUsuarios(@QueryParam("all") Boolean all) {
 		UsuarioController uc = new UsuarioController();
 		List<UsuarioDto> usuarios = uc.listUsuarios(all);
+
+		return Response.ok(usuarios, MediaType.APPLICATION_JSON).build();
+	}
+
+	@GET
+	@Path("/rol/{rolId}")
+	public Response listUsuariosByRol(@PathParam("rolId")Integer rolId) {
+		UsuarioController uc = new UsuarioController();
+		List<UsuarioRol> usuarios = uc.listUsuariosByRol(rolId);
 
 		return Response.ok(usuarios, MediaType.APPLICATION_JSON).build();
 	}

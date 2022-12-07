@@ -52,6 +52,10 @@ public class OrdenServicio implements Serializable {
     @JoinColumn(name = "id_orden_servicio", referencedColumnName = "id")
     private List<OrdenServicioDetalle> ordenServicioDetalles;
 
+    @OneToOne
+    @JoinColumn(name = "id_tecnico", referencedColumnName = "id")
+    private Usuario tecnico;
+
     public OrdenServicio() {
     }
 
@@ -157,6 +161,14 @@ public class OrdenServicio implements Serializable {
 
     public void setOrdenServicioDetalles(List<OrdenServicioDetalle> ordenServicioDetalles) {
         this.ordenServicioDetalles = ordenServicioDetalles;
+    }
+
+    public Usuario getTecnico() {
+        return tecnico;
+    }
+
+    public void setTecnico(Usuario tecnico) {
+        this.tecnico = tecnico;
     }
 
     @Override
