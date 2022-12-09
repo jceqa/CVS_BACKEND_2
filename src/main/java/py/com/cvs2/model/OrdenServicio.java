@@ -56,6 +56,14 @@ public class OrdenServicio implements Serializable {
     @JoinColumn(name = "id_tecnico", referencedColumnName = "id")
     private Usuario tecnico;
 
+    @ManyToMany
+    @JoinTable(
+            name = "articulos_por_orden_servicio",
+            joinColumns = @JoinColumn(name = "id_orden_servicio", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_articulo", referencedColumnName = "id")
+    )
+    private List<Articulo> articulos;
+
     public OrdenServicio() {
     }
 
@@ -169,6 +177,14 @@ public class OrdenServicio implements Serializable {
 
     public void setTecnico(Usuario tecnico) {
         this.tecnico = tecnico;
+    }
+
+    public List<Articulo> getArticulos() {
+        return articulos;
+    }
+
+    public void setArticulos(List<Articulo> articulos) {
+        this.articulos = articulos;
     }
 
     @Override
